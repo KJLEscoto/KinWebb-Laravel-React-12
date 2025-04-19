@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useState } from "react";
 import InputError from "../input-error";
 import { Textarea } from "../ui/textarea";
 
@@ -52,16 +52,14 @@ function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
         <InputError message={errors.message} />
       </section>
 
-      <div>
-        <Button
-          className="rounded-full flex items-center gap-2 !px-6"
-          type="submit"
-          disabled={processing || !data.name || !data.email || !data.message}
-        >
-          Send Message
-          <Send className="w-4 h-4" />
-        </Button>
-      </div>
+      <Button
+        className="rounded-full flex items-center gap-2 !px-6"
+        type="submit"
+        disabled={processing || !data.name || !data.email || !data.message}
+      >
+        Send Message
+        <Send className="w-4 h-4" />
+      </Button>
     </form>
   );
 }
@@ -69,6 +67,8 @@ function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
 function NavHeader() {
   const KINWEBB_ICON = import.meta.env.VITE_KINWEBB_ICON;
   const KINWEBB_LOGO = import.meta.env.VITE_KINWEBB_LOGO;
+
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   const { data, setData, post, processing, errors, reset } = useForm<SubmitForm>({
     name: "",
@@ -87,7 +87,7 @@ function NavHeader() {
   };
 
   return (
-    <nav className="w-full pt-7 px-5 lg:px-0 transition-all duration-500 flex items-center justify-between">
+    <nav className="w-full py-7 px-5 lg:px-0 transition-all duration-500 flex items-center justify-between">
       <Link href={route("home")} className="text-white font-bold text-base">
         {KINWEBB_ICON}
       </Link>
@@ -136,35 +136,54 @@ function NavHeader() {
               <SheetTitle>{KINWEBB_LOGO}</SheetTitle>
             </SheetHeader>
             <div className="w-full px-5 pb-5 -mt-5">
-              {links.map(({ href, label, icon: Icon }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="text-[#A0A0A0] font-medium py-3 px-3 flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
-                >
-                  {label}
-                  {Icon && <Icon className="w-4 h-4" />}
-                </Link>
-              ))}
-              <Sheet>
-                <SheetTrigger className="w-full mt-3">
-                  <Button size="sm" className="rounded-full text-xs w-full font-bold">
+              {!isContactOpen ? (
+                <>
+                  {links.map(({ href, label, icon: Icon }) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      className="text-[#A0A0A0] font-medium py-3 px-3 flex items-center gap-1 text-xs tracking-wide hover:text-white transition border rounded-full"
+                    >
+                      {label}
+                      {Icon && <Icon className="w-4 h-4" />}
+                    </Link>
+                  ))}
+                  <Button
+                    size="sm"
+                    className="rounded-full text-xs w-full font-bold mt-3"
+                    onClick={() => setIsContactOpen(true)}
+                  >
                     Get in Touch
                   </Button>
-                </SheetTrigger>
-                <SheetContent className="overflow-auto">
-                  <SheetHeader>
+                </>
+              ) : (
+                <>
+                  <SheetHeader className="!px-0">
                     <SheetTitle>Looking for a Web Developer?</SheetTitle>
                     <SheetDescription>
                       If you have any inquiries, ideas, or just want to say hello, feel free to leave a message — I'll get back to you as soon as possible.
                     </SheetDescription>
-                    <ContactForm onSubmit={sendMessage} data={data} setData={setData} errors={errors} processing={processing} />
                   </SheetHeader>
-                </SheetContent>
-              </Sheet>
+                  <ContactForm
+                    onSubmit={sendMessage}
+                    data={data}
+                    setData={setData}
+                    errors={errors}
+                    processing={processing}
+                  />
+                  <Button
+                    variant="ghost"
+                    className="text-xs mt-5 underline"
+                    onClick={() => setIsContactOpen(false)}
+                  >
+                    Back to Menu
+                  </Button>
+                </>
+              )}
             </div>
           </SheetContent>
         </Sheet>
+
       </section>
     </nav>
   );

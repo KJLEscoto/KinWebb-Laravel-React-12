@@ -1,3 +1,5 @@
+import FeaturedProjects from '@/components/personalized/featured-projects';
+import FixedBottom from '@/components/personalized/fixed-bottom';
 import Hero from '@/components/personalized/hero';
 import NavHeader from '@/components/personalized/nav-header';
 import { type SharedData } from '@/types';
@@ -10,11 +12,16 @@ export default function Welcome() {
         <>
             <Head title="Welcome" />
             <main className='min-h-screen h-auto max-w-5xl mx-auto'>
-                <span className='fixed top-0 z-50 max-w-5xl mx-auto w-full'>
+                <span className='fixed top-0 z-50 max-w-5xl mx-auto w-full mix-blend-difference'>
                     <NavHeader />
                 </span>
 
                 <Hero />
+                <FeaturedProjects />
+
+                <span className='fixed bottom-5 z-50 max-w-5xl mx-auto w-full mix-blend-difference'>
+                    <FixedBottom />
+                </span>
             </main>
         </>
     );
