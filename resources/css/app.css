@@ -8,8 +8,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+    /* --font-sans:
+        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; */
+
     --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        /* 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,  */
+        'Lato', sans-serif;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -154,7 +158,7 @@
     }
 
     body {
-        @apply bg-[#040204] text-white;
+        @apply scroll-smooth bg-[#040204] text-white;
     }
 
     .custom-scrollbar {

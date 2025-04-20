@@ -17,7 +17,7 @@ function Hero() {
         Hey, I'm <strong>Kin</strong> — I build sleek, scalable, and user-focused web solutions.
       </p>
 
-      <div className='flex items-center gap-1 md:mt-10 mt-52 transition-all duration-500 cursor-pointer'>
+      <div className='flex items-center gap-1 md:mt-10 mt-52 transition-all font-light duration-500 cursor-pointer'>
         Scroll To Explore
         <MoveDown className='w-5 h-auto' />
       </div>

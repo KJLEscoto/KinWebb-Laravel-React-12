@@ -1,7 +1,7 @@
+import AboutMe from '@/components/personalized/about-me-short';
 import FeaturedProjects from '@/components/personalized/featured-projects';
-import FixedBottom from '@/components/personalized/fixed-bottom';
 import Hero from '@/components/personalized/hero';
-import NavHeader from '@/components/personalized/nav-header';
+import ClientLayout from '@/layouts/client-layout';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
@@ -9,21 +9,17 @@ export default function Welcome() {
     // const { auth } = usePage<SharedData>().props;
 
     return (
-        <>
+        <ClientLayout>
             <Head title="Welcome" />
-            <main className='min-h-screen h-auto max-w-5xl mx-auto'>
-                <span className='fixed top-0 z-50 max-w-5xl mx-auto w-full mix-blend-difference'>
-                    <NavHeader />
-                </span>
-
+            <main className='min-h-screen h-auto w-full bg-[#040204]'>
                 <Hero />
-                <FeaturedProjects />
 
-                <span className='fixed bottom-5 z-50 max-w-5xl mx-auto w-full mix-blend-difference'>
-                    <FixedBottom />
+                <span className='space-y-40'>
+                    <FeaturedProjects />
+                    <AboutMe />
                 </span>
             </main>
-        </>
+        </ClientLayout>
     );
 }
 

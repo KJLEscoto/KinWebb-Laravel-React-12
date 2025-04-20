@@ -49,10 +49,10 @@ const projects = [
 
 function FeaturedProjects() {
   return (
-    <div className="flex flex-col min-h-screen lg:p-0 p-5 gap-10 !pb-40">
+    <div className="flex flex-col max-w-5xl mx-auto h-full lg:p-0 p-5 gap-10">
       <section>
-        <span className="italic font-extralight text-2xl  text-white/50">Featured</span>
-        <h1 className="font-bold text-5xl">Projects</h1>
+        <span className="italic font-light text-2xl  text-white/60">Featured</span>
+        <h1 className="font-medium text-5xl">Projects</h1>
       </section>
 
       <article className="grid grid-cols-5 gap-x-5 gap-y-10">
@@ -63,7 +63,7 @@ function FeaturedProjects() {
             </section>
 
             <section className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-white">{project.title}</h2>
+              <h2 className="text-lg font-semibold text-white">{project.title}</h2>
               <p className="text-white/80 text-sm">{project.description}</p>
             </section>
           </div>

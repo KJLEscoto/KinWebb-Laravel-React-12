@@ -49,7 +49,7 @@ function FixedBottom() {
       </section>
 
       <section>
-        <p className="text-sm select-none font-extralight text-white">
+        <p className="text-sm select-none font-light text-white">
           PH - {time} (GMT+8)
         </p>
       </section>

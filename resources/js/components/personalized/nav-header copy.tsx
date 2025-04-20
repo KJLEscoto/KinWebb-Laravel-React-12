@@ -87,7 +87,7 @@ function NavHeader() {
   };
 
   return (
-    <nav className="w-full py-7 px-5 lg:px-0 transition-all duration-500 flex items-center justify-between">
+    <nav className="max-w-5xl mx-auto py-7 px-5 lg:px-0 transition-all duration-500 flex items-center justify-between">
       <Link href={route("home")} className="text-white font-bold text-base">
         {KINWEBB_ICON}
       </Link>
