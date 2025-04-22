@@ -1,6 +1,7 @@
 import { MoveRight } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "./image";
+import { Link } from "@inertiajs/react";
 
 const projects = [
   {
@@ -70,12 +71,12 @@ function FeaturedProjects() {
         ))}
       </article>
 
-      <section>
+      <Link href={route('projects.index')}>
         <Button className="rounded-full flex items-center gap-2" size="lg">
           View All Projects
           <MoveRight className="w-4 h-4" />
         </Button>
-      </section>
+      </Link>
     </div>
   );
 }

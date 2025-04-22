@@ -11,7 +11,7 @@ export default function Welcome() {
     return (
         <ClientLayout>
             <Head title="Welcome" />
-            <main className='min-h-screen h-auto w-full bg-[#040204]'>
+            <main className='min-h-screen h-auto shadow-lg w-full bg-[#040204]'>
                 <Hero />
 
                 <span className='space-y-40'>

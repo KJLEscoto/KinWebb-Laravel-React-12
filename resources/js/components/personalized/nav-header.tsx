@@ -131,9 +131,13 @@ function NavHeader() {
           <SheetTrigger>
             <Menu className="w-5 h-5 text-[#A0A0A0] hover:text-white cursor-pointer" />
           </SheetTrigger>
-          <SheetContent className="overflow-auto md:hidden" side="top">
+          <SheetContent className="overflow-auto max-h-80 md:hidden" side="top">
             <SheetHeader>
-              <SheetTitle>{KINWEBB_LOGO}</SheetTitle>
+              <SheetTitle>
+                <Link href={route("home")}>
+                  {KINWEBB_LOGO}
+                </Link>
+              </SheetTitle>
             </SheetHeader>
             <div className="w-full px-5 pb-5 -mt-5">
               {links.map(({ href, label, icon: Icon }) => (

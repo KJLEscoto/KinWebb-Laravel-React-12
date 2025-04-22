@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\ProjectsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -7,6 +8,8 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
+
+Route::resource('projects', ProjectsController::class);
 
 Route::post('/send-message', function (Request $request) {
     // dd($request->all());

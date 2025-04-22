@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 
 import Footer from "@/components/personalized/footer";
-import NavHeader from '@/components/personalized/nav-header copy';
+import NavHeader from '@/components/personalized/nav-header';
 import FixedBottom from '@/components/personalized/fixed-bottom';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {

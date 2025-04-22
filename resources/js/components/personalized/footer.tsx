@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 
 function Footer() {
   return (
-    <footer className='flex flex-col justify-center items-center min-h-96 gap-8 lg:p-0 p-5 bg-white text-black w-full'>
+    <footer className='flex flex-col justify-center items-center min-h-96 gap-8 lg:p-0 p-5 bg-white text-black w-full select-none'>
       <h3 className="text-sm capitalize font-bold">HAVE AN IDEA IN MIND?</h3>
 
       <p className="text-2xl font-light">
