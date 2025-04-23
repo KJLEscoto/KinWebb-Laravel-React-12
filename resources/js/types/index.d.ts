@@ -41,3 +41,11 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface Flash {
+    success?: string;
+    update?: string;
+    warning?: string;
+    error?: string;
+    info?: string;
+}
