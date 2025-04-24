@@ -13,6 +13,9 @@ const mainNavItems: NavItem[] = [
         href: '/admin/dashboard',
         icon: LayoutGrid,
     },
+];
+
+const manageNavItems: NavItem[] = [
     {
         title: 'Projects',
         href: '/admin/projects',
@@ -40,7 +43,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
+                            <Link href="/admin/dashboard">
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>
@@ -50,6 +53,7 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain groupLabel='Main' items={mainNavItems} />
+                <NavMain groupLabel='Manage' items={manageNavItems} />
             </SidebarContent>
 
             <SidebarFooter>

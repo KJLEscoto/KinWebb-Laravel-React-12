@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Framework;
 use App\Models\Project;
+use App\Models\Tool;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -26,7 +28,9 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        return inertia('admin/projects/create');
+        $tools = Tool::all();
+        $frameworks = Framework::all();
+        return inertia('admin/projects/create', compact('tools', 'frameworks'));
     }
 
     /**
@@ -34,7 +38,7 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
 
         $validated = $request->validate([
             'name' => 'required|string',
@@ -42,45 +46,64 @@ class ProjectsController extends Controller
             'description' => 'required|string|max:2500',
             'year' => 'required|string|max:4',
             'roles' => 'required|string',
-            'tools' => 'nullable|array',
-            'frameworks' => 'nullable|array',
+            'tools' => 'nullable|array|min:1',
+            'frameworks' => 'nullable|array|min:1',
             'is_featured' => 'boolean',
+            'screenshots' => 'nullable|array|min:1',
+            'screenshots.*.name' => 'required|string',
+            'screenshots.*.image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:20480',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:20480',
         ]);
 
-        if ($request->hasFile('thumbnail') ?? false) {
-            $path = Storage::disk('public')->put('thumbnails', $request->file('thumbnail'));
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail_path = Storage::disk('public')->put('thumbnails', $request->file('thumbnail'));
         } else {
-            $path = null;
+            $thumbnail_path = null;
         }
 
         $project = Auth::user()->projects()->create(array_merge(
-            Arr::except($validated, ['tags', 'roles', 'tools', 'frameworks', 'thumbnail']),
-            ['thumbnail' => $path]
+            Arr::except($validated, ['tags', 'roles', 'tools', 'frameworks', 'thumbnail', 'screenshots']),
+            ['thumbnail' => $thumbnail_path]
         ));
 
         if ($validated['tags'] ?? false) {
             foreach (explode(',', $validated['tags']) as $tag) {
-                $project->tag($tag);
+                $project->tag(trim($tag)); // trim here
             }
         }
 
         if ($validated['roles'] ?? false) {
             foreach (explode(',', $validated['roles']) as $role) {
-                $project->role($role);
+                $project->role(trim($role)); // and here
+            }
+        }
+
+        if ($validated['screenshots'] ?? false) {
+            foreach ($validated['screenshots'] as $screenshot) {
+                $screenshot_path = Storage::disk('public')->put('screenshots', $screenshot['image']);
+                $project->screenshots()->create([
+                    'name' => $screenshot['name'],
+                    'image' => $screenshot_path,
+                ]);
+            }
+        }
+
+        if ($validated['tools'] ?? false) {
+            foreach ($validated['tools'] as $tool) {
+                $find_tool = Tool::where('name', $tool)->first();
+                $project->tools()->attach($find_tool->id);
+            }
+        }
+
+        if ($validated['frameworks'] ?? false) {
+            foreach ($validated['frameworks'] as $framework) {
+                $find_framework = Framework::where('name', $framework)->first();
+                $project->frameworks()->attach($find_framework->id);
             }
         }
 
         return redirect()->route('admin.projects.index')->with('success', 'New project added!');
     }
-
-    // Project::create([
-    //     'name' => $request->name,
-    //     'description' => $request->description,
-    //     'thumbnail' => $path,
-    //     'year' => $request->year,
-    //     'isFeatured' => $request->isFeatured,
-    // ]);
 
     /**
      * Display the specified resource.

@@ -11,7 +11,7 @@ export function NavMain({ items = [], groupLabel }: { items: NavItem[], groupLab
                 {items.map((item) => (
                     <SidebarMenuItem key={item.title}>
                         <SidebarMenuButton asChild isActive={item.href === page.url || page.url.startsWith(item.href)}>
-                            <Link href={item.href} prefetch>
+                            <Link href={item.href}>
                                 {item.icon && <item.icon />}
                                 <span>{item.title}</span>
                             </Link>

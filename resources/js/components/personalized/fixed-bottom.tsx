@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Facebook, Github, Linkedin } from "lucide-react";
 import HyperLogo from "./hyperlogo";
+import { getFormattedTime } from "@/lib/utils";
 
 const hyperlogos = [
   {
@@ -21,23 +22,12 @@ function FixedBottom() {
   const [time, setTime] = useState("");
 
   useEffect(() => {
-    const updateTime = () => {
-      const date = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-        timeZone: "Asia/Manila",
-      };
-      const formatter = new Intl.DateTimeFormat("en-PH", options);
-      setTime(formatter.format(date));
-    };
+    const updateTime = () => setTime(getFormattedTime());
 
-    updateTime(); // set initial time
-    const interval = setInterval(updateTime, 1000); // update every second
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
 
-    return () => clearInterval(interval); // clean up
+    return () => clearInterval(interval);
   }, []);
 
   return (

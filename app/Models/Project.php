@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends Model
 {
@@ -39,4 +40,20 @@ class Project extends Model
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function screenshots(): HasMany
+    {
+        return $this->hasMany(Screenshot::class);
+    }
+
+    public function tools(): BelongsToMany
+    {
+        return $this->belongsToMany(Tool::class, 'project_tool');
+    }
+
+    public function frameworks(): BelongsToMany
+    {
+        return $this->belongsToMany(Framework::class, 'project_framework');
+    }
+
 }

@@ -37,17 +37,7 @@ type AddProjectForm = {
   screenshots: Array<{ name: string; image: File | null }>;
 };
 
-const allTools = [
-  { id: '1', name: 'Figma' },
-  { id: '2', name: 'Photoshop' },
-];
-
-const allFrameworks = [
-  { id: '1', name: 'React' },
-  { id: '2', name: 'Laravel' },
-];
-
-export default function Create() {
+export default function Create({ tools, frameworks }: { tools: any, frameworks: any }) {
   const addScreenshot = () => {
     setData('screenshots', [...data.screenshots, { name: '', image: null }]);
   };
@@ -107,6 +97,8 @@ export default function Create() {
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="grid gap-6">
+
+            {/* project information section */}
             <div className='flex justify-between items-center'>
               <Title title='Project Information' />
               <Button type="submit" disabled={processing}>
@@ -117,7 +109,7 @@ export default function Create() {
             </div>
 
             <div className='flex gap-5 w-full'>
-              <section className="grid gap-2 w-full">
+              <section className="w-full flex flex-col gap-3">
                 <Label htmlFor="name">Project Name</Label>
                 <Input
                   id="name"
@@ -131,7 +123,7 @@ export default function Create() {
                 <InputError message={errors.name} />
               </section>
 
-              <section className="grid gap-2 w-full">
+              <section className="w-full flex flex-col gap-3">
                 <Label htmlFor="tags">Tags <span className='opacity-50'>(comma separated)</span></Label>
                 <Input
                   id="tags"
@@ -146,7 +138,7 @@ export default function Create() {
               </section>
             </div>
 
-            <section>
+            <section className="w-full flex flex-col gap-3">
               <Label htmlFor="description">Description</Label>
               <Input
                 id="description"
@@ -161,7 +153,7 @@ export default function Create() {
             </section>
 
             <div className='flex gap-5 w-full'>
-              <section className="grid gap-2 w-full">
+              <section className="w-full flex flex-col gap-3">
                 <Label htmlFor="roles">Roles <span className='opacity-50'>(comma separated)</span></Label>
                 <Input
                   id="roles"
@@ -175,7 +167,7 @@ export default function Create() {
                 <InputError message={errors.roles} />
               </section>
 
-              <div className="grid gap-2 w-full">
+              <div className="w-full flex flex-col gap-3">
                 <Label htmlFor="year">Year Created</Label>
                 <Input
                   id="year"
@@ -192,10 +184,10 @@ export default function Create() {
 
             <div className="flex gap-5 w-full">
               {/* Tools Section */}
-              <section className="grid gap-2 w-full">
+              <section className="w-full flex flex-col gap-3">
                 <Label>Tools <span className='opacity-50'>(can be more than 1)</span></Label>
-                <div className="w-fit ml-2 space-y-2">
-                  {allTools.map((tool) => {
+                <div className="w-fit ml-2 space-y-3">
+                  {tools.map((tool: any) => {
                     const id = `tool-${tool.id}`;
                     return (
                       <div key={tool.id} className="flex items-start space-x-3">
@@ -210,8 +202,9 @@ export default function Create() {
                             }
                           }}
                         />
-                        <Label htmlFor={id} className="font-normal cursor-pointer">
-                          {tool.name}
+                        <Label htmlFor={id} className="font-normal cursor-pointer flex items-center gap-2">
+                          <Image src={tool.logo} className='!w-4 !h-4 rounded' />
+                          <p>{tool.name}</p>
                         </Label>
                       </div>
                     );
@@ -221,10 +214,10 @@ export default function Create() {
               </section>
 
               {/* Frameworks Section */}
-              <section className="grid gap-2 w-full">
+              <section className="w-full flex flex-col gap-3">
                 <Label>Frameworks <span className='opacity-50'>(can be more than 1)</span></Label>
-                <div className="w-fit ml-2 space-y-2">
-                  {allFrameworks.map((framework) => {
+                <div className="w-fit ml-2 space-y-3">
+                  {frameworks.map((framework: any) => {
                     const id = `framework-${framework.id}`;
                     return (
                       <div key={framework.id} className="flex items-start space-x-3">
@@ -239,8 +232,9 @@ export default function Create() {
                             }
                           }}
                         />
-                        <Label htmlFor={id} className="font-normal cursor-pointer">
-                          {framework.name}
+                        <Label htmlFor={id} className="font-normal cursor-pointer flex items-center gap-2">
+                          <Image src={framework.logo} className='!w-4 !h-4 rounded' />
+                          <p>{framework.name}</p>
                         </Label>
                       </div>
                     );
@@ -252,7 +246,8 @@ export default function Create() {
 
             <Separator />
 
-            <section className="grid gap-2 w-full">
+            {/* project thumbnail section */}
+            <section className="w-full flex flex-col gap-3">
               <div className='flex items-center justify-between'>
                 <Title title='Project Thumbnail' />
                 <div className="flex items-center gap-3">
@@ -297,7 +292,8 @@ export default function Create() {
 
             <Separator />
 
-            <section className="grid gap-2 w-full">
+            {/* screenshot section */}
+            <section className="w-full flex flex-col gap-3">
               <div className='flex items-center justify-between'>
                 <Title title='Screenshots' />
                 <Button variant='outline' type='button' onClick={addScreenshot}>
@@ -309,7 +305,7 @@ export default function Create() {
               {data.screenshots.map((screenshot, index) => (
                 <div key={index} className='mt-2'>
                   <section className='flex gap-5 w-full'>
-                    <div className="grid gap-2 w-full">
+                    <div className="w-full flex flex-col gap-3">
                       <Label htmlFor={`screenshot_name_${index}`}>Screenshot Name</Label>
                       <Input
                         id={`screenshot_name_${index}`}
@@ -325,7 +321,7 @@ export default function Create() {
                       />
                     </div>
 
-                    <div className="grid gap-2 w-full">
+                    <div className="w-full flex flex-col gap-3">
                       <Label>Screenshot Image</Label>
                       <Label
                         className="w-full cursor-pointer flex items-center gap-2 px-4 border transition hover:border-white p-3 rounded-md"
