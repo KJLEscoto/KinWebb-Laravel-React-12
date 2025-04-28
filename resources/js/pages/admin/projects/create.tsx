@@ -6,10 +6,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
+import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head, useForm } from '@inertiajs/react';
-import { Check, FullscreenIcon, ImageIcon, LoaderCircle, Plus, Save } from 'lucide-react';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { ArrowLeft, Check, FullscreenIcon, ImageIcon, LoaderCircle, Plus, Save } from 'lucide-react';
 import { FormEventHandler, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -100,7 +101,12 @@ export default function Create({ tools, frameworks }: { tools: any, frameworks: 
 
             {/* project information section */}
             <div className='flex justify-between items-center'>
-              <Title title='Project Information' />
+              <Link href={route('admin.projects.index')} className='flex items-center gap-2'>
+                <Button variant='outline'>
+                  <ArrowLeft className="w-4 h-4" />
+                  Back
+                </Button>
+              </Link>
               <Button type="submit" disabled={processing}>
                 {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                 Save Project
@@ -108,6 +114,7 @@ export default function Create({ tools, frameworks }: { tools: any, frameworks: 
               </Button>
             </div>
 
+            <Title title='Project Information' />
             <div className='flex gap-5 w-full'>
               <section className="w-full flex flex-col gap-3">
                 <Label htmlFor="name">Project Name</Label>
@@ -140,15 +147,13 @@ export default function Create({ tools, frameworks }: { tools: any, frameworks: 
 
             <section className="w-full flex flex-col gap-3">
               <Label htmlFor="description">Description</Label>
-              <Input
+              <Textarea
                 id="description"
-                type="text"
                 required
-                autoComplete="description"
                 placeholder='This project is...'
+                className="!bg-[#0a0a0a] h-40"
                 value={data.description}
-                onChange={(e) => setData('description', e.target.value)}
-              />
+                onChange={(e) => setData("description", e.target.value)} />
               <InputError message={errors.description} />
             </section>
 
@@ -284,7 +289,7 @@ export default function Create({ tools, frameworks }: { tools: any, frameworks: 
                 <span className='flex justify-center'>
                   <Image
                     src={URL.createObjectURL(data.thumbnail)}
-                    className="object-cover lg:!max-w-2xl"
+                    className="object-cover rounded-sm lg:!max-w-2xl"
                   />
                 </span>
               )}

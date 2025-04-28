@@ -2,3 +2,6 @@ npx shadcn@latest add sheet
 npx shadcn@latest add textarea
 npx shadcn@latest add form
 npx shadcn@latest add sonner
+npx shadcn@latest add switch
+npx shadcn@latest add tooltip
+npx shadcn@latest add carousel

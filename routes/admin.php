@@ -18,4 +18,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     'update' => 'admin.projects.update',
     'destroy' => 'admin.projects.delete',
   ]);
+
+  Route::patch('admin/projects/{project}/toggle-featured', [AdminProjectsController::class, 'toggleFeatured'])->name('admin.projects.toggle-featured');
 });

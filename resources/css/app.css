@@ -158,7 +158,7 @@
     }
 
     body {
-        @apply scroll-smooth bg-[#040204] text-white selection:bg-white selection:text-black;
+        @apply scroll-smooth selection:bg-black selection:text-white dark:bg-[#040204] dark:text-white dark:selection:bg-white dark:selection:text-black;
     }
 
     .custom-scrollbar {
@@ -181,6 +181,14 @@
 
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: #555;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 
     /* For Firefox */

@@ -9,7 +9,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     <div className="relative min-h-screen flex flex-col items-center justify-center">
 
       {/* Sticky Header */}
-      <span className='fixed top-0 z-50 w-full bg-black/50 backdrop-blur-sm border-b mix-blend-difference'>
+      <span className='fixed top-0 z-50 w-full bg-black/50 backdrop-blur-sm mix-blend-difference'>
         <NavHeader />
       </span>
 

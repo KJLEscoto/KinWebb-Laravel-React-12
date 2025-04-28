@@ -19,7 +19,7 @@ class Project extends Model
 
     public function tag(string $title): void
     {
-        $tag = Tag::firstOrCreate(['title' => strtolower($title)]);
+        $tag = Tag::firstOrCreate(['title' => $title]);
 
         $this->tags()->attach($tag);
     }
@@ -31,7 +31,7 @@ class Project extends Model
 
     public function role(string $type): void
     {
-        $role = Role::firstOrCreate(['type' => strtolower($type)]);
+        $role = Role::firstOrCreate(['type' => $type]);
 
         $this->roles()->attach($role);
     }

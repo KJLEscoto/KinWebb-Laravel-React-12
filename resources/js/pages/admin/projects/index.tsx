@@ -1,6 +1,17 @@
+import Image from '@/components/personalized/image';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
+import { Plus } from 'lucide-react';
+import { toast } from 'sonner';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -9,8 +20,17 @@ const breadcrumbs: BreadcrumbItem[] = [
   },
 ];
 
+const changeFeatured = (projectId: number) => {
+  router.patch(route('admin.projects.toggle-featured', projectId), {}, {
+    preserveScroll: true,
+    onError: () => {
+      toast.error('Something went wrong updating featured status.');
+    }
+  });
+}
+
 export default function Index({ projects }: { projects: any }) {
-  console.log(projects);
+  const MAX_TAG = import.meta.env.VITE_MAX_TAGS;
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
@@ -18,39 +38,56 @@ export default function Index({ projects }: { projects: any }) {
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <div className='flex justify-between items-center'>
           <h1>ALL PROJECTS</h1>
-          <Link href={route('admin.projects.create')}
-            className="text-blue-500 hover:underline">
-            Add Project
+          <Link href={route('admin.projects.create')}>
+            <Button variant='default'>
+              <Plus className="w-4 h-4" />
+              Add Project
+            </Button>
           </Link>
         </div>
 
-        <div className='space-y-5'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-7'>
           {projects.map((project: any) => (
-            <div key={project.id} className="border rounded-sm p-4">
-              <h2 className="text-lg font-semibold">{project.name}</h2>
-              <p className="text-gray-600">{project.description}</p>
-              <p className="text-sm text-gray-500">Year: {project.year}</p>
-              {
-                project.roles.map((role: any, index: number) => (
-                  <div
-                    key={`role-${project.id}-${index}`}
-                    className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
-                  >
-                    {role.type}
-                  </div>
-                ))
-              }
+            <div className='flex flex-col gap-2' key={project.id}>
+              <Link href={route('admin.projects.show', project.id)}>
+                <div className='relative group'>
+                  <Image src={`/storage/${project.thumbnail}`} className="w-full h-32 object-cover rounded" />
+                  <h2 className="text-lg font-medium transition opacity-0 group-hover:opacity-100 absolute bottom-0 left-0 px-3 py-2 truncate bg-black/70 w-full">{project.name}</h2>
+                </div>
+              </Link>
+              <section className='w-full flex items-start justify-between'>
+                <div className="flex flex-wrap gap-y-2">
+                  {project.tags.slice(0, MAX_TAG).map((tag: any, index: number) => (
+                    <Link
+                      href={route('admin.projects.show', project.id)}
+                      key={`tag-${project.id}-${index}`}
+                      className="bg-[#1c1c1c] text-white/80 text-xs tracking-wide mr-2 px-3 py-1 rounded-full inline-block"
+                    >
+                      {tag.title}
+                    </Link>
+                  ))}
+                  {project.tags.length > MAX_TAG && (
+                    <span className="text-white/80 text-xs flex items-center">
+                      <Plus className='w-3 h-3' />
+                      {project.tags.length - MAX_TAG} more
+                    </span>
+                  )}
+                </div>
 
-              {
-                project.tags.map((tag: any, index: number) => (
-                  <div
-                    key={`tag-${project.id}-${index}`}
-                    className="inline-block bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"
-                  >
-                    {tag.title}
-                  </div>
-                ))
-              }
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Switch
+                        checked={project.is_featured}
+                        onCheckedChange={() => changeFeatured(project.id)}
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Featured: <span className='font-bold'>{project.is_featured ? 'yes' : 'no'}</span></p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </section>
             </div>
           ))}
         </div>

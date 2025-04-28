@@ -18,7 +18,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Auth::user()->projects()->with(['tags', 'roles'])->get();
+        $projects = Project::with('tags')->get();
 
         return inertia('admin/projects/index', compact('projects'));
     }
@@ -110,7 +110,8 @@ class ProjectsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $project = Project::with(['tags', 'roles', 'tools', 'frameworks', 'screenshots'])->findOrFail($id);
+        return inertia('admin/projects/show', compact('project'));
     }
 
     /**
@@ -136,4 +137,23 @@ class ProjectsController extends Controller
     {
         //
     }
+
+    public function toggleFeatured(Project $project)
+    {
+        $maxFeatured = config('app.max_featured_projects');
+
+        if (Project::where('is_featured', true)->count() >= $maxFeatured && !$project->is_featured) {
+            return back()->with('warning', "You can only have {$maxFeatured} featured projects.");
+        }
+
+        $project->is_featured = !$project->is_featured;
+        $project->save();
+
+        $message = $project->is_featured
+            ? $project->name . ' was added to featured.'
+            : $project->name . ' was removed from featured.';
+
+        return back()->with('update', $message);
+    }
+
 }

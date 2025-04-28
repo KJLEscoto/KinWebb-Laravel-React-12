@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->text('description');
             $table->string('thumbnail');
             $table->string('year');
-            $table->string('is_featured')->default(false);
+            $table->boolean('is_featured')->default(false);
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
