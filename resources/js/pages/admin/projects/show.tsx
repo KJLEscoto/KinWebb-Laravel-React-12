@@ -2,7 +2,7 @@ import Section from '@/components/personalized/admin-show-project';
 import Image from '@/components/personalized/image';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { Framework, Project, Role, Screenshot, Tag, Tool, type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, PencilLine } from 'lucide-react';
 import {
@@ -13,9 +13,11 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
+type ProjectProps = {
+  project: Project
+}
 
-
-export default function Show({ project }: { project: any }) {
+export default function Show({ project }: ProjectProps) {
   const breadcrumbs: BreadcrumbItem[] = [
     {
       title: 'Projects',
@@ -36,13 +38,13 @@ export default function Show({ project }: { project: any }) {
         <section className='w-full flex items-center justify-between'>
           <Link href={route('admin.projects.index')} className='flex items-center gap-2'>
             <Button variant='outline'>
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="size-4" />
               Back
             </Button>
           </Link>
           <Link href={route('admin.projects.edit', project.id)} className='flex items-center gap-2'>
             <Button variant='default'>
-              <PencilLine className="w-4 h-4" />
+              <PencilLine className="size-4" />
               Edit Project
             </Button>
           </Link>
@@ -63,7 +65,7 @@ export default function Show({ project }: { project: any }) {
         <div className='flex items-start justify-between'>
           <Section header='Tags'>
             <ul className='ml-3 list list-disc list-inside'>
-              {project.tags.map((tag: any) => (
+              {project.tags.map((tag: Tag) => (
                 <li key={tag.id} className='text-sm capitalize'>{tag.title}</li>
               ))}
             </ul>
@@ -71,7 +73,7 @@ export default function Show({ project }: { project: any }) {
 
           <Section header='Roles'>
             <ul className='ml-3 list list-disc list-inside'>
-              {project.roles.map((role: any) => (
+              {project.roles.map((role: Role) => (
                 <li key={role.id} className='text-sm capitalize'>{role.type}</li>
               ))}
             </ul>
@@ -82,7 +84,7 @@ export default function Show({ project }: { project: any }) {
           {project.tools.length > 0 &&
             <Section header='Tools'>
               <div className='flex items-center gap-2 flex-wrap'>
-                {project.tools.map((tool: any) => (
+                {project.tools.map((tool: Tool) => (
                   <div key={tool.id} className='flex items-center gap-2 rounded-sm bg-[#1c1c1c] px-3 py-2 select-none w-fit'>
                     <Image src={tool.logo} className="!w-4 !h-4 object-cover" />
                     <p className='text-sm text-white/80 tracking-wide'>
@@ -97,7 +99,7 @@ export default function Show({ project }: { project: any }) {
           {project.frameworks.length > 0 &&
             <Section header='Frameworks'>
               <div className='flex items-center gap-2 flex-wrap'>
-                {project.frameworks.map((framework: any) => (
+                {project.frameworks.map((framework: Framework) => (
                   <div key={framework.id} className='flex items-center gap-2 rounded-sm bg-[#1c1c1c] px-3 py-2 select-none w-fit'>
                     <Image src={framework.logo} className="!w-4 !h-4 object-cover" />
                     <p className='text-sm text-white/80 tracking-wide'>
@@ -122,7 +124,7 @@ export default function Show({ project }: { project: any }) {
             <div className='flex items-center justify-center'>
               <Carousel className="w-full max-w-sm"> {/* Limit the carousel width */}
                 <CarouselContent>
-                  {project.screenshots.map((screenshot: any, index: number) => (
+                  {project.screenshots.map((screenshot: Screenshot, index: number) => (
                     <CarouselItem key={index} className="flex flex-col justify-center">
                       <div className="rounded-lg border bg-muted text-muted-foreground flex items-center justify-center">
                         <Image src={`/storage/${screenshot.image}`} className="h-full w-full object-cover rounded" />

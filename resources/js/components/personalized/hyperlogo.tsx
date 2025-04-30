@@ -14,7 +14,7 @@ function HyperLogo({ Icon, url }: HyperLogoProps) {
         rel="noopener noreferrer"
         className="p-2 rounded-full border border-white/30 hover:border-white cursor-pointer transition-all duration-300 hover:bg-white group"
       >
-        <Icon className="w-3 h-3 text-white group-hover:text-black transition-all duration-300" />
+        <Icon className="size-3 text-white group-hover:text-black transition-all duration-300" />
       </a>
     </div>
   );

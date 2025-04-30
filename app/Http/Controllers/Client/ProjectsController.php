@@ -60,9 +60,11 @@ class ProjectsController extends Controller
             ->with(['tags', 'roles', 'tools', 'frameworks', 'screenshots'])
             ->firstOrFail();
 
+        $project_names = $project_instance->pluck('name')->toArray();
+
         // $project->load(['tags', 'roles', 'tools', 'frameworks', 'screenshots']);
 
-        return inertia('client/projects/show', compact('project'));
+        return inertia('client/projects/show', compact('project', 'project_names'));
     }
 
     /**

@@ -1,10 +1,10 @@
 
 import ProjectList from '@/components/personalized/project-list';
 import ClientLayout from '@/layouts/client-layout';
+import { ProjectProps } from '@/types';
 import { Head, } from '@inertiajs/react';
 
-
-export default function Index({ projects }: { projects: any }) {
+export default function Index({ projects }: ProjectProps) {
   return (
     <ClientLayout>
       <Head title="Projects" />

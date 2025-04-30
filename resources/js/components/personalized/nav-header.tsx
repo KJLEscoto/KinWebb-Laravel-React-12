@@ -28,6 +28,7 @@ const links = [
     href: "https://drive.google.com/file/d/1UsVAtVGbFRgDPO6cB9Zpi7QHpJV4x_iX/view",
     label: "Resumé",
     icon: ArrowUpRight,
+    new_tab: true
   },
 ];
 
@@ -59,7 +60,7 @@ function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
           disabled={processing || !data.name || !data.email || !data.message}
         >
           Send Message
-          <Send className="w-4 h-4" />
+          <Send className="size-4" />
         </Button>
       </div>
     </form>
@@ -99,15 +100,28 @@ function NavHeader() {
       {/* Desktop */}
       <section className="md:flex hidden items-center gap-8">
         <div className="flex items-center gap-10">
-          {links.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              className="text-[#A0A0A0] font-medium flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
-            >
-              {label}
-              {Icon && <Icon className="w-4 h-4" />}
-            </Link>
+          {links.map(({ href, new_tab, label, icon: Icon }) => (
+            new_tab ? (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#A0A0A0] font-medium flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
+              >
+                {label}
+                {Icon && <Icon className="size-4" />}
+              </a>
+            ) : (
+              <Link
+                key={href}
+                href={href}
+                className="text-[#A0A0A0] font-medium flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
+              >
+                {label}
+                {Icon && <Icon className="size-4" />}
+              </Link>
+            )
           ))}
         </div>
 
@@ -133,7 +147,7 @@ function NavHeader() {
       <section className="md:hidden flex items-center gap-5">
         <Sheet open={isMobSheetOpen} onOpenChange={setIsMobSheetOpen}>
           <SheetTrigger>
-            <Menu className="w-5 h-5 text-[#A0A0A0] hover:text-white cursor-pointer" />
+            <Menu className="size-5 text-[#A0A0A0] hover:text-white cursor-pointer" />
           </SheetTrigger>
           <SheetContent className="overflow-auto max-h-80 md:hidden" side="top">
             <SheetHeader>
@@ -151,7 +165,7 @@ function NavHeader() {
                   className="text-[#A0A0A0] font-medium py-3 px-3 flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
                 >
                   {label}
-                  {Icon && <Icon className="w-4 h-4" />}
+                  {Icon && <Icon className="size-4" />}
                 </Link>
               ))}
               <Sheet>

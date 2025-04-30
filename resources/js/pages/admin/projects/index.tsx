@@ -2,7 +2,7 @@ import Image from '@/components/personalized/image';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { Project, ProjectProps, Tag, type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
@@ -21,8 +21,8 @@ const breadcrumbs: BreadcrumbItem[] = [
   },
 ];
 
-const changeFeatured = (projectId: number) => {
-  router.patch(route('admin.projects.toggle-featured', projectId), {}, {
+const changeFeatured = (name: string) => {
+  router.patch(route('admin.projects.toggle-featured', name), {}, {
     preserveScroll: true,
     onError: () => {
       toast.error('Something went wrong updating featured status.');
@@ -30,7 +30,7 @@ const changeFeatured = (projectId: number) => {
   });
 }
 
-export default function Index({ projects }: { projects: any }) {
+export default function Index({ projects }: ProjectProps) {
   const MAX_TAG = import.meta.env.VITE_MAX_TAGS;
 
   return (
@@ -41,14 +41,14 @@ export default function Index({ projects }: { projects: any }) {
           <h1>ALL PROJECTS</h1>
           <Link href={route('admin.projects.create')}>
             <Button variant='default'>
-              <Plus className="w-4 h-4" />
+              <Plus className="size-4" />
               Add Project
             </Button>
           </Link>
         </div>
 
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-7'>
-          {projects.map((project: any) => (
+          {projects.map((project: Project) => (
             <div className='flex flex-col gap-2' key={project.id}>
               <Link href={route('admin.projects.show', slugify(project.name))}>
                 <div className='relative group'>
@@ -58,7 +58,7 @@ export default function Index({ projects }: { projects: any }) {
               </Link>
               <section className='w-full flex items-start justify-between'>
                 <div className="flex flex-wrap gap-y-2">
-                  {project.tags.slice(0, MAX_TAG).map((tag: any, index: number) => (
+                  {project.tags.slice(0, MAX_TAG).map((tag: Tag, index: number) => (
                     <Link
                       href={route('admin.projects.show', project.id)}
                       key={`tag-${project.id}-${index}`}
@@ -69,7 +69,7 @@ export default function Index({ projects }: { projects: any }) {
                   ))}
                   {project.tags.length > MAX_TAG && (
                     <span className="text-white/80 text-xs flex items-center">
-                      <Plus className='w-3 h-3' />
+                      <Plus className='size-3' />
                       {project.tags.length - MAX_TAG} more
                     </span>
                   )}

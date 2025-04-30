@@ -58,7 +58,7 @@ function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
         disabled={processing || !data.name || !data.email || !data.message}
       >
         Send Message
-        <Send className="w-4 h-4" />
+        <Send className="size-4" />
       </Button>
     </form>
   );
@@ -102,7 +102,7 @@ function NavHeader() {
               className="text-[#A0A0A0] font-medium flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
             >
               {label}
-              {Icon && <Icon className="w-4 h-4" />}
+              {Icon && <Icon className="size-4" />}
             </Link>
           ))}
         </div>
@@ -129,7 +129,7 @@ function NavHeader() {
       <section className="md:hidden flex items-center gap-5">
         <Sheet>
           <SheetTrigger>
-            <Menu className="w-5 h-5 text-[#A0A0A0] hover:text-white cursor-pointer" />
+            <Menu className="size-5 text-[#A0A0A0] hover:text-white cursor-pointer" />
           </SheetTrigger>
           <SheetContent className="overflow-auto md:hidden" side="top">
             <SheetHeader>
@@ -145,7 +145,7 @@ function NavHeader() {
                       className="text-[#A0A0A0] font-medium py-3 px-3 flex items-center gap-1 text-xs tracking-wide hover:text-white transition border rounded-full"
                     >
                       {label}
-                      {Icon && <Icon className="w-4 h-4" />}
+                      {Icon && <Icon className="size-4" />}
                     </Link>
                   ))}
                   <Button

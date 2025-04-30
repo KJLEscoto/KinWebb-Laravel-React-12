@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
+import { Framework, Tool, type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft, Check, FullscreenIcon, ImageIcon, LoaderCircle, Plus, Save } from 'lucide-react';
 import { FormEventHandler, useState } from 'react';
@@ -38,7 +38,12 @@ type AddProjectForm = {
   screenshots: Array<{ name: string; image: File | null }>;
 };
 
-export default function Create({ tools, frameworks }: { tools: any, frameworks: any }) {
+type CreateProjectsProps = {
+  tools: Tool[],
+  frameworks: Framework[]
+}
+
+export default function Create({ tools, frameworks }: CreateProjectsProps) {
   const addScreenshot = () => {
     setData('screenshots', [...data.screenshots, { name: '', image: null }]);
   };
@@ -103,7 +108,7 @@ export default function Create({ tools, frameworks }: { tools: any, frameworks: 
             <div className='flex justify-between items-center'>
               <Link href={route('admin.projects.index')} className='flex items-center gap-2'>
                 <Button variant='outline'>
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="size-4" />
                   Back
                 </Button>
               </Link>
@@ -192,7 +197,7 @@ export default function Create({ tools, frameworks }: { tools: any, frameworks: 
               <section className="w-full flex flex-col gap-3">
                 <Label>Tools <span className='opacity-50'>(can be more than 1)</span></Label>
                 <div className="w-fit ml-2 space-y-3">
-                  {tools.map((tool: any) => {
+                  {tools.map((tool: Tool) => {
                     const id = `tool-${tool.id}`;
                     return (
                       <div key={tool.id} className="flex items-start space-x-3">
@@ -222,7 +227,7 @@ export default function Create({ tools, frameworks }: { tools: any, frameworks: 
               <section className="w-full flex flex-col gap-3">
                 <Label>Frameworks <span className='opacity-50'>(can be more than 1)</span></Label>
                 <div className="w-fit ml-2 space-y-3">
-                  {frameworks.map((framework: any) => {
+                  {frameworks.map((framework: Framework) => {
                     const id = `framework-${framework.id}`;
                     return (
                       <div key={framework.id} className="flex items-start space-x-3">

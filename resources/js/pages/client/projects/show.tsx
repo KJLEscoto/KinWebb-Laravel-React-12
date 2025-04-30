@@ -2,7 +2,7 @@ import Image from '@/components/personalized/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import ClientLayout from '@/layouts/client-layout';
-import { Head, useForm, } from '@inertiajs/react';
+import { Head, Link, useForm, } from '@inertiajs/react';
 import { ChevronLeftIcon, ChevronRightIcon, FilePen, Info } from 'lucide-react';
 import { FormEventHandler, useEffect, useState } from 'react';
 import {
@@ -11,13 +11,20 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import InputError from '@/components/input-error';
+import { slugify } from '@/lib/utils';
+import { Framework, Project, Role, Tag, Tool } from '@/types';
 
 type RequestForm = {
   email: string;
-  project: number | null;
+  project?: number | null;
 }
 
-export default function Show({ project }: { project: any }) {
+type ShowProjectProps = {
+  project: Project;
+  project_names: string[];
+}
+
+export default function Show({ project, project_names }: ShowProjectProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -61,9 +68,11 @@ export default function Show({ project }: { project: any }) {
     });
   };
 
+  const page_title = project.name + ' | Projects';
+
   return (
     <ClientLayout>
-      <Head title="Projects" />
+      <Head title={page_title} />
       <main className='min-h-screen !pt-35 !pb-20 shadow-lg w-full flex flex-col items-start justify-start bg-[#040204] h-auto lg:p-0 p-5 gap-10'>
         <div className='mx-auto w-full max-w-5xl space-y-20'>
 
@@ -72,8 +81,8 @@ export default function Show({ project }: { project: any }) {
               <section className='space-y-2'>
                 <p className="font-light text-white/60">
                   {
-                    project.tags.map((tag: any, index: number) => (
-                      <span key={tag.id} className="capitalize text-nowrap">
+                    project.tags.map((tag: Tag, index: number) => (
+                      <span key={tag.id} className="capitalize text-nowrap mr-2">
                         {tag.title}{index < project.tags.length - 1 ? ',' : ''}
                       </span>
                     ))
@@ -93,8 +102,8 @@ export default function Show({ project }: { project: any }) {
                   <h3 className='text-sm flex items-end'>Role</h3>
                   <p className='text-white/70 font-light'>
                     {
-                      project.roles.map((role: any, index: number) => (
-                        <span key={role.id} className="capitalize text-nowrap">
+                      project.roles.map((role: Role, index: number) => (
+                        <span key={role.id} className="capitalize text-nowrap mr-2">
                           {role.type}{index < project.roles.length - 1 ? ',' : ''}
                         </span>
                       ))
@@ -112,13 +121,16 @@ export default function Show({ project }: { project: any }) {
           <section className='grid grid-cols-2 gap-5 w-full'>
             {project.tools.length > 0 &&
               <>
-                <h3 className='text-sm flex items-end'>Tools</h3>
-                <div className='text-white/70 font-light'>
+                <h3 className='text-sm flex items-start'>Tools</h3>
+                <div className='flex items-center flex-wrap gap-2'>
                   {
-                    project.tools.map((tool: any, index: number) => (
-                      <span key={tool.id} className="capitalize text-nowrap mr-2">
-                        {tool.name}{index < project.tools.length - 1 ? ',' : ''}
-                      </span>
+                    project.tools.map((tool: Tool) => (
+                      <div key={tool.id} className='flex items-center gap-2 rounded-sm bg-[#131313] px-3 py-2 select-none w-fit'>
+                        <Image src={tool.logo} className="!w-4 !h-4 object-cover" />
+                        <p className='text-sm text-white/80 tracking-wide'>
+                          {tool.name}
+                        </p>
+                      </div>
                     ))
                   }
                 </div>
@@ -127,13 +139,16 @@ export default function Show({ project }: { project: any }) {
 
             {project.frameworks.length > 0 &&
               <>
-                <h3 className='text-sm flex items-end'>Frameworks</h3>
-                <div className='text-white/70 font-light'>
+                <h3 className='text-sm flex items-start'>Frameworks</h3>
+                <div className='flex items-center flex-wrap gap-2'>
                   {
-                    project.frameworks.map((framework: any, index: number) => (
-                      <span key={framework.id} className="capitalize text-nowrap mr-2">
-                        {framework.name}{index < project.frameworks.length - 1 ? ',' : ''}
-                      </span>
+                    project.frameworks.map((framework: Framework) => (
+                      <div key={framework.id} className='flex items-center gap-2 rounded-sm bg-[#131313] px-3 py-2 select-none w-fit'>
+                        <Image src={framework.logo} className="!w-4 !h-4 object-cover" />
+                        <p className='text-sm text-white/80 tracking-wide'>
+                          {framework.name}
+                        </p>
+                      </div>
                     ))
                   }
                 </div>
@@ -153,7 +168,7 @@ export default function Show({ project }: { project: any }) {
                     className='!text-xs'
                     disabled={currentPage === 0}
                   >
-                    <ChevronLeftIcon className='w-4 h-4' />
+                    <ChevronLeftIcon className='size-4' />
                     Prev
                   </Button>
 
@@ -180,19 +195,21 @@ export default function Show({ project }: { project: any }) {
                     disabled={currentPage >= totalPages - 1}
                   >
                     Next
-                    <ChevronRightIcon className='w-4 h-4' />
+                    <ChevronRightIcon className='size-4' />
                   </Button>
                 </div>
               </section>
 
               <section className='flex flex-col items-center justify-center w-full'>
-                <Image
-                  src={`/storage/${project.screenshots[currentPage].image}`}
-                  alt={project.screenshots[currentPage].name}
-                />
-                <p className='text-center border w-full py-2'>
-                  {project.screenshots[currentPage].name}
-                </p>
+                <div className='w-fit'>
+                  <Image
+                    src={`/storage/${project.screenshots[currentPage].image}`}
+                    alt={project.screenshots[currentPage].name}
+                  />
+                  <p className='text-center border py-2'>
+                    {project.screenshots[currentPage].name}
+                  </p>
+                </div>
               </section>
             </div>
           }
@@ -207,7 +224,7 @@ export default function Show({ project }: { project: any }) {
               <DrawerTrigger>
                 <Button className='rounded-full !px-5'>
                   Request Now
-                  <FilePen className='w-3 h-3' />
+                  <FilePen className='size-4' />
                 </Button>
               </DrawerTrigger>
               <DrawerContent>
@@ -234,18 +251,44 @@ export default function Show({ project }: { project: any }) {
                       Submit
                     </Button>
 
-                    <InputError message={errors.email} />
+                    <InputError className='text-center' message={errors.email} />
                   </form>
 
                   <section className='flex flex-col gap-2 items-center tracking-wider text-white/50 font-light px-24'>
                     <Image src='/images/gcash.png' className='!w-30' alt='gcash' />
                     <p className='text-xs'>If you’d like to show some support, feel free to scan my <span className='text-blue-500 font-bold'>GCash</span> QR code. Every little bit is appreciated!</p>
-                    <Info className='w-3 h-3' />
+                    <Info className='size-4' />
                   </section>
                 </div>
               </DrawerContent>
             </Drawer>
 
+          </section>
+
+          <section className='w-full flex items-center justify-between'>
+            {(() => {
+              const currentIndex = project_names.findIndex(name => name === project.name);
+              const prev = currentIndex > 0 ? project_names[currentIndex - 1] : null;
+              const next = currentIndex < project_names.length - 1 ? project_names[currentIndex + 1] : null;
+
+              return (
+                <>
+                  {prev ? (
+                    <Link href={route('projects.show', slugify(prev))} className='flex items-center gap-2 tracking-wide text-lg text-white/60 hover:text-white'>
+                      <ChevronLeftIcon className='size-11' />
+                      {prev}
+                    </Link>
+                  ) : <div></div>}
+
+                  {next ? (
+                    <Link href={route('projects.show', slugify(next))} className='flex items-center gap-2 tracking-wide text-lg text-white/60 hover:text-white'>
+                      {next}
+                      <ChevronRightIcon className='size-11' />
+                    </Link>
+                  ) : <div></div>}
+                </>
+              );
+            })()}
           </section>
 
         </div>

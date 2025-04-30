@@ -6,3 +6,5 @@ npx shadcn@latest add switch
 npx shadcn@latest add tooltip
 npx shadcn@latest add carousel
 npx shadcn@latest add drawer
+npx shadcn@latest add popover
+npm install gsap

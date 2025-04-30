@@ -2,14 +2,14 @@ import { Link } from '@inertiajs/react';
 import { MoveRight } from 'lucide-react';
 import Image from './image';
 import { slugify } from '@/lib/utils';
+import { Project, ProjectProps, Role } from '@/types';
 
 
-export default function ProjectList({ projects }: { projects: any }) {
-  console.log(projects);
+export default function ProjectList({ projects }: ProjectProps) {
 
   return (
     <section className='mt-20 divide-y'>
-      {projects.map((project: any) => (
+      {projects.map((project: Project) => (
         <Link
           href={route('projects.show', slugify(project.name))}
           key={project.id}
@@ -18,7 +18,7 @@ export default function ProjectList({ projects }: { projects: any }) {
           <h3 className='w-full truncate'>{project.name}</h3>
           <div className='flex items-center justify-start gap-2 w-full overflow-auto scrollbar-hide'>
             {
-              project.roles.map((role: any, index: number) => (
+              project.roles.map((role: Role, index: number) => (
                 <p key={role.id} className="capitalize text-nowrap">
                   {role.type}{index < project.roles.length - 1 ? ',' : ''}
                 </p>

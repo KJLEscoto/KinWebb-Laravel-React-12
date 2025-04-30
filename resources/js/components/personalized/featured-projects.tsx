@@ -3,54 +3,9 @@ import { Button } from "../ui/button";
 import Image from "./image";
 import { Link } from "@inertiajs/react";
 import { slugify } from "@/lib/utils";
+import { Project, ProjectProps, Role } from "@/types";
 
-// const projects = [
-//   {
-//     title: "Project 1",
-//     description: "Description of project 1",
-//     imageUrl: "https://placehold.co/600x550",
-//     span: "lg:col-span-3",
-//     height: "lg:h-80"
-//   },
-//   {
-//     title: "Project 2",
-//     description: "Description of project 2",
-//     imageUrl: "https://placehold.co/600x550",
-//     span: "lg:col-span-2",
-//     height: "lg:h-60"
-//   },
-//   {
-//     title: "Project 3",
-//     description: "Description of project 3",
-//     imageUrl: "https://placehold.co/600x550",
-//     span: "lg:col-span-2",
-//     height: "lg:h-60"
-//   },
-//   {
-//     title: "Project 4",
-//     description: "Description of project 4",
-//     imageUrl: "https://placehold.co/600x550",
-//     span: "lg:col-span-3",
-//     height: "lg:h-80"
-//   },
-//   {
-//     title: "Project 5",
-//     description: "Description of project 5",
-//     imageUrl: "https://placehold.co/600x550",
-//     span: "lg:col-span-3",
-//     height: "lg:h-80"
-//   },
-//   {
-//     title: "Project 6",
-//     description: "Description of project 6",
-//     imageUrl: "https://placehold.co/600x550",
-//     span: "lg:col-span-2",
-//     height: "lg:h-60"
-//   },
-// ];
-
-function FeaturedProjects({ projects }: { projects: any }) {
-  console.log(projects);
+function FeaturedProjects({ projects }: ProjectProps) {
 
   return (
     <div className="flex flex-col max-w-5xl mx-auto h-full lg:p-0 p-5 gap-10">
@@ -61,7 +16,7 @@ function FeaturedProjects({ projects }: { projects: any }) {
 
       {projects.length > 0 ?
         <article className="grid grid-cols-5 gap-x-5 gap-y-10">
-          {projects.map((project: any, index: number) => {
+          {projects.map((project: Project, index: number) => {
             // Determine layout based on index
             const isLarge = [0, 3, 4].includes(index); // projects 1, 4, 5 (0-based index)
             const span = isLarge ? "lg:col-span-3" : "lg:col-span-2";
@@ -84,7 +39,7 @@ function FeaturedProjects({ projects }: { projects: any }) {
                   <h2 className="text-lg font-semibold text-white">{project.name}</h2>
                   <div className="flex items-center justify-end gap-2 w-1/2 truncate">
                     {
-                      project.roles.map((role: any, index: number) => (
+                      project.roles.map((role: Role, index: number) => (
                         <p key={role.id} className="capitalize text-nowrap text-white/80 text-sm">
                           {role.type}{index < project.roles.length - 1 ? ',' : ''}
                         </p>
@@ -104,7 +59,7 @@ function FeaturedProjects({ projects }: { projects: any }) {
         <Link href={route('projects.index')}>
           <Button className="rounded-full flex items-center gap-2" size="lg">
             View All Projects
-            <MoveRight className="w-4 h-4" />
+            <MoveRight className="size-4" />
           </Button>
         </Link>
       </div>

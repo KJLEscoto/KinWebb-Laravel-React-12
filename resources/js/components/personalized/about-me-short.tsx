@@ -19,7 +19,7 @@ function AboutMe() {
 
         <Button className="rounded-full flex items-center gap-2" size="lg">
           More About Me
-          <MoveRight className="w-4 h-4" />
+          <MoveRight className="size-4" />
         </Button>
       </section>
 

@@ -30,12 +30,12 @@ export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: Breadcrum
                 </div>
                 <div className='text-sm tracking-wider flex items-center gap-2.5 opacity-70'>
                     <section className='flex items-center gap-1'>
-                        <CalendarFold className='w-3 h-3' />
+                        <CalendarFold className='size-4' />
                         <p> {dateToday}</p>
                     </section>
                     |
                     <section className='flex items-center gap-1'>
-                        <Timer className='w-3 h-3' />
+                        <Timer className='size-4' />
                         <p> {time}</p>
                     </section>
                 </div>
