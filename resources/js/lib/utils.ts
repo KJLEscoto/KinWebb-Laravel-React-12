@@ -37,3 +37,10 @@ export function getFormattedDate(timeZone: string = "Asia/Manila"): string {
 
     return `${formattedDate} [${weekday}]`;
 }
+
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[\s\W-]+/g, '-'); // replaces spaces and non-word characters with hyphens
+}

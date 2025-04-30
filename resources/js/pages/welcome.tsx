@@ -5,7 +5,7 @@ import ClientLayout from '@/layouts/client-layout';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
-export default function Welcome() {
+export default function Welcome({ featured_projects }: { featured_projects: any }) {
     // const { auth } = usePage<SharedData>().props;
 
     return (
@@ -15,7 +15,7 @@ export default function Welcome() {
                 <Hero />
 
                 <span className='space-y-40'>
-                    <FeaturedProjects />
+                    <FeaturedProjects projects={featured_projects} />
                     <AboutMe />
                 </span>
             </main>

@@ -12,6 +12,11 @@ class Project extends Model
     protected $guarded = [];
     protected $table = 'projects';
 
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

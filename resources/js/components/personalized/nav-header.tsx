@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { FormEventHandler } from "react";
+import { FormEventHandler, useState } from "react";
 import InputError from "../input-error";
 import { Textarea } from "../ui/textarea";
 
@@ -70,6 +70,9 @@ function NavHeader() {
   const KINWEBB_ICON = import.meta.env.VITE_KINWEBB_ICON;
   const KINWEBB_LOGO = import.meta.env.VITE_KINWEBB_LOGO;
 
+  const [isWebSheetOpen, setIsWebSheetOpen] = useState(false);
+  const [isMobSheetOpen, setIsMobSheetOpen] = useState(false);
+
   const { data, setData, post, processing, errors, reset } = useForm<SubmitForm>({
     name: "",
     email: "",
@@ -78,10 +81,11 @@ function NavHeader() {
 
   const sendMessage: FormEventHandler = (e) => {
     e.preventDefault();
-    post(route("send.message"), {
+    post(route("message.store"), {
       onSuccess: () => {
-        console.log("success");
-        reset();
+        reset()
+        setIsWebSheetOpen(false)
+        setIsMobSheetOpen(false)
       },
     });
   };
@@ -107,7 +111,7 @@ function NavHeader() {
           ))}
         </div>
 
-        <Sheet>
+        <Sheet open={isWebSheetOpen} onOpenChange={setIsWebSheetOpen}>
           <SheetTrigger>
             <Button size="sm" className="rounded-full text-xs font-bold">
               Get in Touch
@@ -127,7 +131,7 @@ function NavHeader() {
 
       {/* Mobile */}
       <section className="md:hidden flex items-center gap-5">
-        <Sheet>
+        <Sheet open={isMobSheetOpen} onOpenChange={setIsMobSheetOpen}>
           <SheetTrigger>
             <Menu className="w-5 h-5 text-[#A0A0A0] hover:text-white cursor-pointer" />
           </SheetTrigger>

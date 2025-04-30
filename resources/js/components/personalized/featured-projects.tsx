@@ -2,81 +2,112 @@ import { MoveRight } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "./image";
 import { Link } from "@inertiajs/react";
+import { slugify } from "@/lib/utils";
 
-const projects = [
-  {
-    title: "Project 1",
-    description: "Description of project 1",
-    imageUrl: "https://placehold.co/600x550",
-    span: "lg:col-span-3",
-    height: "lg:h-80"
-  },
-  {
-    title: "Project 2",
-    description: "Description of project 2",
-    imageUrl: "https://placehold.co/600x550",
-    span: "lg:col-span-2",
-    height: "lg:h-60"
-  },
-  {
-    title: "Project 3",
-    description: "Description of project 3",
-    imageUrl: "https://placehold.co/600x550",
-    span: "lg:col-span-2",
-    height: "lg:h-60"
-  },
-  {
-    title: "Project 4",
-    description: "Description of project 4",
-    imageUrl: "https://placehold.co/600x550",
-    span: "lg:col-span-3",
-    height: "lg:h-80"
-  },
-  {
-    title: "Project 5",
-    description: "Description of project 5",
-    imageUrl: "https://placehold.co/600x550",
-    span: "lg:col-span-3",
-    height: "lg:h-80"
-  },
-  {
-    title: "Project 6",
-    description: "Description of project 6",
-    imageUrl: "https://placehold.co/600x550",
-    span: "lg:col-span-2",
-    height: "lg:h-60"
-  },
-];
+// const projects = [
+//   {
+//     title: "Project 1",
+//     description: "Description of project 1",
+//     imageUrl: "https://placehold.co/600x550",
+//     span: "lg:col-span-3",
+//     height: "lg:h-80"
+//   },
+//   {
+//     title: "Project 2",
+//     description: "Description of project 2",
+//     imageUrl: "https://placehold.co/600x550",
+//     span: "lg:col-span-2",
+//     height: "lg:h-60"
+//   },
+//   {
+//     title: "Project 3",
+//     description: "Description of project 3",
+//     imageUrl: "https://placehold.co/600x550",
+//     span: "lg:col-span-2",
+//     height: "lg:h-60"
+//   },
+//   {
+//     title: "Project 4",
+//     description: "Description of project 4",
+//     imageUrl: "https://placehold.co/600x550",
+//     span: "lg:col-span-3",
+//     height: "lg:h-80"
+//   },
+//   {
+//     title: "Project 5",
+//     description: "Description of project 5",
+//     imageUrl: "https://placehold.co/600x550",
+//     span: "lg:col-span-3",
+//     height: "lg:h-80"
+//   },
+//   {
+//     title: "Project 6",
+//     description: "Description of project 6",
+//     imageUrl: "https://placehold.co/600x550",
+//     span: "lg:col-span-2",
+//     height: "lg:h-60"
+//   },
+// ];
 
-function FeaturedProjects() {
+function FeaturedProjects({ projects }: { projects: any }) {
+  console.log(projects);
+
   return (
     <div className="flex flex-col max-w-5xl mx-auto h-full lg:p-0 p-5 gap-10">
       <section>
-        <span className="italic font-light text-2xl  text-white/60">Featured</span>
+        <span className="italic font-light text-2xl text-white/60">Featured</span>
         <h1 className="font-medium text-5xl">Projects</h1>
       </section>
 
-      <article className="grid grid-cols-5 gap-x-5 gap-y-10">
-        {projects.map((project, index) => (
-          <div key={index} className={`col-span-5 ${project.span} space-y-3 cursor-pointer h-fit group`}>
-            <section className={`${project.height} h-96 overflow-hidden`}>
-              <Image src={project.imageUrl} className={`w-full h-full object-cover group-hover:scale-110 transition`} />
-            </section>
+      {projects.length > 0 ?
+        <article className="grid grid-cols-5 gap-x-5 gap-y-10">
+          {projects.map((project: any, index: number) => {
+            // Determine layout based on index
+            const isLarge = [0, 3, 4].includes(index); // projects 1, 4, 5 (0-based index)
+            const span = isLarge ? "lg:col-span-3" : "lg:col-span-2";
+            const height = isLarge ? "lg:h-80" : "lg:h-60";
 
-            <section className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-white">{project.title}</h2>
-              <p className="text-white/80 text-sm">{project.description}</p>
-            </section>
-          </div>
-        ))}
-      </article>
+            return (
+              <Link
+                href={route('projects.show', slugify(project.name))}
+                key={index}
+                className={`col-span-5 ${span} space-y-2 cursor-pointer h-fit group`}
+              >
+                <section className={`${height} h-96 overflow-hidden`}>
+                  <Image
+                    src={`/storage/${project.thumbnail}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition"
+                  />
+                </section>
 
-      <Link href={route('projects.index')}>
-        <Button className="rounded-full flex items-center gap-2" size="lg">
-          View All Projects
-          <MoveRight className="w-4 h-4" />
-        </Button>
-      </Link>
+                <section className="flex items-center justify-between">
+                  <h2 className="text-lg font-semibold text-white">{project.name}</h2>
+                  <div className="flex items-center justify-end gap-2 w-1/2 truncate">
+                    {
+                      project.roles.map((role: any, index: number) => (
+                        <p key={role.id} className="capitalize text-nowrap text-white/80 text-sm">
+                          {role.type}{index < project.roles.length - 1 ? ',' : ''}
+                        </p>
+                      ))
+                    }
+                  </div>
+                </section>
+              </Link>
+            )
+          })}
+        </article>
+        :
+        <div className="font-light tracking-wide">Coming Soon...</div>
+      }
+
+      <div className="w-fit">
+        <Link href={route('projects.index')}>
+          <Button className="rounded-full flex items-center gap-2" size="lg">
+            View All Projects
+            <MoveRight className="w-4 h-4" />
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

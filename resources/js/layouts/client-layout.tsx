@@ -1,15 +1,41 @@
-import { type ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 
 import Footer from "@/components/personalized/footer";
 import NavHeader from '@/components/personalized/nav-header';
 import FixedBottom from '@/components/personalized/fixed-bottom';
+import { toast, Toaster } from 'sonner';
+import { usePage } from '@inertiajs/react';
+import { Flash } from '@/types';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
+
+  const { flash } = usePage<{ flash: Flash }>().props;
+
+  useEffect(() => {
+    if (flash.success) {
+      toast.success(flash.success);
+    }
+    if (flash.update) {
+      toast.info(flash.update);
+    }
+    if (flash.warning) {
+      toast.warning(flash.warning);
+    }
+    if (flash.info) {
+      toast.info(flash.info);
+    }
+    if (flash.error) {
+      toast.error(flash.error);
+    }
+  }, [flash]);
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center">
 
+      <Toaster className='!z-50 !top-16' position={'top-right'} richColors />
+
       {/* Sticky Header */}
-      <span className='fixed top-0 z-50 w-full bg-black/50 backdrop-blur-sm mix-blend-difference'>
+      <span className='fixed top-0 !z-40 w-full bg-black/50 backdrop-blur-sm mix-blend-difference'>
         <NavHeader />
       </span>
 

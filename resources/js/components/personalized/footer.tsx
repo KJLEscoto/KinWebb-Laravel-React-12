@@ -12,7 +12,7 @@ function Footer() {
       </p>
 
       <a href='mailto:kin.webb.1024@gmail.com' >
-        <Button size='lg' variant='outline' className="rounded-full !py-6 !px-7 flex items-center gap-2 bg-white transition-all duration-300 text-base">
+        <Button size='lg' variant='outline' className="rounded-full !py-6 !px-7 flex items-center gap-2 !bg-white hover:!bg-black !text-black hover:!text-white transition-all duration-300 text-base">
           kin.webb.1024@gmail.com
         </Button>
       </a>

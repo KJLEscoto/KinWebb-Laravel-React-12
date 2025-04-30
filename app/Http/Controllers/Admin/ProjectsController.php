@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\ProjectFactory;
 
 class ProjectsController extends Controller
 {
@@ -108,24 +109,33 @@ class ProjectsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        $project = Project::with(['tags', 'roles', 'tools', 'frameworks', 'screenshots'])->findOrFail($id);
+        $project_instance = new Project();
+        $project_name = $project_instance->unslugify($slug);
+
+        $project = $project_instance
+            ->where('name', $project_name)
+            ->with(['tags', 'roles', 'tools', 'frameworks', 'screenshots'])
+            ->firstOrFail();
+
         return inertia('admin/projects/show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Project $project)
     {
-        //
+        $project->load(['tags', 'roles', 'tools', 'frameworks', 'screenshots']);
+
+        dd($project);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
         //
     }
@@ -138,9 +148,16 @@ class ProjectsController extends Controller
         //
     }
 
-    public function toggleFeatured(Project $project)
+    public function toggleFeatured(string $slug)
     {
         $maxFeatured = config('app.max_featured_projects');
+
+        $project_instance = new Project();
+        $project_name = $project_instance->unslugify($slug);
+
+        $project = $project_instance
+            ->where('name', $project_name)
+            ->first();
 
         if (Project::where('is_featured', true)->count() >= $maxFeatured && !$project->is_featured) {
             return back()->with('warning', "You can only have {$maxFeatured} featured projects.");

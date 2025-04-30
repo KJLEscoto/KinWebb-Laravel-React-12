@@ -12,6 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { slugify } from '@/lib/utils';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -49,7 +50,7 @@ export default function Index({ projects }: { projects: any }) {
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-7'>
           {projects.map((project: any) => (
             <div className='flex flex-col gap-2' key={project.id}>
-              <Link href={route('admin.projects.show', project.id)}>
+              <Link href={route('admin.projects.show', slugify(project.name))}>
                 <div className='relative group'>
                   <Image src={`/storage/${project.thumbnail}`} className="w-full h-32 object-cover rounded" />
                   <h2 className="text-lg font-medium transition opacity-0 group-hover:opacity-100 absolute bottom-0 left-0 px-3 py-2 truncate bg-black/70 w-full">{project.name}</h2>
@@ -79,7 +80,7 @@ export default function Index({ projects }: { projects: any }) {
                     <TooltipTrigger>
                       <Switch
                         checked={project.is_featured}
-                        onCheckedChange={() => changeFeatured(project.id)}
+                        onCheckedChange={() => changeFeatured(project.name)}
                       />
                     </TooltipTrigger>
                     <TooltipContent>
