@@ -11,7 +11,7 @@
     /* --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; */
 
-    --font-sans:
+    --font-lato:
         /* 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,  */
         'Lato', sans-serif;
 
@@ -153,6 +153,10 @@
 }
 
 @layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
     * {
         @apply border-border;
     }

@@ -2,9 +2,9 @@ import Section from '@/components/personalized/admin-show-project';
 import Image from '@/components/personalized/image';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
-import { Framework, Project, Role, Screenshot, Tag, Tool, type BreadcrumbItem } from '@/types';
+import { Project, Role, Screenshot, Tag, type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { ArrowLeft, PencilLine } from 'lucide-react';
+import { ArrowLeft, Pencil } from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -12,6 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import Badge from '@/components/personalized/badge';
 
 type ProjectProps = {
   project: Project
@@ -34,7 +35,7 @@ export default function Show({ project }: ProjectProps) {
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title={` ${project.name} | Projects`} />
-      <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+      <div className="flex h-full flex-1 flex-col gap-5 rounded-xl p-4">
         <section className='w-full flex items-center justify-between'>
           <Link href={route('admin.projects.index')} className='flex items-center gap-2'>
             <Button variant='outline'>
@@ -44,7 +45,7 @@ export default function Show({ project }: ProjectProps) {
           </Link>
           <Link href={route('admin.projects.edit', project.id)} className='flex items-center gap-2'>
             <Button variant='default'>
-              <PencilLine className="size-4" />
+              <Pencil className="size-4" />
               Edit Project
             </Button>
           </Link>
@@ -84,14 +85,7 @@ export default function Show({ project }: ProjectProps) {
           {project.tools.length > 0 &&
             <Section header='Tools'>
               <div className='flex items-center gap-2 flex-wrap'>
-                {project.tools.map((tool: Tool) => (
-                  <div key={tool.id} className='flex items-center gap-2 rounded-sm bg-[#1c1c1c] px-3 py-2 select-none w-fit'>
-                    <Image src={tool.logo} className="!w-4 !h-4 object-cover" />
-                    <p className='text-sm text-white/80 tracking-wide'>
-                      {tool.name}
-                    </p>
-                  </div>
-                ))}
+                <Badge items={project.tools} />
               </div>
             </Section>
           }
@@ -99,19 +93,11 @@ export default function Show({ project }: ProjectProps) {
           {project.frameworks.length > 0 &&
             <Section header='Frameworks'>
               <div className='flex items-center gap-2 flex-wrap'>
-                {project.frameworks.map((framework: Framework) => (
-                  <div key={framework.id} className='flex items-center gap-2 rounded-sm bg-[#1c1c1c] px-3 py-2 select-none w-fit'>
-                    <Image src={framework.logo} className="!w-4 !h-4 object-cover" />
-                    <p className='text-sm text-white/80 tracking-wide'>
-                      {framework.name}
-                    </p>
-                  </div>
-                ))}
+                <Badge items={project.frameworks} />
               </div>
             </Section>
           }
         </div>
-
 
         <Section header='Thumbnail'>
           <div className='w-full flex items-center justify-center'>

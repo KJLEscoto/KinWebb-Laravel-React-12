@@ -127,7 +127,7 @@ export default function Create({ tools, frameworks }: CreateProjectsProps) {
                   id="name"
                   type="text"
                   required
-                  autoComplete="name"
+                  autoFocus
                   placeholder='Untitled Project'
                   value={data.name}
                   onChange={(e) => setData('name', e.target.value)}
@@ -321,6 +321,7 @@ export default function Create({ tools, frameworks }: CreateProjectsProps) {
                         id={`screenshot_name_${index}`}
                         type="text"
                         required
+                        autoFocus
                         placeholder='Untitled Screenshot'
                         value={screenshot.name}
                         onChange={(e) => {

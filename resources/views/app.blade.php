@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {{-- icon --}}
+    <link rel="icon" type="image/x-icon" href="{{ asset('kinwebb_icon.png') }}">
+
     {{-- Inline script to detect system dark mode preference and apply it immediately --}}
     <script>
         (function() {
@@ -48,7 +51,7 @@
     @inertiaHead
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-lato antialiased">
     @inertia
 </body>
 

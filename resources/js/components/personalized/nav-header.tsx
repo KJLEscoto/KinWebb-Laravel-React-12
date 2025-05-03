@@ -14,6 +14,7 @@ import { Input } from "../ui/input";
 import { FormEventHandler, useState } from "react";
 import InputError from "../input-error";
 import { Textarea } from "../ui/textarea";
+import Image from "./image";
 
 type SubmitForm = {
   name: string;
@@ -68,7 +69,6 @@ function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
 }
 
 function NavHeader() {
-  const KINWEBB_ICON = import.meta.env.VITE_KINWEBB_ICON;
   const KINWEBB_LOGO = import.meta.env.VITE_KINWEBB_LOGO;
 
   const [isWebSheetOpen, setIsWebSheetOpen] = useState(false);
@@ -94,7 +94,7 @@ function NavHeader() {
   return (
     <nav className="py-5 max-w-5xl mx-auto px-5 lg:px-0 transition-all duration-500 flex items-center justify-between">
       <Link href={route("home")} className="text-white font-bold text-base">
-        {KINWEBB_ICON}
+        <Image className="!w-10" src='/images/KinWebb_Icon_White.png' alt="kinwebb_icon" />
       </Link>
 
       {/* Desktop */}
@@ -135,7 +135,7 @@ function NavHeader() {
             <SheetHeader>
               <SheetTitle>Looking for a Web Developer?</SheetTitle>
               <SheetDescription>
-                If you have any inquiries, ideas, or just want to say hello, feel free to leave a message — I'll get back to you as soon as possible.
+                If you have any inquiries or ideas, feel free to leave a message — I'll get back to you as soon as possible.
               </SheetDescription>
               <ContactForm onSubmit={sendMessage} data={data} setData={setData} errors={errors} processing={processing} />
             </SheetHeader>
@@ -158,15 +158,28 @@ function NavHeader() {
               </SheetTitle>
             </SheetHeader>
             <div className="w-full px-5 pb-5 -mt-5">
-              {links.map(({ href, label, icon: Icon }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="text-[#A0A0A0] font-medium py-3 px-3 flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
-                >
-                  {label}
-                  {Icon && <Icon className="size-4" />}
-                </Link>
+              {links.map(({ href, new_tab, label, icon: Icon }) => (
+                new_tab ? (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#A0A0A0] font-medium py-3 px-3 flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
+                  >
+                    {label}
+                    {Icon && <Icon className="size-4" />}
+                  </a>
+                ) : (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="text-[#A0A0A0] font-medium py-3 px-3 flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
+                  >
+                    {label}
+                    {Icon && <Icon className="size-4" />}
+                  </Link>
+                )
               ))}
               <Sheet>
                 <SheetTrigger className="w-full mt-3">
