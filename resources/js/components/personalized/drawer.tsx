@@ -51,7 +51,7 @@ function ProjectRequestForm({ request }: ProjectRequestProps) {
   return (
     <div className='flex items-center w-full justify-between gap-10'>
       <h3 className="tracking-wide">
-        Want a copy of this project?
+        Want a copy of {request.name}?
         <span className='ml-2 text-white/70'>Request now for free.</span>
       </h3>
 

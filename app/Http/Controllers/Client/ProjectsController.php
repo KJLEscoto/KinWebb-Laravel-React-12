@@ -64,7 +64,13 @@ class ProjectsController extends Controller
 
         // $project->load(['tags', 'roles', 'tools', 'frameworks', 'screenshots']);
 
-        return inertia('client/projects/show', compact('project', 'project_names'));
+        $random_projects = $project_instance
+            ->whereNot('name', $project_name)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
+
+        return inertia('client/projects/show', compact('project', 'project_names', 'random_projects'));
     }
 
     /**

@@ -1,4 +1,4 @@
-import { Link, useForm } from "@inertiajs/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
 import { ArrowUpRight, Menu, Send } from "lucide-react";
 import { Button } from "../ui/button";
 import {
@@ -34,23 +34,24 @@ const links = [
 ];
 
 function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
+
   return (
     <form className="flex flex-col gap-5 mt-5" onSubmit={onSubmit}>
       <section className="flex flex-col gap-2">
         <Label htmlFor="name">Name</Label>
-        <Input id="name" type="text" value={data.name} onChange={(e) => setData("name", e.target.value)} />
+        <Input required id="name" type="text" value={data.name} onChange={(e) => setData("name", e.target.value)} />
         <InputError message={errors.name} />
       </section>
 
       <section className="flex flex-col gap-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" value={data.email} onChange={(e) => setData("email", e.target.value)} />
+        <Input required id="email" type="email" value={data.email} onChange={(e) => setData("email", e.target.value)} />
         <InputError message={errors.email} />
       </section>
 
       <section className="flex flex-col gap-2">
         <Label htmlFor="message">Message</Label>
-        <Textarea id="message" className="!bg-[#0a0a0a] h-40" value={data.message} onChange={(e) => setData("message", e.target.value)} />
+        <Textarea required id="message" className="!bg-[#0a0a0a] h-40" value={data.message} onChange={(e) => setData("message", e.target.value)} />
         <InputError message={errors.message} />
       </section>
 
@@ -58,7 +59,7 @@ function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
         <Button
           className="rounded-full flex items-center gap-2 !px-6"
           type="submit"
-          disabled={processing || !data.name || !data.email || !data.message}
+          disabled={processing}
         >
           Send Message
           <Send className="size-4" />
@@ -100,8 +101,11 @@ function NavHeader() {
       {/* Desktop */}
       <section className="md:flex hidden items-center gap-8">
         <div className="flex items-center gap-10">
-          {links.map(({ href, new_tab, label, icon: Icon }) => (
-            new_tab ? (
+          {links.map(({ href, new_tab, label, icon: Icon }) => {
+            const page = usePage();
+            const isActive = page.url === href || page.url.startsWith(href);
+
+            return new_tab ? (
               <a
                 key={href}
                 href={href}
@@ -116,13 +120,18 @@ function NavHeader() {
               <Link
                 key={href}
                 href={href}
-                className="text-[#A0A0A0] font-medium flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
+                className={`relative font-medium flex items-center gap-1 text-xs tracking-wide hover:text-white transition ${isActive ? 'text-white' : 'text-[#A0A0A0]'
+                  }`}
               >
                 {label}
                 {Icon && <Icon className="size-4" />}
+                {isActive && (
+                  <div className="w-1.5 h-1.5 rounded-full bg-white absolute left-1/2 -translate-x-1/2 -bottom-2.5"></div>
+                )}
               </Link>
-            )
-          ))}
+            );
+          })}
+
         </div>
 
         <Sheet open={isWebSheetOpen} onOpenChange={setIsWebSheetOpen}>
@@ -158,8 +167,11 @@ function NavHeader() {
               </SheetTitle>
             </SheetHeader>
             <div className="w-full px-5 pb-5 -mt-5">
-              {links.map(({ href, new_tab, label, icon: Icon }) => (
-                new_tab ? (
+              {links.map(({ href, new_tab, label, icon: Icon }) => {
+                const page = usePage();
+                const isActive = page.url === href || page.url.startsWith(href);
+
+                return new_tab ? (
                   <a
                     key={href}
                     href={href}
@@ -174,13 +186,14 @@ function NavHeader() {
                   <Link
                     key={href}
                     href={href}
-                    className="text-[#A0A0A0] font-medium py-3 px-3 flex items-center gap-1 text-xs tracking-wide hover:text-white transition"
+                    className={`text-[#A0A0A0] font-medium py-3 px-3 flex items-center gap-1 text-xs tracking-wide hover:text-white transition relative ${isActive ? 'text-white bg-white/10 rounded-full' : 'text-[#A0A0A0]'
+                      }`}
                   >
                     {label}
                     {Icon && <Icon className="size-4" />}
                   </Link>
-                )
-              ))}
+                );
+              })}
               <Sheet>
                 <SheetTrigger className="w-full mt-3">
                   <Button size="sm" className="rounded-full text-xs w-full font-bold">

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Tag extends Model
 {
 
-    protected $guarded = [];
     protected $table = 'tags';
 
     public function projects(): BelongsToMany

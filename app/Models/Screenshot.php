@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Screenshot extends Model
 {
-    protected $guarded = [];
     protected $table = 'screenshots';
 
     public function project(): BelongsTo

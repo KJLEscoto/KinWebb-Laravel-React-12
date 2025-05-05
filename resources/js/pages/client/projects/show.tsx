@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import ClientLayout from '@/layouts/client-layout';
 import { Head, Link } from '@inertiajs/react';
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import { ChevronLeftIcon, ChevronRightIcon, MoveRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { slugify } from '@/lib/utils';
 import { Project, Role, Tag } from '@/types';
@@ -19,13 +19,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Separator } from '@/components/ui/separator';
 
 type ShowProjectProps = {
   project: Project;
+  random_projects: Project[]
   project_names: string[];
 }
 
-export default function Show({ project, project_names }: ShowProjectProps) {
+export default function Show({ project, project_names, random_projects }: ShowProjectProps) {
   const [currentPage, setCurrentPage] = useState(0);
 
   const prevButton = () => {
@@ -62,7 +64,7 @@ export default function Show({ project, project_names }: ShowProjectProps) {
         <Shell>
           <div className='space-y-20'>
             <header className='flex flex-row gap-5 items-start h-full'>
-              <aside className='flex flex-col gap-10 justify-between h-70 w-full'>
+              <aside className='flex flex-col gap-10 justify-between min-h-70 w-full'>
                 <section className='space-y-2'>
                   <p className="font-light text-white/60 text-sm">
                     <Comma
@@ -109,7 +111,8 @@ export default function Show({ project, project_names }: ShowProjectProps) {
                 </Dialog>
               </aside>
             </header>
-            <section className='grid grid-cols-2 gap-5 w-full'>
+
+            <section className='grid grid-cols-2 gap-x-5 gap-y-10 w-full'>
               {project.tools.length > 0 &&
                 <>
                   <h3 className='text-sm flex items-start'>Tools</h3>
@@ -127,6 +130,7 @@ export default function Show({ project, project_names }: ShowProjectProps) {
                 </>
               }
             </section>
+
             {project.screenshots.length > 0 &&
               <div className='space-y-5'>
                 <section className='flex items-end justify-between gap-5'>
@@ -178,9 +182,6 @@ export default function Show({ project, project_names }: ShowProjectProps) {
               </div>
             }
 
-            {/* project request drawer */}
-            <ProjectRequestForm request={project} />
-
             <section className='w-full flex items-center justify-between'>
               {(() => {
                 const currentIndex = project_names.findIndex(name => name === project.name);
@@ -210,6 +211,37 @@ export default function Show({ project, project_names }: ShowProjectProps) {
             </section>
           </div>
 
+          <Separator />
+
+          {/* project request drawer */}
+          <ProjectRequestForm request={project} />
+
+          <Separator />
+
+          <div className='space-y-5'>
+            <h1 className='text-xl font-bold'>More of my works</h1>
+
+            <section className='grid md:grid-cols-3 gap-5'>
+              {
+                random_projects.map((rand: Project) => (
+                  <Link
+                    href={route('projects.show', slugify(rand.name))}
+                    className='group w-fit h-fit relative'
+                  >
+                    <Image src={`/storage/${rand.thumbnail}`} alt={project.name} />
+                    <div className='group-hover:opacity-100 transition opacity-0 bg-black/80 absolute bottom-0 w-full p-3 truncate'>
+                      {rand.name}
+                    </div>
+                  </Link>
+                ))
+              }
+            </section>
+
+            <Link href={route('projects.index')} className='group flex items-center gap-2 transition !w-fit font-light text-white/70 hover:text-white'>
+              See all projects
+              <MoveRight className='size-4 group-hover:translate-x-2 transition' />
+            </Link>
+          </div>
         </Shell>
       </MainLayer>
     </ClientLayout>

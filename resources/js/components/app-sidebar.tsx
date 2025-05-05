@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, FolderOpen, LayoutGrid } from 'lucide-react';
+import { BadgeMinus, BookOpen, Container, Folder, FolderOpen, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -13,13 +13,18 @@ const mainNavItems: NavItem[] = [
         href: '/admin/dashboard',
         icon: LayoutGrid,
     },
-];
-
-const manageNavItems: NavItem[] = [
     {
         title: 'Projects',
         href: '/admin/projects',
         icon: FolderOpen,
+    },
+];
+
+const manageNavItems: NavItem[] = [
+    {
+        title: 'Tech Stack',
+        href: '/admin/tech-stack',
+        icon: Container,
     },
 ];
 

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Role extends Model
 {
 
-    protected $guarded = [];
     protected $table = 'roles';
 
     public function projects(): BelongsToMany

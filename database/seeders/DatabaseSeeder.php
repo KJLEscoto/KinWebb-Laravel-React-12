@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            ToolSeeder::class,
-            FrameworkSeeder::class,
+            // ToolSeeder::class,
+            // FrameworkSeeder::class,
             // Add other seeders here
         ]);
     }

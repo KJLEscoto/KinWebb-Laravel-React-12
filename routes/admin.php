@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ProjectsController as AdminProjectsController;
+use App\Http\Controllers\Admin\TechStackController as AdminTechStackController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -16,6 +17,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     'show' => 'admin.projects.show',
     'edit' => 'admin.projects.edit',
     'update' => 'admin.projects.update',
+    'destroy' => 'admin.projects.delete',
+  ]);
+
+  Route::resource('admin/tech-stack', AdminTechStackController::class)->names([
+    'index' => 'admin.techstack.index',
+    'create' => 'admin.techstack.create',
+    'store' => 'admin.techstack.store',
+    'show' => 'admin.techstack.show',
+    'edit' => 'admin.techstack.edit',
+    'update' => 'admin.techstack.update',
     'destroy' => 'admin.projects.delete',
   ]);
 

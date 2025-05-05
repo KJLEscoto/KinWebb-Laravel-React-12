@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Framework extends Model
 {
-    protected $guarded = [];
     protected $table = 'frameworks';
 
     public function projects(): BelongsToMany
