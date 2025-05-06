@@ -69,7 +69,7 @@ export default function Create() {
         <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="grid gap-6">
             <div className="flex justify-between items-center">
-              <Link href={route('admin.projects.index')} className="flex items-center gap-2">
+              <Link href={route('admin.techstack.index')} className="flex items-center gap-2">
                 <Button variant="outline">
                   <ArrowLeft className="size-4" />
                   Back

@@ -109,6 +109,11 @@ export type ProjectProps = {
     projects: Project[];
 }
 
-export interface Index {
-    index: number;
+export interface Hero {
+    id: number;
+    logo_image?: File | null;
+    model_image?: File | null;
+    body: string;
+    is_active: boolean;
 }
+

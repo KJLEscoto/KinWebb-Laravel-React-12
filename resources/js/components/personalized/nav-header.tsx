@@ -23,6 +23,7 @@ type SubmitForm = {
 };
 
 const links = [
+  { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/about-me", label: "About Me" },
   {
@@ -103,7 +104,7 @@ function NavHeader() {
         <div className="flex items-center gap-10">
           {links.map(({ href, new_tab, label, icon: Icon }) => {
             const page = usePage();
-            const isActive = page.url === href || page.url.startsWith(href);
+            const isActive = href === '/' ? page.url === '/' : page.url.startsWith(href);
 
             return new_tab ? (
               <a
@@ -169,7 +170,7 @@ function NavHeader() {
             <div className="w-full px-5 pb-5 -mt-5">
               {links.map(({ href, new_tab, label, icon: Icon }) => {
                 const page = usePage();
-                const isActive = page.url === href || page.url.startsWith(href);
+                const isActive = href === '/' ? page.url === '/' : page.url.startsWith(href);
 
                 return new_tab ? (
                   <a

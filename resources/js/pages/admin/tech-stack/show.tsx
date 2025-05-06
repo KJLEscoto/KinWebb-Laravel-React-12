@@ -2,6 +2,7 @@ import Section from '@/components/personalized/admin-show-project';
 import Image from '@/components/personalized/image';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
+import { techLogo } from '@/lib/utils';
 import { Framework, Tool, type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, Pencil } from 'lucide-react';
@@ -12,6 +13,7 @@ type ShowTechStackProps = {
 }
 
 export default function Show({ techstack, techtype }: ShowTechStackProps) {
+
   const breadcrumbs: BreadcrumbItem[] = [
     {
       title: 'Tech Stack',
@@ -23,9 +25,9 @@ export default function Show({ techstack, techtype }: ShowTechStackProps) {
     },
   ];
 
-  console.log(techstack, techtype);
-
   return (
+
+
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title={` ${techstack.name} | Tech Stack`} />
       <div className="flex h-full flex-1 flex-col gap-5 rounded-xl p-4">
@@ -49,7 +51,7 @@ export default function Show({ techstack, techtype }: ShowTechStackProps) {
         </Section>
 
         <Section header='Logo'>
-          <Image className='!max-w-xs' src={techstack.logo} alt={techstack.name} />
+          <Image className='!max-w-xs' src={techLogo(techstack)} alt={techstack.name} />
         </Section>
 
       </div>

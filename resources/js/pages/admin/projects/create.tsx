@@ -156,7 +156,7 @@ export default function Create({ tools, frameworks }: CreateProjectsProps) {
                 id="description"
                 required
                 placeholder='This project is...'
-                className="!bg-[#0a0a0a] h-40"
+                className="!bg-transparent h-40"
                 value={data.description}
                 onChange={(e) => setData("description", e.target.value)} />
               <InputError message={errors.description} />

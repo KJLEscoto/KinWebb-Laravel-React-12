@@ -3,10 +3,15 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MoveDown } from 'lucide-react';
 import Image from './image';
+import { Hero as MainHero } from '@/types';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Hero() {
+type HeroProps = {
+  main_hero: MainHero
+}
+
+function Hero({ main_hero }: HeroProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -64,16 +69,22 @@ function Hero() {
       ref={heroRef}
       className='flex flex-col items-center justify-center min-h-screen h-auto text-center lg:p-0 p-5'
     >
-      <header className="relative h-full w-full flex items-center justify-center">
-        <Image src="/gif/orb.gif" alt="orb" />
-        <span className='absolute md:-top-10 bottom-5 transition-all duration-500'>
-          <Image src="/images/big-logo.png" alt="big logo" className="lg:max-w-5xl" />
-        </span>
-      </header>
+      {main_hero ? (
+        <>
+          <header className="relative h-full w-full flex items-center justify-center">
+            <Image src={`/storage/${main_hero.model_image}`} alt="model image" />
+            <span className='absolute md:-top-10 bottom-5 transition-all duration-500'>
+              <Image src={`/storage/${main_hero.logo_image}`} alt="logo image" className="lg:max-w-5xl" />
+            </span>
+          </header>
 
-      <p className='text-[#A0A0A0] text-sm tracking-wide'>
-        Hey, I'm <strong>Kin</strong> — I build sleek, scalable, and user-focused web solutions.
-      </p>
+          <p className='text-[#A0A0A0] text-sm tracking-wide mt-3'>
+            {main_hero.body}
+          </p>
+        </>
+      ) : (
+        <div className='text-5xl text-center'>Coming Soon...</div>
+      )}
 
       <button
         ref={buttonRef}

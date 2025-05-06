@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BadgeMinus, BookOpen, Container, Folder, FolderOpen, LayoutGrid } from 'lucide-react';
+import { AppWindow, BadgeMinus, BookOpen, Container, Folder, FolderOpen, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -17,6 +17,14 @@ const mainNavItems: NavItem[] = [
         title: 'Projects',
         href: '/admin/projects',
         icon: FolderOpen,
+    },
+];
+
+const pageSectionNavItems: NavItem[] = [
+    {
+        title: 'Hero',
+        href: '/admin/hero',
+        icon: AppWindow,
     },
 ];
 
@@ -58,6 +66,7 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain groupLabel='Main' items={mainNavItems} />
+                <NavMain groupLabel='Page Section' items={pageSectionNavItems} />
                 <NavMain groupLabel='Manage' items={manageNavItems} />
             </SidebarContent>
 

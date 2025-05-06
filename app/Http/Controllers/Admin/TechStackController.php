@@ -35,49 +35,38 @@ class TechStackController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'type' => 'required|string',
+            'type' => 'required|string|in:tool,framework',
             'logoUrl' => 'nullable|string',
             'logoUpload' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:20480',
         ]);
 
+        $logo = $validated['logoUrl'] ?? null;
+
         if ($request->hasFile('logoUpload')) {
-            $techstack_path = Storage::disk('public')->put('techstack', $request->file('logoUpload'));
-        } else {
-            $techstack_path = null;
+            $logo = Storage::disk('public')->put('techstack', $request->file('logoUpload'));
         }
 
-        if ($validated['type'] == 'tool') {
-            if ($validated['logoUrl']) {
-                Tool::create([
-                    'name' => $validated['name'],
-                    'logo' => $validated['logoUrl'],
-                ]);
-            } else {
-                Tool::create([
-                    'name' => $validated['name'],
-                    'logo' => $techstack_path,
-                ]);
-            }
-        } elseif ($validated['type'] == 'framework') {
-            if ($validated['logoUrl']) {
-                Framework::create([
-                    'name' => $validated['name'],
-                    'logo' => $validated['logoUrl'],
-                ]);
-            } else {
-                Framework::create([
-                    'name' => $validated['name'],
-                    'logo' => $techstack_path,
-                ]);
-            }
-        } else {
-            return back()->with('error', 'Error occured, please try again.');
+        $modelMap = [
+            'tool' => Tool::class,
+            'framework' => Framework::class,
+        ];
+
+        $modelClass = $modelMap[$validated['type']] ?? null;
+
+        if (!$modelClass) {
+            return back()->with('error', 'Error occurred, please try again.');
         }
 
-        $message = $validated['name'] . ' has been added.';
+        $modelClass::create([
+            'name' => $validated['name'],
+            'logo' => $logo,
+        ]);
+
+        $message = "{$validated['name']} has been added.";
 
         return redirect()->route('admin.techstack.index')->with('success', $message);
     }
+
 
     /**
      * Display the specified resource.
@@ -113,14 +102,6 @@ class TechStackController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
     {
         //
     }

@@ -39,8 +39,12 @@ export function getFormattedDate(timeZone: string = "Asia/Manila"): string {
 }
 
 export function slugify(text: string): string {
-  return text
+    return text
     .toLowerCase()
     .trim()
     .replace(/[\s\W-]+/g, '-'); // replaces spaces and non-word characters with hyphens
+}
+
+export function techLogo(name: any): any {
+    return name.logo.startsWith('techstack') ? `/storage/${name.logo}` : name.logo;
 }

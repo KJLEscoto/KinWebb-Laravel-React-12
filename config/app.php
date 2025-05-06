@@ -125,6 +125,7 @@ return [
 
     // personalized
 
-    'max_featured_projects' => env('MAX_FEATURED_PROJECTS')
+    'max_featured_projects' => env('MAX_FEATURED_PROJECTS'),
+    'main_hero_count' => env('MAIN_HERO')
 
 ];
