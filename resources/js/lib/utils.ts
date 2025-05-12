@@ -1,3 +1,4 @@
+import { TechStack } from '@/types';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -47,4 +48,8 @@ export function slugify(text: string): string {
 
 export function techLogo(name: any): any {
     return name.logo.startsWith('techstack') ? `/storage/${name.logo}` : name.logo;
+}
+
+export function filterByType(items: any[], type: string): any[] {
+    return items.filter(item => item.type === type);
 }

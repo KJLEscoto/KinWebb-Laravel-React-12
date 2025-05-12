@@ -1,7 +1,8 @@
 import Badge from '@/components/personalized/badge';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
-import { Framework, Tool, type BreadcrumbItem } from '@/types';
+import { filterByType } from '@/lib/utils';
+import { TechStack, type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 
@@ -13,11 +14,13 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 type TechStackProps = {
-  tools: Tool[],
-  frameworks: Framework[]
+  techstack: TechStack[]
 }
 
-export default function Index({ tools, frameworks }: TechStackProps) {
+export default function Index({ techstack }: TechStackProps) {
+  const tools = filterByType(techstack, 'tool');
+  const frameworks = filterByType(techstack, 'framework');
+
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="Tech Stack" />

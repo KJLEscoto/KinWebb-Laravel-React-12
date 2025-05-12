@@ -11,6 +11,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     return Inertia::render('dashboard');
   })->name('admin.dashboard');
 
+  // admin projects page
   Route::resource('admin/projects', AdminProjectsController::class)->names([
     'index' => 'admin.projects.index',
     'create' => 'admin.projects.create',
@@ -21,6 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
   ]);
   Route::patch('admin/projects/{project}/toggle-featured', [AdminProjectsController::class, 'toggleFeatured'])->name('admin.projects.toggle-featured');
 
+  // admin tech stack page
   Route::resource('admin/tech-stack', AdminTechStackController::class)->names([
     'index' => 'admin.techstack.index',
     'create' => 'admin.techstack.create',
@@ -30,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     'update' => 'admin.techstack.update',
   ]);
 
+  // admin hero page
   Route::resource('admin/hero', AdminHeroController::class)->names([
     'index' => 'admin.hero.index',
     'create' => 'admin.hero.create',

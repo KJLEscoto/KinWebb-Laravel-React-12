@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// home page
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
+// projects page
 Route::resource('projects', ClientProjectsController::class);
 
+// get in touch
 Route::resource('message', ClientMessageController::class)->only('store');
 
 require __DIR__ . '/settings.php';

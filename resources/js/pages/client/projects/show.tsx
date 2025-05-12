@@ -5,7 +5,7 @@ import ClientLayout from '@/layouts/client-layout';
 import { Head, Link } from '@inertiajs/react';
 import { ChevronLeftIcon, ChevronRightIcon, MoveRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { slugify } from '@/lib/utils';
+import { filterByType, slugify } from '@/lib/utils';
 import { Project, Role, Tag } from '@/types';
 import Shell from '@/components/personalized/shell';
 import MainLayer from '@/components/personalized/main-layer';
@@ -28,6 +28,9 @@ type ShowProjectProps = {
 }
 
 export default function Show({ project, project_names, random_projects }: ShowProjectProps) {
+  const tools = filterByType(project.techstack, 'tool');
+  const frameworks = filterByType(project.techstack, 'framework');
+
   const [currentPage, setCurrentPage] = useState(0);
 
   const prevButton = () => {
@@ -113,19 +116,22 @@ export default function Show({ project, project_names, random_projects }: ShowPr
             </header>
 
             <section className='grid grid-cols-2 gap-x-5 gap-y-10 w-full'>
-              {project.tools.length > 0 &&
+              {
+                tools.length > 0 &&
                 <>
                   <h3 className='text-sm flex items-start'>Tools</h3>
                   <div className='flex items-center flex-wrap gap-2'>
-                    <Badge items={project.tools} />
+                    <Badge items={tools} />
                   </div>
                 </>
               }
-              {project.frameworks.length > 0 &&
+
+              {
+                frameworks.length > 0 &&
                 <>
                   <h3 className='text-sm flex items-start'>Frameworks</h3>
                   <div className='flex items-center flex-wrap gap-2'>
-                    <Badge items={project.frameworks} />
+                    <Badge items={frameworks} />
                   </div>
                 </>
               }

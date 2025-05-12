@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Framework;
 use App\Models\Project;
+use App\Models\TechStack;
 use App\Models\Tool;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -29,9 +30,8 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        $tools = Tool::all();
-        $frameworks = Framework::all();
-        return inertia('admin/projects/create', compact('tools', 'frameworks'));
+        $techstack = TechStack::all();
+        return inertia('admin/projects/create', compact('techstack'));
     }
 
     /**
@@ -91,15 +91,15 @@ class ProjectsController extends Controller
 
         if ($validated['tools'] ?? false) {
             foreach ($validated['tools'] as $tool) {
-                $find_tool = Tool::where('name', $tool)->first();
-                $project->tools()->attach($find_tool->id);
+                $find_tool = TechStack::where('name', $tool)->first();
+                $project->techstack()->attach($find_tool->id);
             }
         }
 
         if ($validated['frameworks'] ?? false) {
             foreach ($validated['frameworks'] as $framework) {
-                $find_framework = Framework::where('name', $framework)->first();
-                $project->frameworks()->attach($find_framework->id);
+                $find_framework = TechStack::where('name', $framework)->first();
+                $project->techstack()->attach($find_framework->id);
             }
         }
 
@@ -116,7 +116,7 @@ class ProjectsController extends Controller
 
         $project = $project_instance
             ->where('name', $project_name)
-            ->with(['tags', 'roles', 'tools', 'frameworks', 'screenshots'])
+            ->with(['tags', 'roles', 'techstack', 'screenshots'])
             ->firstOrFail();
 
         return inertia('admin/projects/show', compact('project'));
@@ -127,7 +127,7 @@ class ProjectsController extends Controller
      */
     public function edit(Project $project)
     {
-        $project->load(['tags', 'roles', 'tools', 'frameworks', 'screenshots']);
+        $project->load(['tags', 'roles', 'techstack', 'screenshots']);
 
         dd($project);
     }

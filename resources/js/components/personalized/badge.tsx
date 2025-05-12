@@ -26,7 +26,7 @@ function Badge({ items, asLink }: BadgeProps) {
           >
             <Image
               src={techLogo(item)}
-              alt={item.name}
+              alt={item.logo}
               className="!w-4 !h-4 object-cover rounded-xs"
             />
             <p className="text-sm text-white/80 tracking-wide">{item.name}</p>

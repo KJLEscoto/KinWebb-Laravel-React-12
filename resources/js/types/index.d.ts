@@ -65,18 +65,27 @@ export interface Tag {
     updated_at: string;
 }
 
-export interface Tool {
-    id: number;
-    name: string;
-    logo: string;
-    created_at: string;
-    updated_at: string;
-}
+// export interface Tool {
+//     id: number;
+//     name: string;
+//     logo: string;
+//     created_at: string;
+//     updated_at: string;
+// }
 
-export interface Framework {
-    id: number;
+// export interface Framework {
+//     id: number;
+//     name: string;
+//     logo: string;
+//     created_at: string;
+//     updated_at: string;
+// }
+
+interface TechStack {
+    id: number | string;
     name: string;
     logo: string;
+    type: string;
     created_at: string;
     updated_at: string;
 }
@@ -98,8 +107,7 @@ export interface Project {
     is_featured?: boolean;
     roles: Role[];
     tags: Tag[];
-    tools: Tool[];
-    frameworks: Framework[];
+    techstack: TechStack[];
     screenshots: Screenshot[];
     created_at: string;
     updated_at: string;

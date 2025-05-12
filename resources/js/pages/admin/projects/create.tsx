@@ -8,7 +8,8 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import AppLayout from '@/layouts/app-layout';
-import { Framework, Tool, type BreadcrumbItem } from '@/types';
+import { filterByType, techLogo } from '@/lib/utils';
+import { TechStack, type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft, Check, FullscreenIcon, ImageIcon, LoaderCircle, Plus, Save } from 'lucide-react';
 import { FormEventHandler, useState } from 'react';
@@ -39,11 +40,14 @@ type AddProjectForm = {
 };
 
 type CreateProjectsProps = {
-  tools: Tool[],
-  frameworks: Framework[]
+  techstack: TechStack[]
 }
 
-export default function Create({ tools, frameworks }: CreateProjectsProps) {
+export default function Create({ techstack }: CreateProjectsProps) {
+
+  const tools = filterByType(techstack, 'tool');
+  const frameworks = filterByType(techstack, 'framework');
+
   const addScreenshot = () => {
     setData('screenshots', [...data.screenshots, { name: '', image: null }]);
   };
@@ -197,7 +201,7 @@ export default function Create({ tools, frameworks }: CreateProjectsProps) {
               <section className="w-full flex flex-col gap-3">
                 <Label>Tools <span className='opacity-50'>(can be more than 1)</span></Label>
                 <div className="w-fit ml-2 space-y-3">
-                  {tools.map((tool: Tool) => {
+                  {tools.map((tool: TechStack) => {
                     const id = `tool-${tool.id}`;
                     return (
                       <div key={tool.id} className="flex items-start space-x-3">
@@ -213,7 +217,11 @@ export default function Create({ tools, frameworks }: CreateProjectsProps) {
                           }}
                         />
                         <Label htmlFor={id} className="font-normal cursor-pointer flex items-center gap-2">
-                          <Image src={tool.logo} className='!w-4 !h-4 rounded' />
+                          <Image
+                            src={techLogo(tool)}
+                            alt={tool.logo}
+                            className="!w-4 !h-4 object-cover rounded-xs"
+                          />
                           <p>{tool.name}</p>
                         </Label>
                       </div>
@@ -227,7 +235,7 @@ export default function Create({ tools, frameworks }: CreateProjectsProps) {
               <section className="w-full flex flex-col gap-3">
                 <Label>Frameworks <span className='opacity-50'>(can be more than 1)</span></Label>
                 <div className="w-fit ml-2 space-y-3">
-                  {frameworks.map((framework: Framework) => {
+                  {frameworks.map((framework: TechStack) => {
                     const id = `framework-${framework.id}`;
                     return (
                       <div key={framework.id} className="flex items-start space-x-3">
@@ -243,7 +251,11 @@ export default function Create({ tools, frameworks }: CreateProjectsProps) {
                           }}
                         />
                         <Label htmlFor={id} className="font-normal cursor-pointer flex items-center gap-2">
-                          <Image src={framework.logo} className='!w-4 !h-4 rounded' />
+                          <Image
+                            src={techLogo(framework)}
+                            alt={framework.logo}
+                            className="!w-4 !h-4 object-cover rounded-xs"
+                          />
                           <p>{framework.name}</p>
                         </Label>
                       </div>

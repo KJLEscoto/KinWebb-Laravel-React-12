@@ -50,14 +50,18 @@ class Project extends Model
         return $this->hasMany(Screenshot::class);
     }
 
-    public function tools(): BelongsToMany
-    {
-        return $this->belongsToMany(Tool::class, 'project_tool');
-    }
+    // public function tools(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Tool::class, 'project_tool');
+    // }
 
-    public function frameworks(): BelongsToMany
-    {
-        return $this->belongsToMany(Framework::class, 'project_framework');
-    }
+    // public function frameworks(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Framework::class, 'project_framework');
+    // }
 
+    public function techstack(): BelongsToMany
+    {
+        return $this->belongsToMany(TechStack::class, 'project_techstack');
+    }
 }

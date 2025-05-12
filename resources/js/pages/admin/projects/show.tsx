@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import Badge from '@/components/personalized/badge';
+import { filterByType } from '@/lib/utils';
 
 type ProjectProps = {
   project: Project
@@ -31,6 +32,9 @@ export default function Show({ project }: ProjectProps) {
   ];
 
   console.log(project);
+
+  const tools = filterByType(project.techstack, 'tool');
+  const frameworks = filterByType(project.techstack, 'framework');
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
@@ -82,18 +86,20 @@ export default function Show({ project }: ProjectProps) {
         </div>
 
         <div className='flex items-start justify-between'>
-          {project.tools.length > 0 &&
+          {
+            tools.length > 0 &&
             <Section header='Tools'>
               <div className='flex items-center gap-2 flex-wrap'>
-                <Badge items={project.tools} />
+                <Badge asLink items={tools} />
               </div>
             </Section>
           }
 
-          {project.frameworks.length > 0 &&
+          {
+            frameworks.length > 0 &&
             <Section header='Frameworks'>
               <div className='flex items-center gap-2 flex-wrap'>
-                <Badge items={project.frameworks} />
+                <Badge asLink items={frameworks} />
               </div>
             </Section>
           }

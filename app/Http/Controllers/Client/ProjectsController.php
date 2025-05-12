@@ -57,7 +57,7 @@ class ProjectsController extends Controller
 
         $project = $project_instance
             ->where('name', $project_name)
-            ->with(['tags', 'roles', 'tools', 'frameworks', 'screenshots'])
+            ->with(['tags', 'roles', 'techstack', 'screenshots'])
             ->firstOrFail();
 
         $project_names = $project_instance->pluck('name')->toArray();

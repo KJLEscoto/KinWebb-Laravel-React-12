@@ -3,12 +3,12 @@ import Image from '@/components/personalized/image';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { techLogo } from '@/lib/utils';
-import { Framework, Tool, type BreadcrumbItem } from '@/types';
+import { TechStack, type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, Pencil } from 'lucide-react';
 
 type ShowTechStackProps = {
-  techstack: Tool | Framework,
+  techstack: TechStack
   techtype: string;
 }
 
@@ -26,8 +26,6 @@ export default function Show({ techstack, techtype }: ShowTechStackProps) {
   ];
 
   return (
-
-
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title={` ${techstack.name} | Tech Stack`} />
       <div className="flex h-full flex-1 flex-col gap-5 rounded-xl p-4">

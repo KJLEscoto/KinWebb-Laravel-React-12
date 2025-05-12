@@ -13,9 +13,8 @@ class TechStackController extends Controller
 {
     public function index()
     {
-        $tools = Tool::all();
-        $frameworks = Framework::all();
-        return inertia('admin/tech-stack/index', compact('tools', 'frameworks'));
+        $techstack = TechStack::all();
+        return inertia('admin/tech-stack/index', compact('techstack'));
     }
 
     /**
@@ -23,9 +22,7 @@ class TechStackController extends Controller
      */
     public function create()
     {
-        $tools = Tool::all();
-        $frameworks = Framework::all();
-        return inertia('admin/tech-stack/create', compact('tools', 'frameworks'));
+        return inertia('admin/tech-stack/create');
     }
 
     /**
@@ -46,20 +43,14 @@ class TechStackController extends Controller
             $logo = Storage::disk('public')->put('techstack', $request->file('logoUpload'));
         }
 
-        $modelMap = [
-            'tool' => Tool::class,
-            'framework' => Framework::class,
-        ];
-
-        $modelClass = $modelMap[$validated['type']] ?? null;
-
-        if (!$modelClass) {
+        if (!TechStack::class) {
             return back()->with('error', 'Error occurred, please try again.');
         }
 
-        $modelClass::create([
+        TechStack::create([
             'name' => $validated['name'],
             'logo' => $logo,
+            'type' => $validated['type']
         ]);
 
         $message = "{$validated['name']} has been added.";
@@ -76,15 +67,8 @@ class TechStackController extends Controller
         $techstack_instance = new TechStack();
         $tech_name = $techstack_instance->unslugify($slug);
 
-        $techtype = '';
-
-        $techstack = Framework::where('name', $tech_name)->first();
-        $techtype = 'framework';
-
-        if (!$techstack) {
-            $techstack = Tool::where('name', $tech_name)->first();
-            $techtype = 'tool';
-        }
+        $techstack = $techstack_instance->where('name', $tech_name)->first();
+        $techtype = $techstack->type;
 
         return inertia('admin/tech-stack/show', compact('techstack', 'techtype'));
     }
