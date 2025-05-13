@@ -89,7 +89,7 @@ function ProjectRequestForm({ request }: ProjectRequestProps) {
               <InputError className='text-center' message={errors.email} />
             </form>
 
-            <section className='flex flex-col gap-2 items-center tracking-wider text-white/50 font-light px-24'>
+            {/* <section className='flex flex-col gap-2 items-center tracking-wider text-white/50 font-light px-24'>
               <Dialog>
                 <DialogTrigger>
                   <Image src='/images/gcash.jpg' className='!w-30 cursor-zoom-in' alt='gcash' />
@@ -114,7 +114,7 @@ function ProjectRequestForm({ request }: ProjectRequestProps) {
                   </DialogHeader>
                 </DialogContent>
               </Dialog>
-            </section>
+            </section> */}
           </div>
         </DrawerContent>
       </Drawer>
