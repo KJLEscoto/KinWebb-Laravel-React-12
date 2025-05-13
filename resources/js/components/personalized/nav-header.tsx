@@ -27,7 +27,7 @@ const links = [
   { href: "/projects", label: "Projects" },
   { href: "/about-me", label: "About Me" },
   {
-    href: "https://drive.google.com/file/d/1UsVAtVGbFRgDPO6cB9Zpi7QHpJV4x_iX/view",
+    href: "https://drive.google.com/file/d/1Kxu04RPwJtZs4KQujC2Y_36wKl5eaR6E/view",
     label: "Resumé",
     icon: ArrowUpRight,
     new_tab: true

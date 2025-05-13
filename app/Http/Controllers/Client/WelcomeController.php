@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Hero;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WelcomeController extends Controller
 {
@@ -18,6 +19,8 @@ class WelcomeController extends Controller
 
         $main_hero = Hero::where('is_active', true)->first();
 
-        return inertia('welcome', compact('main_hero', 'featured_projects'));
+        $short = DB::table('short_about')->first();
+
+        return inertia('welcome', compact('main_hero', 'featured_projects', 'short'));
     }
 }

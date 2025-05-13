@@ -3,15 +3,16 @@ import FeaturedProjects from '@/components/personalized/featured-projects';
 import Hero from '@/components/personalized/hero';
 import MainLayer from '@/components/personalized/main-layer';
 import ClientLayout from '@/layouts/client-layout';
-import { Hero as MainHero, Project, type SharedData } from '@/types';
+import { Hero as MainHero, Project, ShortAbout, type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 
 type WelcomeProps = {
     featured_projects: Project[],
     main_hero: MainHero,
+    short: ShortAbout
 }
 
-export default function Welcome({ main_hero, featured_projects }: WelcomeProps) {
+export default function Welcome({ main_hero, featured_projects, short }: WelcomeProps) {
 
     return (
         <ClientLayout>
@@ -20,7 +21,7 @@ export default function Welcome({ main_hero, featured_projects }: WelcomeProps) 
                 <Hero main_hero={main_hero} />
                 <div className='space-y-40' id='explore'>
                     <FeaturedProjects projects={featured_projects} />
-                    <AboutMe />
+                    <AboutMe short={short} />
                 </div>
             </MainLayer>
         </ClientLayout>

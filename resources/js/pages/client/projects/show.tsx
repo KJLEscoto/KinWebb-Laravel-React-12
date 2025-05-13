@@ -84,7 +84,7 @@ export default function Show({ project, project_names, random_projects }: ShowPr
 
                 <Shell>
                   <div className='space-y-20'>
-                    <header className='flex flex-row gap-5 items-start h-full'>
+                    <header className='flex lg:flex-row flex-col-reverse gap-5 items-start h-full'>
                       <aside className='flex flex-col gap-10 justify-between min-h-70 w-full'>
                         <section className='space-y-2'>
                           <p className="font-light text-white/60 text-sm">
@@ -99,6 +99,7 @@ export default function Show({ project, project_names, random_projects }: ShowPr
                           <h1 className="font-medium text-5xl">{project.name}</h1>
                           <p className='tracking-wide font-light'>{project.description}</p>
                         </section>
+
                         <section className='space-y-3'>
                           <div className='border-b pb-2 grid grid-cols-2 w-full'>
                             <h3 className='text-sm flex items-end'>Year</h3>
@@ -118,12 +119,13 @@ export default function Show({ project, project_names, random_projects }: ShowPr
                           </div>
                         </section>
                       </aside>
+
                       <aside className='w-full'>
                         <Dialog>
                           <DialogTrigger className="cursor-pointer">
                             <Image src={`/storage/${project.thumbnail}`} className="cursor-zoom-in" />
                           </DialogTrigger>
-                          <DialogContent className='!max-w-5xl w-full'>
+                          <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
                             <DialogHeader>
                               <DialogTitle>Thumbnail</DialogTitle>
                             </DialogHeader>
@@ -133,7 +135,7 @@ export default function Show({ project, project_names, random_projects }: ShowPr
                       </aside>
                     </header>
 
-                    <section className='grid grid-cols-2 gap-x-5 gap-y-10 w-full'>
+                    <section className='grid lg:grid-cols-2 gap-x-5 lg:gap-y-10 gap-y-5 w-full'>
                       {
                         tools.length > 0 &&
                         <>
@@ -147,7 +149,7 @@ export default function Show({ project, project_names, random_projects }: ShowPr
                       {
                         frameworks.length > 0 &&
                         <>
-                          <h3 className='text-sm flex items-start'>Frameworks</h3>
+                          <h3 className='text-sm flex items-start lg:mt-0 mt-5'>Frameworks</h3>
                           <div className='flex items-center flex-wrap gap-2'>
                             <Badge items={frameworks} />
                           </div>

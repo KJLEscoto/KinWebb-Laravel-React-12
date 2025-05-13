@@ -11,20 +11,13 @@ export default function Index({ projects }: ProjectProps) {
     <ClientLayout>
       <Head title="Projects" />
       <MainLayer paddingTop paddingBottom>
-        {
-          projects.length > 0 ? (
-            <Shell>
-              <section>
-                <span className="italic font-light text-2xl  text-white/60">All</span>
-                <h1 className="font-medium text-5xl">Projects</h1>
-              </section>
+        <Shell>
+          <section>
+            <span className="italic font-light text-2xl  text-white/60">About</span>
+            <h1 className="font-medium text-5xl">Me</h1>
+          </section>
 
-              <ProjectList projects={projects} />
-            </Shell>
-          ) : (
-            <div className='text-5xl text-center mt-52'>Coming Soon...</div>
-          )
-        }
+        </Shell>
       </MainLayer>
     </ClientLayout>
   );

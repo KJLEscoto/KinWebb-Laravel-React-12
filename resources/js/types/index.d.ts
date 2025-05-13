@@ -123,5 +123,14 @@ export interface Hero {
     model_image?: File | null;
     body: string;
     is_active: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ShortAbout {
+    id: number;
+    body: string;
+    created_at: string;
+    updated_at: string;
 }
 
