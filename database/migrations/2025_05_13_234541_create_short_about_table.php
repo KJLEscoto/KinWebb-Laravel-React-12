@@ -13,6 +13,8 @@ return new class extends Migration {
         Schema::create('short_about', function (Blueprint $table) {
             $table->id();
             $table->string('body');
+            $table->string('highlight')->nullable();
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

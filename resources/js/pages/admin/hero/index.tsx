@@ -2,9 +2,9 @@ import Image from '@/components/personalized/image';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import AppLayout from '@/layouts/app-layout';
-import { Framework, Hero, Tool, type BreadcrumbItem } from '@/types';
+import { Hero, type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
-import { Plus } from 'lucide-react';
+import { Info, Plus } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
@@ -12,6 +12,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { toast } from 'sonner';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -42,19 +49,32 @@ export default function Index({ hero_entries }: HeroProps) {
 
         <div className='flex justify-between w-full items-center'>
           <h1>HERO</h1>
-          <Link href={route('admin.hero.create')}>
-            <Button variant='default'>
-              <Plus className="size-4" />
-              Add Entry
-            </Button>
-          </Link>
+          <div className='flex items-center gap-3'>
+            <Link href={route('admin.hero.create')}>
+              <Button variant='default'>
+                <Plus className="size-4" />
+                Add Entry
+              </Button>
+            </Link>
+            <Dialog>
+              <DialogTrigger className="cursor-pointer">
+                <Info className="size-4" />
+              </DialogTrigger>
+              <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
+                <DialogHeader>
+                  <DialogTitle>Hero Preview</DialogTitle>
+                </DialogHeader>
+                Replace the Coming Soon...
+                <Image className='!w-full' src='/images/hero-preview.png' alt='hero preview' />
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
 
         {
           hero_entries.length > 0 ? (
             hero_entries.map((entry: Hero) => (
               <div className='flex relative flex-col items-center w-full border rounded-lg gap-5 py-20 px-10 max-w-7xl'>
-
 
                 <div className='absolute w-full gap-5 flex justify-between p-5 top-0'>
                   <h1 className='text-lg'>

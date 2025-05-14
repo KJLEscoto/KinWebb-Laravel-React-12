@@ -82,9 +82,6 @@ class HeroController extends Controller
         dd($request->all(), $hero);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function toggleMainHero(Hero $hero)
     {
         $mainHeroCount = config('app.main_hero_count');

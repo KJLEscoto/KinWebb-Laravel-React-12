@@ -72,14 +72,15 @@ export default function Show({ project, project_names, random_projects }: ShowPr
             const prevFirst = currentIndex > 0 ? getFirstWord(project_names[currentIndex - 1]) : null;
             const next = currentIndex < project_names.length - 1 ? project_names[currentIndex + 1] : null;
             const nextFirst = currentIndex < project_names.length - 1 ? getFirstWord(project_names[currentIndex + 1]) : null;
+
             return (
               <>
                 {prev ? (
-                  <Link href={route('projects.show', slugify(prev))} className='lg:flex hidden -mt-30 -mb-40 h-screen sticky top-10 justify-center left-0 w-1/2 items-center gap-2 tracking-wide text-lg text-white/60 hover:text-white transition hover:bg-white/5'>
+                  <Link href={route('projects.show', slugify(prev))} className='lg:flex hidden -mt-30 -mb-40 h-screen sticky top-10 justify-center left-0 w-1/4 items-center gap-2 tracking-wide text-lg text-white/60 hover:text-white transition hover:bg-white/5'>
                     <ChevronLeftIcon className='size-10' />
                   </Link>
                 )
-                  : <div className='w-1/2 lg:block hidden'></div>
+                  : <div className='w-1/4 lg:block hidden'></div>
                 }
 
                 <Shell>
@@ -125,11 +126,11 @@ export default function Show({ project, project_names, random_projects }: ShowPr
                           <DialogTrigger className="cursor-pointer">
                             <Image src={`/storage/${project.thumbnail}`} className="cursor-zoom-in" />
                           </DialogTrigger>
-                          <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
+                          <DialogContent className='lg:!min-w-5xl !max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
                             <DialogHeader>
                               <DialogTitle>Thumbnail</DialogTitle>
                             </DialogHeader>
-                            <Image src={`/storage/${project.thumbnail}`} alt={project.name} />
+                            <Image className='!w-full' src={`/storage/${project.thumbnail}`} alt={project.name} />
                           </DialogContent>
                         </Dialog>
                       </aside>
@@ -266,11 +267,11 @@ export default function Show({ project, project_names, random_projects }: ShowPr
                 </Shell>
 
                 {next ? (
-                  <Link href={route('projects.show', slugify(next))} className='lg:flex hidden h-screen -mt-30 -mb-40 sticky top-10 justify-center right-0 w-1/2 items-center gap-2 tracking-wide text-lg text-white/60 hover:text-white transition hover:bg-white/5'>
+                  <Link href={route('projects.show', slugify(next))} className='lg:flex hidden h-screen -mt-30 -mb-40 sticky top-10 justify-center right-0 w-1/4 items-center gap-2 tracking-wide text-lg text-white/60 hover:text-white transition hover:bg-white/5'>
                     <ChevronRightIcon className='size-10' />
                   </Link>
                 )
-                  : <div className='w-1/2 lg:block hidden'></div>
+                  : <div className='w-1/4 lg:block hidden'></div>
                 }
               </>
             );

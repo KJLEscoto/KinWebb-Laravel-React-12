@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { AppWindow, BadgeMinus, BookOpen, Container, Folder, FolderOpen, LayoutGrid } from 'lucide-react';
+import { AppWindow, BadgeMinus, BookOpen, CircleUserRound, Container, Folder, FolderOpen, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -25,6 +25,11 @@ const pageSectionNavItems: NavItem[] = [
         title: 'Hero',
         href: '/admin/hero',
         icon: AppWindow,
+    },
+    {
+        title: 'About Me',
+        href: '/admin/about-me',
+        icon: CircleUserRound,
     },
 ];
 

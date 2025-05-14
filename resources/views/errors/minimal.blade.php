@@ -50,6 +50,18 @@
             -webkit-mask-size: 100% 100%;
             mask-size: 100% 100%;
         }
+
+        .radix-icons--dashboard {
+            display: inline-block;
+            --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15'%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M2.8 1h-.05c-.229 0-.426 0-.6.041A1.5 1.5 0 0 0 1.04 2.15c-.04.174-.04.37-.04.6v2.5c0 .229 0 .426.041.6A1.5 1.5 0 0 0 2.15 6.96c.174.04.37.04.6.04h2.5c.229 0 .426 0 .6-.041A1.5 1.5 0 0 0 6.96 5.85c.04-.174.04-.37.04-.6v-2.5c0-.229 0-.426-.041-.6A1.5 1.5 0 0 0 5.85 1.04C5.676 1 5.48 1 5.25 1zm-.417 1.014c.043-.01.11-.014.417-.014h2.4c.308 0 .374.003.417.014a.5.5 0 0 1 .37.37c.01.042.013.108.013.416v2.4c0 .308-.003.374-.014.417a.5.5 0 0 1-.37.37C5.575 5.996 5.509 6 5.2 6H2.8c-.308 0-.374-.003-.417-.014a.5.5 0 0 1-.37-.37C2.004 5.575 2 5.509 2 5.2V2.8c0-.308.003-.374.014-.417a.5.5 0 0 1 .37-.37M9.8 1h-.05c-.229 0-.426 0-.6.041A1.5 1.5 0 0 0 8.04 2.15c-.04.174-.04.37-.04.6v2.5c0 .229 0 .426.041.6A1.5 1.5 0 0 0 9.15 6.96c.174.04.37.04.6.04h2.5c.229 0 .426 0 .6-.041a1.5 1.5 0 0 0 1.11-1.109c.04-.174.04-.37.04-.6v-2.5c0-.229 0-.426-.041-.6a1.5 1.5 0 0 0-1.109-1.11c-.174-.04-.37-.04-.6-.04zm-.417 1.014c.043-.01.11-.014.417-.014h2.4c.308 0 .374.003.417.014a.5.5 0 0 1 .37.37c.01.042.013.108.013.416v2.4c0 .308-.004.374-.014.417a.5.5 0 0 1-.37.37c-.042.01-.108.013-.416.013H9.8c-.308 0-.374-.003-.417-.014a.5.5 0 0 1-.37-.37C9.004 5.575 9 5.509 9 5.2V2.8c0-.308.003-.374.014-.417a.5.5 0 0 1 .37-.37M2.75 8h2.5c.229 0 .426 0 .6.041A1.5 1.5 0 0 1 6.96 9.15c.04.174.04.37.04.6v2.5c0 .229 0 .426-.041.6a1.5 1.5 0 0 1-1.109 1.11c-.174.04-.37.04-.6.04h-2.5c-.229 0-.426 0-.6-.041a1.5 1.5 0 0 1-1.11-1.109c-.04-.174-.04-.37-.04-.6v-2.5c0-.229 0-.426.041-.6A1.5 1.5 0 0 1 2.15 8.04c.174-.04.37-.04.6-.04m.05 1c-.308 0-.374.003-.417.014a.5.5 0 0 0-.37.37C2.004 9.425 2 9.491 2 9.8v2.4c0 .308.003.374.014.417a.5.5 0 0 0 .37.37c.042.01.108.013.416.013h2.4c.308 0 .374-.004.417-.014a.5.5 0 0 0 .37-.37c.01-.042.013-.108.013-.416V9.8c0-.308-.003-.374-.014-.417a.5.5 0 0 0-.37-.37C5.575 9.004 5.509 9 5.2 9zm7-1h-.05c-.229 0-.426 0-.6.041A1.5 1.5 0 0 0 8.04 9.15c-.04.174-.04.37-.04.6v2.5c0 .229 0 .426.041.6a1.5 1.5 0 0 0 1.109 1.11c.174.041.371.041.6.041h2.5c.229 0 .426 0 .6-.041a1.5 1.5 0 0 0 1.109-1.109c.041-.174.041-.371.041-.6v-2.5c0-.229 0-.426-.041-.6A1.5 1.5 0 0 0 12.85 8.04c-.174-.04-.37-.04-.6-.04zm-.417 1.014c.043-.01.11-.014.417-.014h2.4c.308 0 .374.003.417.014a.5.5 0 0 1 .37.37c.01.042.013.108.013.416v2.4c0 .308-.004.374-.014.417a.5.5 0 0 1-.37.37c-.042.01-.108.013-.416.013H9.8c-.308 0-.374-.004-.417-.014a.5.5 0 0 1-.37-.37C9.004 12.575 9 12.509 9 12.2V9.8c0-.308.003-.374.014-.417a.5.5 0 0 1 .37-.37' clip-rule='evenodd'/%3E%3C/svg%3E");
+            background-color: currentColor;
+            -webkit-mask-image: var(--svg);
+            mask-image: var(--svg);
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+        }
     </style>
 </head>
 
@@ -68,35 +80,53 @@
         <p class="mt-7 text-xl">Let's take you back.</p>
 
         <div class="w-full flex flex-col lg:flex-row items-center justify-center lg:gap-10 gap-5 mt-5">
-            {{-- home --}}
-            <a href="/"
-                class="p-5 cursor-pointer min-w-sm border border-white/20 rounded-sm flex items-center justify-between gap-10 hover:border-white transition">
-                <div class="flex items-center gap-5">
-                    <div class="p-2 bg-white rounded-full flex">
-                        <span class="material-symbols-light--home-rounded size-6 text-black"></span>
+            @if (Auth::check())
+                <a href="/admin/dashboard"
+                    class="p-5 cursor-pointer min-w-sm border border-white/20 rounded-sm flex items-center justify-between gap-10 hover:border-white transition">
+                    <div class="flex items-center gap-5">
+                        <div class="p-2 bg-white rounded-full flex">
+                            <span class="radix-icons--dashboard size-6 text-black"></span>
+                        </div>
+                        <section class="space-y-1">
+                            <h1 class="font-medium text-lg">Dashboard</h1>
+                            <p class="font-light">Admin management</p>
+                        </section>
                     </div>
-                    <section class="space-y-1">
-                        <h1 class="font-medium text-lg">Home</h1>
-                        <p class="font-light">Explore my portfolio</p>
-                    </section>
-                </div>
-                <span class="flowbite--angle-right-outline size-4 text-white"></span>
-            </a>
+                    <span class="flowbite--angle-right-outline size-4 text-white"></span>
+                </a>
+            @else
+                {{-- home --}}
+                <a href="/"
+                    class="p-5 cursor-pointer min-w-sm border border-white/20 rounded-sm flex items-center justify-between gap-10 hover:border-white transition">
+                    <div class="flex items-center gap-5">
+                        <div class="p-2 bg-white rounded-full flex">
+                            <span class="material-symbols-light--home-rounded size-6 text-black"></span>
+                        </div>
+                        <section class="space-y-1">
+                            <h1 class="font-medium text-lg">Home</h1>
+                            <p class="font-light">Explore my portfolio</p>
+                        </section>
+                    </div>
+                    <span class="flowbite--angle-right-outline size-4 text-white"></span>
+                </a>
 
-            {{-- projects --}}
-            <a href="/projects"
-                class="p-5 cursor-pointer min-w-sm border border-white/20 rounded-sm flex items-center justify-between gap-10 hover:border-white transition">
-                <div class="flex items-center gap-5">
-                    <div class="p-2 bg-white rounded-full flex">
-                        <span class="flowbite--folder-solid size-6 text-black"></span>
+                {{-- projects --}}
+                <a href="/projects"
+                    class="p-5 cursor-pointer min-w-sm border border-white/20 rounded-sm flex items-center justify-between gap-10 hover:border-white transition">
+                    <div class="flex items-center gap-5">
+                        <div class="p-2 bg-white rounded-full flex">
+                            <span class="flowbite--folder-solid size-6 text-black"></span>
+                        </div>
+                        <section class="space-y-1">
+                            <h1 class="font-medium text-lg">Projects</h1>
+                            <p class="font-light">See my works</p>
+                        </section>
                     </div>
-                    <section class="space-y-1">
-                        <h1 class="font-medium text-lg">Projects</h1>
-                        <p class="font-light">See my works</p>
-                    </section>
-                </div>
-                <span class="flowbite--angle-right-outline size-4 text-white"></span>
-            </a>
+                    <span class="flowbite--angle-right-outline size-4 text-white"></span>
+                </a>
+            @endif
+
+
         </div>
     </main>
 </body>

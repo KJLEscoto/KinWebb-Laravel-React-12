@@ -52,7 +52,7 @@ function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
 
       <section className="flex flex-col gap-2">
         <Label htmlFor="message">Message</Label>
-        <Textarea required id="message" className="!bg-[#0a0a0a] h-40" value={data.message} onChange={(e) => setData("message", e.target.value)} />
+        <Textarea required id="message" className="bg-transparent dark:!bg-[#0a0a0a] h-40" value={data.message} onChange={(e) => setData("message", e.target.value)} />
         <InputError message={errors.message} />
       </section>
 

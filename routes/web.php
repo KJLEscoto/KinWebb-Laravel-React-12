@@ -13,13 +13,16 @@ use Inertia\Inertia;
 Route::get('/', [WelcomeController::class, 'index'])->name('home');
 
 // projects page
-Route::resource('projects', ClientProjectsController::class);
+Route::resource('projects', ClientProjectsController::class)
+  ->only(['index', 'store', 'show']);
 
 // about me page
-Route::resource('about-me', ClientAboutController::class);
+Route::resource('about-me', ClientAboutController::class)
+  ->only(['index']);
 
 // get in touch
-Route::resource('message', ClientMessageController::class)->only('store');
+Route::resource('message', ClientMessageController::class)
+  ->only('store');
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
