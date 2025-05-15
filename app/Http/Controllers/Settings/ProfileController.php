@@ -40,24 +40,41 @@ class ProfileController extends Controller
         return to_route('profile.edit');
     }
 
+    public function setJobStatus(Request $request)
+    {
+        // dd($request->all());
+
+        $validated = $request->validate([
+            'job_status' => 'required|string',
+            'job_message' => 'required|string|max:2500',
+        ]);
+
+        Auth::user()->update([
+            'job_status' => $validated['job_status'],
+            'job_message' => $validated['job_message'],
+        ]);
+
+        return back()->with('update', 'Job status updated.');
+    }
+
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'password' => ['required', 'current_password'],
-        ]);
+    // public function destroy(Request $request): RedirectResponse
+    // {
+    //     $request->validate([
+    //         'password' => ['required', 'current_password'],
+    //     ]);
 
-        $user = $request->user();
+    //     $user = $request->user();
 
-        Auth::logout();
+    //     Auth::logout();
 
-        $user->delete();
+    //     $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
 
-        return redirect('/');
-    }
+    //     return redirect('/');
+    // }
 }

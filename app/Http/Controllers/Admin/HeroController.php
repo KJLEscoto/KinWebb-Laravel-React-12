@@ -48,46 +48,29 @@ class HeroController extends Controller
             $model_image = Storage::disk('public')->put('hero', $request->file('modelImage'));
         }
 
-        Hero::create([
+        $hero = Hero::create([
             'logo_image' => $logo_image,
             'model_image' => $model_image,
             'body' => $validated['body'],
             'is_active' => $validated['isActive']
         ]);
 
-        return redirect()->route('admin.hero.index')->with('success', 'New hero entry is added!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Hero $hero)
-    {
-        return inertia('admin/hero/edit', compact('hero'));
+        return redirect()->route('admin.hero.index')->with('success', "Entry {$hero->id} is added!");
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hero $hero)
-    {
-        dd($request->all(), $hero);
-    }
-
-    public function toggleMainHero(Hero $hero)
+    public function update(Hero $hero)
     {
         $mainHeroCount = config('app.main_hero_count');
 
-        if ($hero->where('is_active', true)->count() >= $mainHeroCount && !$hero->is_active) {
-            return back()->with('warning', "You can only have {$mainHeroCount} main hero.");
+        $currentHero = Hero::where('is_active', true)->first();
+
+        $currentHeroCount = Hero::where('is_active', true)->count();
+
+        if ($currentHeroCount >= $mainHeroCount && !$hero->is_active) {
+            return back()->with('warning', "Entry {$currentHero->id} is already the main hero.");
         }
         $hero->is_active = !$hero->is_active;
         $hero->save();
@@ -97,5 +80,20 @@ class HeroController extends Controller
             : 'Entry ' . $hero->id . ' was removed as main hero.';
 
         return back()->with('update', $message);
+    }
+
+    public function destroy(Hero $hero)
+    {
+        if ($hero->logo_image && Storage::disk('public')->exists($hero->logo_image)) {
+            Storage::disk('public')->delete($hero->logo_image);
+        }
+
+        if ($hero->model_image && Storage::disk('public')->exists($hero->model_image)) {
+            Storage::disk('public')->delete($hero->model_image);
+        }
+
+        $hero->delete();
+
+        return back()->with('success', "Entry {$hero->id} has been deleted!");
     }
 }

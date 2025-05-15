@@ -53,3 +53,16 @@ export function techLogo(name: any): any {
 export function filterByType(items: any[], type: string): any[] {
     return items.filter(item => item.type === type);
 }
+
+export function getJobStatusColor(status: string): string {
+    switch (status) {
+        case 'Available':
+            return 'green-600';
+        case 'On Duty':
+            return 'blue-600';
+        case 'On Leave':
+            return 'red-600';
+        default:
+            return 'white';
+    }
+}

@@ -85,7 +85,7 @@ export default function Show({ project, project_names, random_projects }: ShowPr
 
                 <Shell>
                   <div className='space-y-20'>
-                    <header className='flex lg:flex-row flex-col-reverse gap-5 items-start h-full'>
+                    <header className='flex lg:flex-row flex-col-reverse gap-5 items-end h-full'>
                       <aside className='flex flex-col gap-10 justify-between min-h-70 w-full'>
                         <section className='space-y-2'>
                           <p className="font-light text-white/60 text-sm">
@@ -123,8 +123,8 @@ export default function Show({ project, project_names, random_projects }: ShowPr
 
                       <aside className='w-full'>
                         <Dialog>
-                          <DialogTrigger className="cursor-pointer">
-                            <Image src={`/storage/${project.thumbnail}`} className="cursor-zoom-in" />
+                          <DialogTrigger className="cursor-pointer !w-full">
+                            <Image src={`/storage/${project.thumbnail}`} className="cursor-zoom-in !w-full" />
                           </DialogTrigger>
                           <DialogContent className='lg:!min-w-5xl !max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
                             <DialogHeader>

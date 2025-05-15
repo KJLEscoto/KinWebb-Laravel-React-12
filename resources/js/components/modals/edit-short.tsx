@@ -98,7 +98,7 @@ export default function EditShort({ short }: EditShortProps) {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="highlight">Highlight a word</Label>
+              <Label htmlFor="highlight">Highlight (1 word)</Label>
               <Input
                 id="highlight"
                 type="text"
@@ -107,6 +107,7 @@ export default function EditShort({ short }: EditShortProps) {
                 onChange={(e) => setData('highlight', e.target.value)}
                 placeholder="from the body"
               />
+              <p className='text-sm font-light text-white/70'>minimalist, design, etc.</p>
               <InputError message={errors.highlight} />
             </div>
 
@@ -118,7 +119,7 @@ export default function EditShort({ short }: EditShortProps) {
               </DialogClose>
 
               <Button type="submit" variant="default" disabled={processing}>
-                Submit Short
+                Update
               </Button>
             </DialogFooter>
           </form>

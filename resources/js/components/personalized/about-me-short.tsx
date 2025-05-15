@@ -27,14 +27,14 @@ function AboutMe({ short }: { short: ShortAbout }) {
         <section className="lg:w-2/3 w-full tracking-wide space-y-14">
           <div className="text-3xl font-light text-white/50">
             {body ? (
-              <div dangerouslySetInnerHTML={{ __html: text }} />
+              <span dangerouslySetInnerHTML={{ __html: text }} />
             ) : (
               <div>Coming Soon...</div>
             )}
           </div>
 
           <Link href="/about-me" className="w-fit block">
-            <Button className="rounded-full flex items-center gap-2" size="lg">
+            <Button className="rounded-full flex font-bold items-center gap-2" size="lg">
               More About Me
               <MoveRight className="size-4" />
             </Button>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\TechStack;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +14,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        return inertia('client/about/index');
+        $techstack = TechStack::all();
+        return inertia('client/about/index', compact('techstack'));
     }
 
     /**

@@ -1,11 +1,11 @@
-import { Flash } from "@/types";
+import { Flash, SharedData } from "@/types";
 import { usePage } from "@inertiajs/react";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
 
 export function useFlashToast() {
-  const { flash } = usePage<{ flash: Flash }>().props;
+  const { flash } = usePage<SharedData>().props;
 
   useEffect(() => {
     if (flash.success) {

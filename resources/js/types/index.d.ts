@@ -23,6 +23,9 @@ export interface NavItem {
 }
 
 export interface SharedData {
+    main_hero: Hero;
+    featured_projects: Project[];
+    flash: Flash;
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
@@ -35,6 +38,8 @@ export interface User {
     id: number;
     name: string;
     email: string;
+    job_status?: string;
+    job_message?: string;
     avatar?: string;
     email_verified_at: string | null;
     created_at: string;
@@ -64,22 +69,6 @@ export interface Tag {
     created_at: string;
     updated_at: string;
 }
-
-// export interface Tool {
-//     id: number;
-//     name: string;
-//     logo: string;
-//     created_at: string;
-//     updated_at: string;
-// }
-
-// export interface Framework {
-//     id: number;
-//     name: string;
-//     logo: string;
-//     created_at: string;
-//     updated_at: string;
-// }
 
 interface TechStack {
     id: number | string;

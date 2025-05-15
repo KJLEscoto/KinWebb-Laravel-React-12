@@ -12,6 +12,9 @@ import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import JobStatus from '@/components/personalized/job-status-admin';
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Profile settings',
@@ -105,7 +108,14 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                         )}
 
                         <div className="flex items-center gap-4">
-                            <Button disabled={processing}>Save</Button>
+                            <Button
+                                disabled={
+                                    processing ||
+                                    (data.email === auth.user.email && data.name === auth.user.name)
+                                }
+                            >
+                                Save
+                            </Button>
 
                             <Transition
                                 show={recentlySuccessful}
@@ -120,7 +130,10 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                     </form>
                 </div>
 
-                <DeleteUser />
+                {/* <DeleteUser /> */}
+
+                <JobStatus />
+
             </SettingsLayout>
         </AppLayout>
     );

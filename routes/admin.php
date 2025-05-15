@@ -41,16 +41,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
   // admin hero page
   Route::resource('admin/hero', AdminHeroController::class)
-    ->except(['destory'])
+    ->except(['edit', 'show'])
     ->names([
       'index' => 'admin.hero.index',
       'create' => 'admin.hero.create',
       'store' => 'admin.hero.store',
       'show' => 'admin.hero.show',
-      'edit' => 'admin.hero.edit',
       'update' => 'admin.hero.update',
+      'destroy' => 'admin.hero.destroy',
     ]);
-  Route::patch('admin/hero/{hero}/toggle-main-hero', [AdminHeroController::class, 'toggleMainHero'])->name('admin.projects.toggle-main-hero');
 
   // about me page
   Route::resource('admin/about-me', AdminAboutController::class)

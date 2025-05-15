@@ -74,9 +74,8 @@ export default function AddShort() {
 
             <div className="grid gap-2">
               <Label htmlFor="highlight">
-                Highlight a word
+                Highlight (1 word)
               </Label>
-
               <Input
                 id="highlight"
                 type="text"
@@ -86,6 +85,7 @@ export default function AddShort() {
                 onChange={(e) => setData('highlight', e.target.value)}
                 placeholder="from the body"
               />
+              <p className='text-sm font-light text-white/70'>minimalist, design, etc.</p>
               <InputError message={errors.highlight} />
             </div>
 
@@ -97,7 +97,7 @@ export default function AddShort() {
               </DialogClose>
 
               <Button type='submit' variant="default" disabled={processing}>
-                Submit Short
+                Confirm
               </Button>
             </DialogFooter>
           </form>

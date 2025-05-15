@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog"
 import AddShort from '@/components/modals/add-short';
 import EditShort from '@/components/modals/edit-short';
+import { Separator } from '@/components/ui/separator';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -36,7 +37,7 @@ export default function Index({ short }: AboutMeProps) {
     text = body
       ? body.replace(
         regex,
-        `<span class="text-white italic mx-1.5">${highlight}</span>`
+        `<span class="text-white italic mx-1">${highlight}</span>`
       )
       : "";
   }
@@ -46,11 +47,12 @@ export default function Index({ short }: AboutMeProps) {
       <Head title="About Me" />
       <div className="flex h-full flex-1 flex-col items-center gap-5 rounded-xl p-4">
 
+        {/* short */}
         <section
           className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl"
         >
-          <div className="w-full gap-5 flex justify-between">
-            <h1 className="text-lg">Short</h1>
+          <div className="w-full gap-5 items-center flex justify-between">
+            <h1 className="text-lg">Welcome | Short</h1>
             <section className="flex items-center gap-3">
               {short ? (
                 <EditShort short={short} />
@@ -78,6 +80,44 @@ export default function Index({ short }: AboutMeProps) {
               <span dangerouslySetInnerHTML={{ __html: text }} />
             ) : (
               <p className='text-center'>No Short Yet.</p>
+            )}
+          </p>
+        </section>
+
+        <section
+          className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl"
+        >
+          <div className="w-full gap-5 items-center flex justify-between">
+            <h1 className="text-lg">About Me | Main</h1>
+            <section className="flex items-center gap-3">
+              {short ? (
+                <EditShort short={short} />
+              ) : (
+                <AddShort />
+              )}
+
+              <Dialog>
+                <DialogTrigger className="cursor-pointer">
+                  <Info className="size-4" />
+                </DialogTrigger>
+                <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
+                  <DialogHeader>
+                    <DialogTitle>Short Preview</DialogTitle>
+                  </DialogHeader>
+                  Replace the Coming Soon...
+                  <Image src='/images/short-preview.png' alt='short preview' />
+                </DialogContent>
+              </Dialog>
+            </section>
+          </div>
+
+          <Separator />
+
+          <p className="text-3xl font-light text-white/50">
+            {short ? (
+              <span dangerouslySetInnerHTML={{ __html: text }} />
+            ) : (
+              <p className='text-center'>No Main Yet.</p>
             )}
           </p>
         </section>
