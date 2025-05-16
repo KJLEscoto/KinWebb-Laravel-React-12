@@ -22,6 +22,8 @@ class ShortController extends Controller
             [
                 'body' => $validated['body'],
                 'highlight' => $validated['highlight'],
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         );
 
@@ -43,12 +45,13 @@ class ShortController extends Controller
             ->update([
                 'body' => $validated['body'],
                 'highlight' => $validated['highlight'],
+                'updated_at' => now()
             ]);
 
         if (!$updated) {
             return back()->with('info', 'No changes made.');
         }
 
-        return back()->with('success', 'Short has been updated!');
+        return back()->with('update', 'Short has been updated!');
     }
 }

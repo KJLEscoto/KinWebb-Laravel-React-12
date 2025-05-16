@@ -62,7 +62,7 @@ class ProjectsController extends Controller
             $thumbnail_path = null;
         }
 
-        $project = Auth::user()->projects()->create(array_merge(
+        $project = Project::create(array_merge(
             Arr::except($validated, ['tags', 'roles', 'tools', 'frameworks', 'thumbnail', 'screenshots']),
             ['thumbnail' => $thumbnail_path]
         ));

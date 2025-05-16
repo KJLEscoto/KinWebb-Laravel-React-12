@@ -15,6 +15,7 @@ import EditShort from '@/components/modals/edit-short';
 import AddMain from '@/components/modals/add-main';
 import { Separator } from '@/components/ui/separator';
 import { highlightText } from '@/lib/utils';
+import EditMain from '@/components/modals/edit-main';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -22,11 +23,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     href: '/admin/about-me',
   },
 ];
-
-type AboutMeProps = {
-  short: ShortAbout | null;
-  about_me: AboutMe | null;
-};
 
 function ShortSection({ short }: { short: ShortAbout | null }) {
   const content = short?.body ? highlightText(short.body, short.highlight ?? '') : null;
@@ -36,7 +32,7 @@ function ShortSection({ short }: { short: ShortAbout | null }) {
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Welcome | Short</h1>
         <section className="flex items-center gap-3">
-          {short ? <EditShort short={short} /> : <AddShort />}
+          {short ? <EditShort /> : <AddShort />}
           <Dialog>
             <DialogTrigger className="cursor-pointer">
               <Info className="size-4" />
@@ -68,7 +64,7 @@ function MainSection({ about_me }: { about_me: AboutMe | null }) {
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Main</h1>
         <section className="flex items-center gap-3">
-          {about_me?.main_text ? <div>edit</div> : <AddMain />}
+          {about_me?.main_text ? <EditMain /> : <AddMain />}
           <Dialog>
             <DialogTrigger className="cursor-pointer">
               <Info className="size-4" />
@@ -88,13 +84,16 @@ function MainSection({ about_me }: { about_me: AboutMe | null }) {
       ) : (
         <p className="text-center text-white/50">No Main Yet.</p>
       )}
-
-      <Separator />
     </section>
   );
 }
 
 export default function Index() {
+  type AboutMeProps = {
+    short: ShortAbout | null;
+    about_me: AboutMe | null;
+  };
+
   const { short, about_me } = usePage<AboutMeProps>().props;
 
   return (

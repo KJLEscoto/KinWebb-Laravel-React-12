@@ -22,7 +22,7 @@ function AboutMe() {
             content ? (
               <p className="text-3xl font-light text-white/50" dangerouslySetInnerHTML={{ __html: content }} />
             ) : (
-              <p className="text-center text-white/50">Coming Soon...</p>
+              <p className="text-white/50">Coming Soon...</p>
             )
           }
 

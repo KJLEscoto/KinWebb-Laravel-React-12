@@ -1,4 +1,4 @@
-import { type BreadcrumbItem, type SharedData } from '@/types';
+import { type SharedData } from '@/types';
 import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 

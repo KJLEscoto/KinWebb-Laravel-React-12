@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('secondary_text')->nullable();
             $table->string('secondary_text_highlight')->nullable();
             $table->string('picture')->nullable();
-            $table->string('resume_link');
+            $table->string('resume_link')->nullable();
             $table->boolean('resume_status')->default(false);
             $table->timestamps();
         });

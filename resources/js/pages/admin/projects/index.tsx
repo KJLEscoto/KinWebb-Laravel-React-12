@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import AppLayout from '@/layouts/app-layout';
 import { Project, ProjectProps, Tag, type BreadcrumbItem } from '@/types';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
 import {
@@ -30,8 +30,11 @@ const changeFeatured = (name: string) => {
   });
 }
 
-export default function Index({ projects }: ProjectProps) {
+export default function Index() {
   const MAX_TAG = import.meta.env.VITE_MAX_TAGS;
+
+  const { projects } = usePage<ProjectProps>().props;
+  console.log(projects)
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>

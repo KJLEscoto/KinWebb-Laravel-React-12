@@ -27,9 +27,8 @@ export default function ProjectList() {
               ))}
             />
           </div>
-          <div className='absolute z-10 right-20 -top-20 w-80 h-auto'>
+          <div className='absolute z-10 right-20 -top-20 w-80 h-auto block opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300'>
             <Image src={`/storage/${project.thumbnail}`} alt={project.name}
-              className='group-hover:opacity-100 opacity-0 w-full h-full transition-all duration-300 ease-out'
             />
           </div>
           <div className='col-span-2 flex items-center justify-end opacity-0 group-hover:opacity-100 transition-all duration-300'>

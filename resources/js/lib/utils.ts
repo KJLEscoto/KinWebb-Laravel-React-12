@@ -57,13 +57,13 @@ export function filterByType(items: any[], type: string): any[] {
 export function getJobStatusColor(status: string): string {
     switch (status) {
         case 'Available':
-            return '-green-600';
+            return '#22C55E';
         case 'On Duty':
-            return '-blue-500';
+            return '#3B82F6';
         case 'On Leave':
-            return '-red-600';
+            return '#EF4444';
         default:
-            return '-white';
+            return '#FFFFFF';
     }
 }
 

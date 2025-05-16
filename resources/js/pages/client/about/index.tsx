@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { useEffect, useState } from 'react';
 
 const webdev = [
   'Build dynamic & responsive websites application',
@@ -38,14 +39,16 @@ export default function Index() {
   const tools = filterByType(techstack, 'tool');
   const frameworks = filterByType(techstack, 'framework');
 
-  const get_color = getJobStatusColor(auth.user.job_status ?? '');
-  const text_color = `text${get_color}`;
+  const [textColor, setTextColor] = useState('');
+
+  useEffect(() => {
+    const colorClass = getJobStatusColor(auth?.user?.job_status ?? '');
+    setTextColor(colorClass);
+  }, [auth?.user?.job_status]);
 
   const mainContent = about_me?.main_text ? highlightText(about_me.main_text, about_me.main_text_highlight ?? '') : null;
 
   const secondaryContent = about_me?.secondary_text ? highlightText(about_me.secondary_text, about_me.secondary_text_highlight ?? '') : null;
-
-  console.log(about_me)
 
   return (
     <ClientLayout>
@@ -56,13 +59,13 @@ export default function Index() {
 
             {/* about me header */}
             <div className='grid grid-cols-2 gap-10'>
-              <section className='flex flex-col items-center gap-4'>
+              <section className='flex flex-col items-center gap-5'>
                 <Image className='!max-w-sm rounded-4xl' src='/images/about-model.png' />
 
-                <div className='flex items-center gap-1 select-none'>
-                  <CircleSmall className={`size-3 animate-pulse cursor-pointer ${text_color}`} />
-                  <p className={`text-xs font-bold ${text_color}`}>
-                    {auth.user.job_message}
+                <div className={`flex items-center gap-1 select-none px-5 py-1.5 rounded-full bg-white/10 text-[${textColor}]`}>
+                  {/* <CircleSmall className='size-3 animate-pulse cursor-pointer' /> */}
+                  <p className='text-xs font-semibold tracking-wide'>
+                    {auth?.user?.job_message}
                   </p>
                 </div>
               </section>

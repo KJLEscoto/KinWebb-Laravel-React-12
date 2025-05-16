@@ -7,38 +7,40 @@ import { Toaster } from 'sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
 import { usePage } from '@inertiajs/react';
 import { ResumeLink } from '@/types';
+import CustomCursor from '@/components/personalized/custom-cursor';
 
-export default function ClientLayout({ children }: { children: ReactNode }) {
-
+export default function ClientLayout({ children }: { children: React.ReactNode }) {
   useFlashToast();
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center !bg-white">
+    <div className="min-h-screen flex flex-col items-center justify-center !bg-white">
 
-      <Toaster
-        className='!z-50'
-        position={'top-right'}
-        richColors />
-
-      {/* Sticky Header */}
-      <span className='fixed top-0 !z-40 w-full bg-black/50 backdrop-blur-sm mix-blend-difference'>
-        <NavHeader />
-      </span>
-
-      {/* Main scrollable area with extra bottom padding to reveal footer */}
+      {/* Main scrollable area */}
       <main className="flex-grow w-full relative z-10">
+        <CustomCursor />
+
+        {/* notification toaster */}
+        <Toaster className='!z-50' position="top-right" richColors />
+
+        {/* nav bar */}
+        <span className='fixed top-0 !z-40 w-full bg-black/50 backdrop-blur-sm mix-blend-difference'>
+          <NavHeader />
+        </span>
+
         {children}
+
+        {/* Footer */}
+        <footer className="sticky bottom-0 w-full -z-10">
+          <Footer />
+        </footer>
       </main>
 
-      {/* Fixed bottom button (like floating CTA) */}
+      {/* Fixed bottom CTA */}
       <span className='fixed bottom-5 z-50 max-w-5xl mx-auto w-full mix-blend-difference'>
         <FixedBottom />
       </span>
 
-      {/* Drawer-style Footer revealed on scroll */}
-      <footer className="sticky bottom-0 w-full z-0">
-        <Footer />
-      </footer>
+
     </div>
   );
 }

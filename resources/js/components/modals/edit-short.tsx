@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler, useEffect, useRef, useState } from 'react';
 
 import InputError from '@/components/input-error';
@@ -28,9 +28,11 @@ type EditShortProps = {
   short: ShortAbout;
 };
 
-export default function EditShort({ short }: EditShortProps) {
+export default function EditShort() {
   const [open, setOpen] = useState(false);
   const bodyInput = useRef<HTMLTextAreaElement>(null);
+
+  const { short } = usePage<EditShortProps>().props;
 
   const { data, setData, put, processing, reset, errors, clearErrors } = useForm<EditShortForm>({
     id: short.id,

@@ -16,11 +16,6 @@ class Project extends Model
         return 'name';
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function tag(string $title): void
     {
         $tag = Tag::firstOrCreate(['title' => $title]);
@@ -49,16 +44,6 @@ class Project extends Model
     {
         return $this->hasMany(Screenshot::class);
     }
-
-    // public function tools(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Tool::class, 'project_tool');
-    // }
-
-    // public function frameworks(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Framework::class, 'project_framework');
-    // }
 
     public function techstack(): BelongsToMany
     {

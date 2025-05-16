@@ -1,5 +1,5 @@
-import { useForm } from '@inertiajs/react';
-import { FormEventHandler, useRef } from 'react';
+import { useForm, usePage } from '@inertiajs/react';
+import { FormEventHandler, useEffect, useRef, useState } from 'react';
 
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
@@ -10,27 +10,41 @@ import HeadingSmall from '@/components/heading-small';
 
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '../ui/textarea';
+import { AboutMe } from '@/types';
 
-type AddMainForm = {
+type EditMainForm = {
+  id: number;
   main: string;
   main_highlight?: string | null;
 }
 
-export default function AddMain() {
+type AboutMeProps = {
+  about_me: AboutMe
+}
+
+export default function EditMain() {
+  const [open, setOpen] = useState(false);
+
   const mainInput = useRef<HTMLInputElement>(null);
   const mainHighlightInput = useRef<HTMLInputElement>(null);
 
-  const { data, setData, post, processing, reset, errors, clearErrors } = useForm<AddMainForm>({
-    main: '',
-    main_highlight: ''
+  const { about_me } = usePage<AboutMeProps>().props;
+
+  const { data, setData, put, processing, reset, errors, clearErrors } = useForm<EditMainForm>({
+    id: about_me.id,
+    main: about_me?.main_text ?? '',
+    main_highlight: about_me?.main_text_highlight ?? '',
   });
 
-  const addMain: FormEventHandler = (e) => {
+  const editMain: FormEventHandler = (e) => {
     e.preventDefault();
 
-    post(route('admin.about-me.store-main-text'), {
+    put(route('admin.about-me.update-main-text', about_me.id), {
       preserveScroll: true,
-      onSuccess: () => closeModal(),
+      onSuccess: () => {
+        reset();
+        setOpen(false);
+      },
       onError: () => {
         mainInput.current?.focus()
       },
@@ -41,20 +55,32 @@ export default function AddMain() {
   const closeModal = () => {
     clearErrors();
     reset();
+    setOpen(false);
   };
+
+  useEffect(() => {
+    if (open) {
+      setData({
+        id: about_me.id,
+        main: about_me.main_text ?? '',
+        main_highlight: about_me.main_text_highlight ?? '',
+      });
+      clearErrors();
+    }
+  }, [open, about_me, setData, clearErrors]);
 
   return (
     <div className="space-y-6">
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size='sm' variant="default">Add Main</Button>
+          <Button size='sm' variant="outline">Edit Main</Button>
         </DialogTrigger>
         <DialogContent className='!max-w-xl w-full overflow-auto max-h-screen scrollbar-hide'>
-          <DialogTitle>Add Main</DialogTitle>
+          <DialogTitle>Edit Main</DialogTitle>
           <DialogDescription>
             This will be the first paragraph in about me page.
           </DialogDescription>
-          <form className="space-y-6" onSubmit={addMain}>
+          <form className="space-y-6" onSubmit={editMain}>
             <div className="grid gap-2">
               <Label htmlFor="main">
                 Main
@@ -95,7 +121,7 @@ export default function AddMain() {
               </DialogClose>
 
               <Button type='submit' variant="default" disabled={processing}>
-                Confirm
+                Update
               </Button>
             </DialogFooter>
           </form>

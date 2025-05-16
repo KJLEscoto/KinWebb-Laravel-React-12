@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\HeroController as AdminHeroController;
+use App\Http\Controllers\Admin\MainTextController as AdminMainTextController;
 use App\Http\Controllers\Admin\ProjectsController as AdminProjectsController;
 use App\Http\Controllers\Admin\ShortController as AdminShortController;
 use App\Http\Controllers\Admin\TechStackController as AdminTechStackController;
@@ -62,11 +63,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
       'edit' => 'admin.about-me.edit',
       'update' => 'admin.about-me.update',
     ]);
-  Route::resource('admin/about-me', AdminShortController::class)
+  Route::resource('admin/about-me/short', AdminShortController::class)
     ->only(['store', 'update'])
     ->names([
       'store' => 'admin.about-me.store-short',
       'update' => 'admin.about-me.update-short',
+    ]);
+  Route::resource('admin/about-me/main', AdminMainTextController::class)
+    ->only(['store', 'update'])
+    ->names([
+      'store' => 'admin.about-me.store-main-text',
+      'update' => 'admin.about-me.update-main-text',
     ]);
 
 });

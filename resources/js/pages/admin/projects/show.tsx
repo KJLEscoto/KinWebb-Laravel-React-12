@@ -3,7 +3,7 @@ import Image from '@/components/personalized/image';
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { Project, Role, Screenshot, Tag, type BreadcrumbItem } from '@/types';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { ArrowLeft, Pencil } from 'lucide-react';
 import {
   Carousel,
@@ -19,7 +19,9 @@ type ProjectProps = {
   project: Project
 }
 
-export default function Show({ project }: ProjectProps) {
+export default function Show() {
+  const { project } = usePage<ProjectProps>().props;
+
   const breadcrumbs: BreadcrumbItem[] = [
     {
       title: 'Projects',
@@ -30,8 +32,6 @@ export default function Show({ project }: ProjectProps) {
       href: `/admin/projects/${project.id}`,
     },
   ];
-
-  console.log(project);
 
   const tools = filterByType(project.techstack, 'tool');
   const frameworks = filterByType(project.techstack, 'framework');

@@ -54,7 +54,7 @@ export default function AddShort() {
         <DialogContent className='!max-w-xl w-full overflow-auto max-h-screen scrollbar-hide'>
           <DialogTitle>Add Short</DialogTitle>
           <DialogDescription>
-            This will be a short introduction about me and what I do.
+            This will be a short introduction about my characteristic in welcome page.
           </DialogDescription>
           <form className="space-y-6" onSubmit={addShort}>
             <div className="grid gap-2">
