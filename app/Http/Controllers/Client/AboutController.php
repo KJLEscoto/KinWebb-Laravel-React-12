@@ -15,7 +15,8 @@ class AboutController extends Controller
     public function index()
     {
         $techstack = TechStack::all();
-        return inertia('client/about/index', compact('techstack'));
+        $about_me = DB::table('about_me')->first();
+        return inertia('client/about/index', compact('techstack', 'about_me'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -58,6 +59,9 @@ class HandleInertiaRequests extends Middleware
                 'info' => fn() => $request->session()->get('info'),
             ],
             'sidebarOpen' => !$request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'resume' => [
+                'resume_link' => optional(DB::table('about_me')->where('resume_status', true)->first())->resume_link ?? '',
+            ],
         ];
     }
 }

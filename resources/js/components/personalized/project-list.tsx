@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { MoveRight } from 'lucide-react';
 import Image from './image';
 import { slugify } from '@/lib/utils';
@@ -6,7 +6,8 @@ import { Project, ProjectProps, Role } from '@/types';
 import Comma from './comma-separated';
 
 
-export default function ProjectList({ projects }: ProjectProps) {
+export default function ProjectList() {
+  const { projects } = usePage<ProjectProps>().props;
 
   return (
     <section className='divide-y'>

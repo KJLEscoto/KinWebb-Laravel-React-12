@@ -38,9 +38,9 @@ function FeaturedProjects() {
                   />
                 </section>
 
-                <section className="flex items-center justify-between w-full">
-                  <h2 className="truncate w-4/5 text-nowrap text-lg font-semibold text-white">{project.name} df df d d f df df fddffddffdf df fddf </h2>
-                  <MoveRight className="size-7 text-white/50 group-hover:text-white transition" />
+                <section className="flex items-center justify-between w-full group">
+                  <h2 className="truncate w-4/5 text-nowrap text-lg font-semibold text-white">{project.name} </h2>
+                  <MoveRight className="size-7 text-white transition-all duration-300 opacity-0 group-hover:opacity-100" />
                 </section>
               </Link>
             )

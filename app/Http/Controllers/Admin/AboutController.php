@@ -15,7 +15,9 @@ class AboutController extends Controller
     {
         $short = DB::table('short_about')->first();
 
-        return inertia('admin/about-me/index', compact('short'));
+        $about_me = DB::table('about_me')->first();
+
+        return inertia('admin/about-me/index', compact('short', 'about_me'));
     }
 
     /**

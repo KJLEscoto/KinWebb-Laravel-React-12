@@ -1,21 +1,14 @@
 import { MoveRight } from "lucide-react";
 import { Button } from "../ui/button";
 import Shell from "./shell";
-import { Link } from "@inertiajs/react";
-import { ShortAbout } from "@/types";
+import { Link, usePage } from "@inertiajs/react";
+import { SharedData } from "@/types";
+import { highlightText } from "@/lib/utils";
 
-function AboutMe({ short }: { short: ShortAbout }) {
-  const body = short?.body;
-  const highlight = short?.highlight;
+function AboutMe() {
+  const { short } = usePage<SharedData>().props;
 
-  const regex = new RegExp(`\\b${highlight}\\b`, "gi");
-
-  const text = body
-    ? body.replace(
-      regex,
-      `<span class="text-white italic mx-1.5">${highlight}</span>`
-    )
-    : "";
+  const content = short?.body ? highlightText(short.body, short.highlight ?? '') : null;
 
   return (
     <Shell>
@@ -25,13 +18,13 @@ function AboutMe({ short }: { short: ShortAbout }) {
         </section>
 
         <section className="lg:w-2/3 w-full tracking-wide space-y-14">
-          <div className="text-3xl font-light text-white/50">
-            {body ? (
-              <span dangerouslySetInnerHTML={{ __html: text }} />
+          {
+            content ? (
+              <p className="text-3xl font-light text-white/50" dangerouslySetInnerHTML={{ __html: content }} />
             ) : (
-              <div>Coming Soon...</div>
-            )}
-          </div>
+              <p className="text-center text-white/50">Coming Soon...</p>
+            )
+          }
 
           <Link href="/about-me" className="w-fit block">
             <Button className="rounded-full flex font-bold items-center gap-2" size="lg">

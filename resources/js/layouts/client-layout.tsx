@@ -5,6 +5,8 @@ import NavHeader from '@/components/personalized/nav-header';
 import FixedBottom from '@/components/personalized/fixed-bottom';
 import { Toaster } from 'sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
+import { usePage } from '@inertiajs/react';
+import { ResumeLink } from '@/types';
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
 

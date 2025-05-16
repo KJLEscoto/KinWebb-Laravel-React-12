@@ -4,9 +4,11 @@ import ProjectList from '@/components/personalized/project-list';
 import Shell from '@/components/personalized/shell';
 import ClientLayout from '@/layouts/client-layout';
 import { ProjectProps } from '@/types';
-import { Head, } from '@inertiajs/react';
+import { Head, usePage, } from '@inertiajs/react';
 
-export default function Index({ projects }: ProjectProps) {
+export default function Index() {
+  const { projects } = usePage<ProjectProps>().props;
+
   return (
     <ClientLayout>
       <Head title="Projects" />
@@ -19,7 +21,7 @@ export default function Index({ projects }: ProjectProps) {
                 <h1 className="font-medium text-5xl">Projects</h1>
               </section>
 
-              <ProjectList projects={projects} />
+              <ProjectList />
             </Shell>
           ) : (
             <div className='text-5xl text-center mt-52'>Coming Soon...</div>

@@ -3,14 +3,9 @@ import FeaturedProjects from '@/components/personalized/featured-projects';
 import Hero from '@/components/personalized/hero';
 import MainLayer from '@/components/personalized/main-layer';
 import ClientLayout from '@/layouts/client-layout';
-import { ShortAbout } from '@/types';
 import { Head } from '@inertiajs/react';
 
-type WelcomeProps = {
-    short: ShortAbout
-}
-
-export default function Welcome({ short }: WelcomeProps) {
+export default function Welcome() {
 
     return (
         <ClientLayout>
@@ -19,7 +14,7 @@ export default function Welcome({ short }: WelcomeProps) {
                 <Hero />
                 <div className='space-y-40' id='explore'>
                     <FeaturedProjects />
-                    <AboutMe short={short} />
+                    <AboutMe />
                 </div>
             </MainLayer>
         </ClientLayout>

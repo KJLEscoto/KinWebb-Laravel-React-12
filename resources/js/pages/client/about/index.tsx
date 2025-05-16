@@ -6,10 +6,16 @@ import Shell from '@/components/personalized/shell';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import ClientLayout from '@/layouts/client-layout';
-import { filterByType, getJobStatusColor } from '@/lib/utils';
-import { SharedData, TechStack } from '@/types';
+import { filterByType, getJobStatusColor, highlightText } from '@/lib/utils';
+import { SharedData } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import { ArrowUpRight, Check, CircleSmall } from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 const webdev = [
   'Build dynamic & responsive websites application',
@@ -25,19 +31,21 @@ const webdesign = [
   'Design with attention to color, typography, layout, and hierarchy',
 ]
 
-type AboutMeProps = {
-  techstack: TechStack[];
-}
+export default function Index() {
 
-export default function Index({ techstack }: AboutMeProps) {
-
-  const { auth } = usePage<SharedData>().props;
+  const { auth, techstack, about_me } = usePage<SharedData>().props;
 
   const tools = filterByType(techstack, 'tool');
   const frameworks = filterByType(techstack, 'framework');
 
   const get_color = getJobStatusColor(auth.user.job_status ?? '');
-  const text_color = `text-${get_color}`;
+  const text_color = `text${get_color}`;
+
+  const mainContent = about_me?.main_text ? highlightText(about_me.main_text, about_me.main_text_highlight ?? '') : null;
+
+  const secondaryContent = about_me?.secondary_text ? highlightText(about_me.secondary_text, about_me.secondary_text_highlight ?? '') : null;
+
+  console.log(about_me)
 
   return (
     <ClientLayout>
@@ -61,25 +69,45 @@ export default function Index({ techstack }: AboutMeProps) {
 
               <section className='space-y-7'>
                 <h3 className="text-sm font-bold">Yup, that's me!</h3>
+                {mainContent ? (
+                  <p className="text-3xl font-light text-white/50" dangerouslySetInnerHTML={{ __html: mainContent }} />
+                ) : (
+                  <></>
+                )}
 
-                <div className="text-3xl font-light text-white/50">
-                  <p> A pixel-and-code
-                    <span className="text-white italic mx-1.5">perfectionist
-                    </span>
-                    who crafts with intention, keeps things clean, and makes the web a little more delightful.
-                  </p>
-                </div>
+                {secondaryContent ? (
+                  <p className='font-light tracking-wider text-white/70' dangerouslySetInnerHTML={{ __html: secondaryContent }} />
+                ) : (
+                  <></>
+                )}
 
-                <p className='font-light tracking-wider text-white/80'>
-                  BTW, I'm <strong className='text-lg'>Kent Joemar Escoto</strong>, a Computer Science graduate. With a strong eagerness to learn and grow. I'm passionate about applying my skills and knowledge in real-world projects.
-                </p>
+                {about_me?.resume_link && about_me.resume_status ? (
+                  <a target="_blank" href={about_me.resume_link} className="w-fit flex">
+                    <Button className="rounded-full flex items-center gap-2 font-bold text-xs" size="default">
+                      Get My Resumé
+                      <ArrowUpRight className="size-4" />
+                    </Button>
+                  </a>
+                ) : (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Button
+                          disabled
+                          className="rounded-full flex items-center gap-2 font-bold text-xs cursor-not-allowed"
+                          size="default"
+                        >
+                          Get My Resumé
+                          <ArrowUpRight className="size-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>To be update.</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
 
-                <a target='_blank' href='https://drive.google.com/file/d/1Kxu04RPwJtZs4KQujC2Y_36wKl5eaR6E/view' className='w-fit block'>
-                  <Button className="rounded-full flex items-center gap-2 font-bold text-xs" size="default">
-                    Get My Resumé
-                    <ArrowUpRight className="size-4" />
-                  </Button>
-                </a>
               </section>
             </div>
 
@@ -179,3 +207,9 @@ export default function Index({ techstack }: AboutMeProps) {
     </ClientLayout>
   );
 }
+
+
+// BTW, I'm Kent Joemar Escoto, a Computer Science graduate. With a strong eagerness to learn and grow. I'm passionate about applying my skills and knowledge in real-world projects.
+
+
+// A pixel - and - code perfectionist who crafts with intention, keeps things clean, and makes the web a little more delightful.

@@ -23,6 +23,9 @@ export interface NavItem {
 }
 
 export interface SharedData {
+    about_me: AboutMe;
+    short: ShortAbout;
+    techstack: TechStack[];
     main_hero: Hero;
     featured_projects: Project[];
     flash: Flash;
@@ -125,3 +128,19 @@ export interface ShortAbout {
     updated_at: string;
 }
 
+export interface AboutMe {
+    id: number;
+    main_text: string;
+    main_text_highlight?: string;
+    secondary_text: string;
+    secondary_text_highlight?: string;
+    picture: File | null;
+    resume_link: string;
+    resume_status: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
+export type ResumeLink = {
+    resume: AboutMe;
+}

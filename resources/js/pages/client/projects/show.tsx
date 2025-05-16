@@ -2,7 +2,7 @@ import Image from '@/components/personalized/image';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import ClientLayout from '@/layouts/client-layout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { ChevronLeftIcon, ChevronRightIcon, MoveRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { filterByType, slugify } from '@/lib/utils';
@@ -27,7 +27,10 @@ type ShowProjectProps = {
   project_names: string[];
 }
 
-export default function Show({ project, project_names, random_projects }: ShowProjectProps) {
+export default function Show() {
+
+  const { project, project_names, random_projects } = usePage<ShowProjectProps>().props;
+
   const tools = filterByType(project.techstack, 'tool');
   const frameworks = filterByType(project.techstack, 'framework');
 

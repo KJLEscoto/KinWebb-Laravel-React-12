@@ -57,12 +57,18 @@ export function filterByType(items: any[], type: string): any[] {
 export function getJobStatusColor(status: string): string {
     switch (status) {
         case 'Available':
-            return 'green-600';
+            return '-green-600';
         case 'On Duty':
-            return 'blue-600';
+            return '-blue-500';
         case 'On Leave':
-            return 'red-600';
+            return '-red-600';
         default:
-            return 'white';
+            return '-white';
     }
+}
+
+export function highlightText(text: string, highlight: string | null): string {
+  if (!text || !highlight) return text;
+  const regex = new RegExp(`\\b${highlight}\\b`, 'gi');
+  return text.replace(regex, `<span class="text-white italic mx-1">${highlight}</span>`);
 }

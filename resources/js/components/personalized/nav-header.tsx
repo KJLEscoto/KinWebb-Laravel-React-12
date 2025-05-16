@@ -15,24 +15,13 @@ import { FormEventHandler, useState } from "react";
 import InputError from "../input-error";
 import { Textarea } from "../ui/textarea";
 import Image from "./image";
+import { AboutMe, ResumeLink } from "@/types";
 
 type SubmitForm = {
   name: string;
   email: string;
   message: string;
 };
-
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about-me", label: "About Me" },
-  {
-    href: "https://drive.google.com/file/d/1Kxu04RPwJtZs4KQujC2Y_36wKl5eaR6E/view",
-    label: "Resumé",
-    icon: ArrowUpRight,
-    new_tab: true
-  },
-];
 
 function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
 
@@ -71,6 +60,31 @@ function ContactForm({ onSubmit, data, setData, errors, processing }: any) {
 }
 
 function NavHeader() {
+  const { resume } = usePage<ResumeLink>().props;
+  const resume_link = resume?.resume_link?.trim() || '#';
+
+  const page = usePage();
+
+  const links = [
+    { href: "/", label: "Home", icon: null, new_tab: false },
+    { href: "/projects", label: "Projects", icon: null, new_tab: false },
+    { href: "/about-me", label: "About Me", icon: null, new_tab: false },
+    {
+      href: resume_link?.trim() || "#",
+      label: "Resumé",
+      icon: ArrowUpRight,
+      new_tab: !!resume_link,
+    },
+  ];
+
+  // filter links based on conditions
+  const visibleLinks = links.filter((link) => {
+    // Don't include resume if href is '#'
+    if (link.href === "#") return false;
+
+    return true;
+  });
+
   const KINWEBB_LOGO = import.meta.env.VITE_KINWEBB_LOGO;
 
   const [isWebSheetOpen, setIsWebSheetOpen] = useState(false);
@@ -102,9 +116,8 @@ function NavHeader() {
       {/* Desktop */}
       <section className="md:flex hidden items-center gap-8">
         <div className="flex items-center gap-10">
-          {links.map(({ href, new_tab, label, icon: Icon }) => {
-            const page = usePage();
-            const isActive = href === '/' ? page.url === '/' : page.url.startsWith(href);
+          {visibleLinks.map(({ href, new_tab, label, icon: Icon }) => {
+            const isActive = href === "/" ? page.url === "/" : page.url.startsWith(href);
 
             return new_tab ? (
               <a
@@ -121,7 +134,7 @@ function NavHeader() {
               <Link
                 key={href}
                 href={href}
-                className={`relative font-medium flex items-center gap-1 text-xs tracking-wide hover:text-white transition ${isActive ? 'text-white' : 'text-[#A0A0A0]'
+                className={`relative font-medium flex items-center gap-1 text-xs tracking-wide hover:text-white transition ${isActive ? "text-white" : "text-[#A0A0A0]"
                   }`}
               >
                 {label}
@@ -136,7 +149,7 @@ function NavHeader() {
         </div>
 
         <Sheet open={isWebSheetOpen} onOpenChange={setIsWebSheetOpen}>
-          <SheetTrigger>
+          <SheetTrigger asChild>
             <Button size="sm" className="rounded-full text-xs font-bold">
               Get in Touch
             </Button>
@@ -168,9 +181,9 @@ function NavHeader() {
               </SheetTitle>
             </SheetHeader>
             <div className="w-full px-5 pb-5 -mt-5">
-              {links.map(({ href, new_tab, label, icon: Icon }) => {
-                const page = usePage();
-                const isActive = href === '/' ? page.url === '/' : page.url.startsWith(href);
+
+              {visibleLinks.map(({ href, new_tab, label, icon: Icon }) => {
+                const isActive = href === "/" ? page.url === "/" : page.url.startsWith(href);
 
                 return new_tab ? (
                   <a
@@ -196,7 +209,7 @@ function NavHeader() {
                 );
               })}
               <Sheet>
-                <SheetTrigger className="w-full mt-3">
+                <SheetTrigger asChild className="w-full mt-3">
                   <Button size="sm" className="rounded-full text-xs w-full font-bold">
                     Get in Touch
                   </Button>

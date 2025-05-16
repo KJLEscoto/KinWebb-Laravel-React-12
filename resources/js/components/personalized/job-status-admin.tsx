@@ -26,7 +26,7 @@ export default function JobStatus() {
     {
       id: 2,
       label: 'On Duty',
-      message: 'This person is currently working.'
+      message: 'Currently working on something.'
     },
     {
       id: 3,
