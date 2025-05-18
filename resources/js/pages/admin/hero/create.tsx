@@ -55,10 +55,9 @@ export default function Create() {
     });
   };
 
-
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
-      <Head title="Add Tech Stack | Tech Stack" />
+      <Head title="Add Entry | Hero" />
       <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
         <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="grid gap-6">

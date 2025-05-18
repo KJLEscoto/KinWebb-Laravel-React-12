@@ -37,6 +37,7 @@ type HeroProps = {
 
 export default function Index({ hero_entries }: HeroProps) {
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   const setMainHero = (id: number) => {
     router.patch(route('admin.hero.update', id), {}, {
@@ -51,22 +52,23 @@ export default function Index({ hero_entries }: HeroProps) {
     router.delete(route('admin.hero.destroy', id), {
       preserveScroll: true,
       onError: () => {
-        setOpen(false);
+        closeModal;
         toast.error('Something went wrong deleting main hero.');
       },
       onSuccess: () => {
-        setOpen(false);
+        closeModal;
       }
     });
   }
 
   const closeModal = () => {
     setOpen(false);
+    setOpenDelete(false);
   };
 
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
-      <Head title="Tech Stack" />
+      <Head title="Hero" />
       <div className="flex h-full flex-1 flex-col items-center gap-5 rounded-xl p-4">
 
         <div className='flex z-20 justify-between w-full items-center'>
@@ -117,7 +119,7 @@ export default function Index({ hero_entries }: HeroProps) {
                       </Tooltip>
                     </TooltipProvider>
 
-                    <Dialog>
+                    <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                       <DialogTrigger asChild>
                         <Button size='sm' variant='destructive'>
                           Delete
@@ -148,8 +150,8 @@ export default function Index({ hero_entries }: HeroProps) {
 
                 <header className="relative h-full w-full flex items-center justify-center">
                   <Image src={`/storage/${entry.model_image}`} alt="model image" />
-                  <span className='absolute md:-top-5 bottom-5 transition-all duration-500 overflow-hidden !h-40'>
-                    <Image src={`/storage/${entry.logo_image}`} alt="logo image" className="lg:!max-w-2xl !object-cover !w-full border-red-500" />
+                  <span className='absolute md:-top-5 bottom-5 transition-all duration-500 overflow-hidden !h-40 w-full'>
+                    <Image src={`/storage/${entry.logo_image}`} alt="logo image" className="lg:!max-w-2xl object-cover !h-full !w-full border-red-500 place-self-center" />
                   </span>
                 </header>
 

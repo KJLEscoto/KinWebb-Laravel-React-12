@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\TechStack;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,8 @@ class AboutController extends Controller
     {
         $techstack = TechStack::all();
         $about_me = DB::table('about_me')->first();
-        return inertia('client/about/index', compact('techstack', 'about_me'));
+        $user = User::first();
+        return inertia('client/about/index', compact('techstack', 'about_me', 'user'));
     }
 
     /**

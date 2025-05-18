@@ -70,10 +70,17 @@ function Hero() {
     >
       {main_hero ? (
         <>
-          <header className="relative h-full w-full flex items-center justify-center">
+          {/* <header className="relative h-full w-full flex items-center justify-center">
             <Image className="lg:!max-w-xl" src={`/storage/${main_hero.model_image}`} alt="model image" />
             <span className='absolute md:-top-10 bottom-5 transition-all duration-500'>
               <Image src={`/storage/${main_hero.logo_image}`} alt="logo image" className="lg:!max-w-5xl" />
+            </span>
+          </header> */}
+
+          <header className="relative h-full w-full flex items-center justify-center">
+            <Image src={`/storage/${main_hero.model_image}`} alt="model image" />
+            <span className='absolute md:-top-5 bottom-5 transition-all duration-500 overflow-hidden w-full'>
+              <Image src={`/storage/${main_hero.logo_image}`} alt="logo image" className="xl:!max-w-5xl object-cover !w-full border-red-500 place-self-center" />
             </span>
           </header>
 

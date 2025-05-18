@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Settings\ModelAboutMeController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::get('settings/appearance', function () {
         return Inertia::render('settings/appearance');
     })->name('appearance');
+
+    Route::get('settings/model', [ModelAboutMeController::class, 'edit'])->name('model.edit');
+    Route::post('settings/model', [ModelAboutMeController::class, 'store'])->name('model.store');
+    Route::patch('settings/model/{id}', [ModelAboutMeController::class, 'update'])->name('model.update');
+
 });

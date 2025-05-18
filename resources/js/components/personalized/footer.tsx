@@ -1,6 +1,12 @@
+import { SharedData } from "@/types";
 import { Button } from "../ui/button";
+import { usePage } from "@inertiajs/react";
 
 function Footer() {
+  const { user } = usePage<SharedData>().props;
+
+  const email = user?.email ?? 'kin.webb.1024@gmail.com';
+
   return (
     <footer className='flex flex-col justify-center items-center min-h-96 gap-8 lg:p-0 p-5 bg-white text-black w-full select-none'>
       <h3 className="text-sm capitalize font-bold">HAVE AN IDEA IN MIND?</h3>
@@ -11,9 +17,9 @@ function Footer() {
         on your project.
       </p>
 
-      <a href='mailto:kin.webb.1024@gmail.com' >
+      <a href={`mailto:${email}`} >
         <Button size='lg' variant='outline' className="rounded-full !py-6 !px-7 flex items-center gap-2 !bg-white hover:!bg-black !text-black hover:!text-white transition-all duration-300 text-base">
-          kin.webb.1024@gmail.com
+          {email}
         </Button>
       </a>
     </footer>

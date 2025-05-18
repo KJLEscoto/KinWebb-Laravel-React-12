@@ -1,12 +1,8 @@
-import { type ReactNode } from 'react';
-
 import Footer from "@/components/personalized/footer";
 import NavHeader from '@/components/personalized/nav-header';
 import FixedBottom from '@/components/personalized/fixed-bottom';
 import { Toaster } from 'sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
-import { usePage } from '@inertiajs/react';
-import { ResumeLink } from '@/types';
 import CustomCursor from '@/components/personalized/custom-cursor';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {

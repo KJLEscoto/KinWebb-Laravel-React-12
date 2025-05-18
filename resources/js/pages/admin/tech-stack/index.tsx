@@ -44,7 +44,7 @@ export default function Index({ techstack }: TechStackProps) {
                 tools.length > 0 ?
                   <Badge asLink items={tools} />
                   :
-                  <div>No Tools Available.</div>
+                  <div className='text-white/70 text-center w-full'>No Tools Available.</div>
               }
             </div>
           </section>
@@ -56,7 +56,7 @@ export default function Index({ techstack }: TechStackProps) {
                 frameworks.length > 0 ?
                   <Badge asLink items={frameworks} />
                   :
-                  <div>No Frameworks Available.</div>
+                  <div className='text-white/70 text-center w-full'>No Frameworks Available.</div>
               }
             </div>
           </section>

@@ -10,3 +10,4 @@ npx shadcn@latest add popover
 npm install gsap
 php artisan vendor:publish --tag=laravel-errors
 npx shadcn@latest add radio-group
+npm install @inertiajs/inertia

@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\HeroController as AdminHeroController;
 use App\Http\Controllers\Admin\MainTextController as AdminMainTextController;
 use App\Http\Controllers\Admin\ProjectsController as AdminProjectsController;
+use App\Http\Controllers\Admin\ResumeController as AdminResumeController;
+use App\Http\Controllers\Admin\SecondaryTextController as AdminSecondaryTextController;
 use App\Http\Controllers\Admin\ShortController as AdminShortController;
 use App\Http\Controllers\Admin\TechStackController as AdminTechStackController;
 use Illuminate\Support\Facades\Route;
@@ -75,5 +77,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
       'store' => 'admin.about-me.store-main-text',
       'update' => 'admin.about-me.update-main-text',
     ]);
+  Route::resource('admin/about-me/secondary', AdminSecondaryTextController::class)
+    ->only(['store', 'update'])
+    ->names([
+      'store' => 'admin.about-me.store-secondary-text',
+      'update' => 'admin.about-me.update-secondary-text',
+    ]);
+  Route::resource('admin/about-me/resume', AdminResumeController::class)
+    ->only(['store', 'update'])
+    ->names([
+      'store' => 'admin.about-me.store-resume',
+      'update' => 'admin.about-me.update-resume',
+    ]);
+  Route::patch('admin/about-me/{id}/resume-status', [AdminResumeController::class, 'setResumeStatus'])->name('admin.about-me.update-resume-status');
 
 });

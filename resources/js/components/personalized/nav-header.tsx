@@ -15,7 +15,7 @@ import { FormEventHandler, useState } from "react";
 import InputError from "../input-error";
 import { Textarea } from "../ui/textarea";
 import Image from "./image";
-import { AboutMe, ResumeLink } from "@/types";
+import { ResumeLink } from "@/types";
 
 type SubmitForm = {
   name: string;

@@ -23,6 +23,7 @@ export interface NavItem {
 }
 
 export interface SharedData {
+    user: User;
     about_me: AboutMe;
     short: ShortAbout;
     techstack: TechStack[];
