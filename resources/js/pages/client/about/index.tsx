@@ -4,7 +4,7 @@ import Shell from '@/components/personalized/shell';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import ClientLayout from '@/layouts/client-layout';
-import { getJobStatusColor, highlightText } from '@/lib/utils';
+import { highlightText } from '@/lib/utils';
 import { SharedData } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import { ArrowUpRight } from 'lucide-react';
@@ -14,7 +14,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { useEffect, useState } from 'react';
 import Skills from '@/components/personalized/skills-about-me';
 import TechStack from '@/components/personalized/techstack-about-me';
 import Experiences from '@/components/personalized/experiences-about-me';
@@ -22,13 +21,6 @@ import Experiences from '@/components/personalized/experiences-about-me';
 export default function Index() {
 
   const { user, about_me } = usePage<SharedData>().props;
-
-  const [textColor, setTextColor] = useState('');
-
-  useEffect(() => {
-    const colorClass = getJobStatusColor(user?.job_status ?? '');
-    setTextColor(colorClass);
-  }, [user?.job_status]);
 
   const mainContent = about_me?.main_text ? highlightText(about_me.main_text, about_me.main_text_highlight ?? '') : null;
 
@@ -46,9 +38,9 @@ export default function Index() {
               <section className='flex flex-col items-center gap-5'>
                 <Image className='!max-w-sm rounded-4xl' src={`/storage/${about_me.picture}`} alt='model image' />
 
-                <div className={`flex items-center gap-1 select-none px-5 py-1.5 rounded-full bg-white/10 text-[${textColor}]`}>
+                <div className={`flex items-center gap-1 select-none px-5 py-1.5 rounded-full bg-white/10`}>
                   {/* <CircleSmall className='size-3 animate-pulse cursor-pointer' /> */}
-                  <p className='text-xs font-semibold tracking-wide'>
+                  <p className='text-xs font-normal tracking-wider text-white/80'>
                     {user?.job_message}
                   </p>
                 </div>

@@ -23,6 +23,7 @@ export interface NavItem {
 }
 
 export interface SharedData {
+    categories: Category[];
     user: User;
     about_me: AboutMe;
     short: ShortAbout;
@@ -144,4 +145,11 @@ export interface AboutMe {
 
 export type ResumeLink = {
     resume: AboutMe;
+}
+
+export interface Category {
+    id: number;
+    name: string;
+    created_at: string;
+    updated_at: string;
 }

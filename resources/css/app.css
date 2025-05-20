@@ -153,16 +153,16 @@
 }
 
 @layer base {
-    html {
+    /* html {
         scroll-behavior: smooth;
-    }
+    } */
 
     * {
         @apply border-border;
     }
 
     body {
-        @apply scroll-smooth selection:bg-black selection:text-white dark:bg-[#040204] dark:text-white dark:selection:bg-white dark:selection:text-black;
+        @apply selection:bg-black selection:text-white dark:bg-[#040204] dark:text-white dark:selection:bg-white dark:selection:text-black;
     }
 
     .custom-scrollbar {

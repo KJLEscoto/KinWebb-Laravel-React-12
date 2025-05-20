@@ -29,6 +29,7 @@ import {
 import { toast } from 'sonner';
 import EditResume from '@/components/modals/edit-resume';
 import AddResume from '@/components/modals/add-resume';
+import { Button } from '@/components/ui/button';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -44,11 +45,13 @@ function ShortSection({ short }: { short: ShortAbout | null }) {
     <section className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl">
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Welcome | Short</h1>
-        <section className="flex items-center gap-3">
+        <section className="flex items-center">
           {short ? <EditShort /> : <AddShort />}
           <Dialog>
-            <DialogTrigger className="cursor-pointer">
-              <Info className="size-4" />
+            <DialogTrigger asChild className="cursor-pointer">
+              <Button size='icon' variant='ghost'>
+                <Info className="size-4" />
+              </Button>
             </DialogTrigger>
             <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
               <DialogHeader>
@@ -76,11 +79,13 @@ function MainSection({ about_me }: { about_me: AboutMe | null }) {
     <section className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl">
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Main</h1>
-        <section className="flex items-center gap-3">
+        <section className="flex items-center">
           {about_me?.main_text ? <EditMain /> : <AddMain />}
           <Dialog>
-            <DialogTrigger className="cursor-pointer">
-              <Info className="size-4" />
+            <DialogTrigger asChild>
+              <Button size="icon" variant="ghost">
+                <Info className='size-4' />
+              </Button>
             </DialogTrigger>
             <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
               <DialogHeader>
@@ -108,11 +113,13 @@ function SecondarySection({ about_me }: { about_me: AboutMe | null }) {
     <section className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl">
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Secondary</h1>
-        <section className="flex items-center gap-3">
+        <section className="flex items-center">
           {about_me?.secondary_text ? <EditSecondary /> : <AddSecondary />}
           <Dialog>
-            <DialogTrigger className="cursor-pointer">
-              <Info className="size-4" />
+            <DialogTrigger asChild>
+              <Button size="icon" variant="ghost">
+                <Info className='size-4' />
+              </Button>
             </DialogTrigger>
             <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
               <DialogHeader>
@@ -152,11 +159,12 @@ function ResumeSection({ about_me }: { about_me: AboutMe }) {
     <section className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl">
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Resumé</h1>
-        <section className="flex items-center gap-3">
+        <section className="flex items-center">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
                 <Switch
+                  className='mr-2'
                   disabled={isDisabled}
                   checked={isChecked}
                   onCheckedChange={() => setResumeStatus(about_me.id)} />
@@ -172,8 +180,10 @@ function ResumeSection({ about_me }: { about_me: AboutMe }) {
           </TooltipProvider>
           {about_me?.resume_link ? <EditResume /> : <AddResume />}
           <Dialog>
-            <DialogTrigger className="cursor-pointer">
-              <Info className="size-4" />
+            <DialogTrigger asChild>
+              <Button size="icon" variant="ghost">
+                <Info className='size-4' />
+              </Button>
             </DialogTrigger>
             <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
               <DialogHeader>

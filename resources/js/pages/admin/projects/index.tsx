@@ -44,7 +44,6 @@ export default function Index() {
           <h1>ALL PROJECTS</h1>
           <Link href={route('admin.projects.create')}>
             <Button variant='default'>
-              <Plus className="size-4" />
               Add Project
             </Button>
           </Link>

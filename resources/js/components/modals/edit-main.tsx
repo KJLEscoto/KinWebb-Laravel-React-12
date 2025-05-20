@@ -11,9 +11,9 @@ import HeadingSmall from '@/components/heading-small';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '../ui/textarea';
 import { AboutMe } from '@/types';
+import { Edit3 } from 'lucide-react';
 
 type EditMainForm = {
-  id: number;
   main: string;
   main_highlight?: string | null;
 }
@@ -31,7 +31,6 @@ export default function EditMain() {
   const { about_me } = usePage<AboutMeProps>().props;
 
   const { data, setData, put, processing, reset, errors, clearErrors } = useForm<EditMainForm>({
-    id: about_me.id,
     main: about_me?.main_text ?? '',
     main_highlight: about_me?.main_text_highlight ?? '',
   });
@@ -61,7 +60,6 @@ export default function EditMain() {
   useEffect(() => {
     if (open) {
       setData({
-        id: about_me.id,
         main: about_me.main_text ?? '',
         main_highlight: about_me.main_text_highlight ?? '',
       });
@@ -73,7 +71,9 @@ export default function EditMain() {
     <div className="space-y-6">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size='sm' variant="outline">Edit Main</Button>
+          <Button size="icon" variant="ghost">
+            <Edit3 className='size-4' />
+          </Button>
         </DialogTrigger>
         <DialogContent className='!max-w-xl w-full overflow-auto max-h-screen scrollbar-hide'>
           <DialogTitle>Edit Main</DialogTitle>

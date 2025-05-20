@@ -17,9 +17,9 @@ import {
 } from '@/components/ui/dialog';
 import { Textarea } from '../ui/textarea';
 import { ShortAbout } from '@/types';
+import { Edit3 } from 'lucide-react';
 
 type EditShortForm = {
-  id: number;
   body: string;
   highlight: string; // optional
 };
@@ -35,7 +35,6 @@ export default function EditShort() {
   const { short } = usePage<EditShortProps>().props;
 
   const { data, setData, put, processing, reset, errors, clearErrors } = useForm<EditShortForm>({
-    id: short.id,
     body: short.body ?? '',
     highlight: short.highlight ?? '',
   });
@@ -64,7 +63,6 @@ export default function EditShort() {
   useEffect(() => {
     if (open) {
       setData({
-        id: short.id,
         body: short.body ?? '',
         highlight: short.highlight ?? '',
       });
@@ -76,7 +74,9 @@ export default function EditShort() {
     <div className="space-y-6">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size="sm" variant="outline">Edit Short</Button>
+          <Button size="icon" variant="ghost">
+            <Edit3 className='size-4' />
+          </Button>
         </DialogTrigger>
         <DialogContent className="!max-w-xl w-full overflow-auto max-h-screen scrollbar-hide">
           <DialogTitle>Edit Short</DialogTitle>

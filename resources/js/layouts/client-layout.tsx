@@ -9,7 +9,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   useFlashToast();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center !bg-white">
+    <div className="min-h-screen !scroll-smooth flex flex-col items-center justify-center !bg-white">
 
       {/* Main scrollable area */}
       <main className="flex-grow w-full relative z-10">

@@ -11,3 +11,5 @@ npm install gsap
 php artisan vendor:publish --tag=laravel-errors
 npx shadcn@latest add radio-group
 npm install @inertiajs/inertia
+npx shadcn@latest add dropdown-menu
+npx shadcn@latest add alert-dialog

@@ -8,9 +8,9 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '../ui/textarea';
 import { AboutMe } from '@/types';
+import { Edit3 } from 'lucide-react';
 
 type EditSecondaryForm = {
-  id: number;
   resume: string;
 }
 
@@ -26,7 +26,6 @@ export default function EditResume() {
   const { about_me } = usePage<AboutMeProps>().props;
 
   const { data, setData, put, processing, reset, errors, clearErrors } = useForm<EditSecondaryForm>({
-    id: about_me.id,
     resume: about_me?.resume_link ?? '',
   });
 
@@ -35,10 +34,7 @@ export default function EditResume() {
 
     put(route('admin.about-me.update-resume', about_me.id), {
       preserveScroll: true,
-      onSuccess: () => {
-        reset();
-        setOpen(false);
-      },
+      onSuccess: () => closeModal(),
       onError: () => {
         resumeInput.current?.focus()
       },
@@ -55,7 +51,6 @@ export default function EditResume() {
   useEffect(() => {
     if (open) {
       setData({
-        id: about_me.id,
         resume: about_me?.resume_link ?? '',
       });
       clearErrors();
@@ -66,7 +61,9 @@ export default function EditResume() {
     <div className="space-y-6">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size='sm' variant="outline">Edit Resumé</Button>
+          <Button size="icon" variant="ghost">
+            <Edit3 className='size-4' />
+          </Button>
         </DialogTrigger>
         <DialogContent className='!max-w-xl w-full overflow-auto max-h-screen scrollbar-hide'>
           <DialogTitle>Edit Resumé</DialogTitle>

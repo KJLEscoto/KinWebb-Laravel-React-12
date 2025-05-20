@@ -54,21 +54,20 @@ export function filterByType(items: any[], type: string): any[] {
     return items.filter(item => item.type === type);
 }
 
-export function getJobStatusColor(status: string): string {
-    switch (status) {
-        case 'Available':
-            return '#22C55E';
-        case 'On Duty':
-            return '#3B82F6';
-        case 'On Leave':
-            return '#EF4444';
-        default:
-            return '#FFFFFF';
-    }
-}
+// export function getJobStatusColor(status: string): string {
+//     if (status == 'Available') {
+//         return '#22C55E';
+//     } else if (status == 'On Duty') {
+//         return '#3B82F6';
+//     } else if (status == 'On Leave') {
+//         return '#EF4444';
+//     } else {
+//         return '#FFFFFF';
+//     }
+// }
 
 export function highlightText(text: string, highlight: string | null): string {
-  if (!text || !highlight) return text;
-  const regex = new RegExp(`\\b${highlight}\\b`, 'gi');
-  return text.replace(regex, `<span class="text-white italic mx-1">${highlight}</span>`);
+    if (!text || !highlight) return text;
+    const regex = new RegExp(`\\b${highlight}\\b`, 'gi');
+    return text.replace(regex, `<span class="text-white italic mx-1">${highlight}</span>`);
 }

@@ -10,11 +10,21 @@ export default function CustomCursor() {
 
   const requestRef = useRef<number | undefined>(undefined);
   const [isPointer, setIsPointer] = useState(false);
+  const [hasMoved, setHasMoved] = useState(false); // track first move
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      mousePos.current.x = e.clientX;
-      mousePos.current.y = e.clientY;
+      const x = e.clientX;
+      const y = e.clientY;
+
+      mousePos.current = { x, y };
+
+      // If it's the first move, initialize other positions
+      if (!hasMoved) {
+        outerPos.current = { x, y };
+        innerPos.current = { x, y };
+        setHasMoved(true);
+      }
 
       const target = e.target as HTMLElement;
       const cursorStyle = window.getComputedStyle(target).cursor;
@@ -26,11 +36,11 @@ export default function CustomCursor() {
     };
 
     const animate = () => {
-      // Outer follows mouse directly
+      if (!hasMoved) return;
+
       outerPos.current.x = lerp(outerPos.current.x, mousePos.current.x, 0.25);
       outerPos.current.y = lerp(outerPos.current.y, mousePos.current.y, 0.25);
 
-      // Inner follows outer (with delay)
       innerPos.current.x = lerp(innerPos.current.x, outerPos.current.x, 0.15);
       innerPos.current.y = lerp(innerPos.current.y, outerPos.current.y, 0.15);
 
@@ -52,7 +62,9 @@ export default function CustomCursor() {
       document.removeEventListener('mousemove', handleMouseMove);
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, []);
+  }, [hasMoved]);
+
+  if (!hasMoved) return null; // Don't show anything until mouse moves
 
   return (
     <>

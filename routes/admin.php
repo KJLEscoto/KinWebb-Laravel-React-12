@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProjectsController as AdminProjectsController;
 use App\Http\Controllers\Admin\ResumeController as AdminResumeController;
 use App\Http\Controllers\Admin\SecondaryTextController as AdminSecondaryTextController;
 use App\Http\Controllers\Admin\ShortController as AdminShortController;
+use App\Http\Controllers\Admin\SkillCategoryController as AdminSkillCategoryController;
 use App\Http\Controllers\Admin\TechStackController as AdminTechStackController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,7 +20,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
   // admin projects page
   Route::resource('admin/projects', AdminProjectsController::class)
-    ->except(['destory'])
+    ->except(['destroy'])
     ->names([
       'index' => 'admin.projects.index',
       'create' => 'admin.projects.create',
@@ -32,7 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
   // admin tech stack page
   Route::resource('admin/tech-stack', AdminTechStackController::class)
-    ->except(['destory'])
+    ->except(['destroy'])
     ->names([
       'index' => 'admin.techstack.index',
       'create' => 'admin.techstack.create',
@@ -56,7 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
   // about me page
   Route::resource('admin/about-me', AdminAboutController::class)
-    ->except(['destory'])
+    ->except(['destroy'])
     ->names([
       'index' => 'admin.about-me.index',
       'create' => 'admin.about-me.create',
@@ -91,4 +92,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ]);
   Route::patch('admin/about-me/{id}/resume-status', [AdminResumeController::class, 'setResumeStatus'])->name('admin.about-me.update-resume-status');
 
+  // skill category page
+  Route::resource('admin/skill-category', AdminSkillCategoryController::class)
+    ->except(['create', 'show', 'edit'])
+    ->names([
+      'index' => 'admin.skill-category.index',
+      'store' => 'admin.skill-category.store',
+      'update' => 'admin.skill-category.update',
+      'destroy' => 'admin.skill-category.destroy',
+    ]);
 });

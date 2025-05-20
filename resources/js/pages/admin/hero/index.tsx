@@ -4,7 +4,7 @@ import { Switch } from '@/components/ui/switch';
 import AppLayout from '@/layouts/app-layout';
 import { Hero, type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
-import { Info, Plus, Trash2 } from 'lucide-react';
+import { Info, Trash2 } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
@@ -76,7 +76,6 @@ export default function Index({ hero_entries }: HeroProps) {
           <div className='flex items-center gap-3'>
             <Link href={route('admin.hero.create')}>
               <Button variant='default'>
-                <Plus className="size-4" />
                 Add Entry
               </Button>
             </Link>

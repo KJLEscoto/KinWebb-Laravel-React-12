@@ -4,7 +4,6 @@ import AppLayout from '@/layouts/app-layout';
 import { filterByType } from '@/lib/utils';
 import { TechStack, type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { Plus } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -30,7 +29,6 @@ export default function Index({ techstack }: TechStackProps) {
           <h1>TECH STACK</h1>
           <Link href={route('admin.techstack.create')}>
             <Button variant='default'>
-              <Plus className="size-4" />
               Add Tech Stack
             </Button>
           </Link>

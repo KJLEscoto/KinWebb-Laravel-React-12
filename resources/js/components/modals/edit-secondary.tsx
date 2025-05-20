@@ -11,9 +11,9 @@ import HeadingSmall from '@/components/heading-small';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '../ui/textarea';
 import { AboutMe } from '@/types';
+import { Edit3 } from 'lucide-react';
 
 type EditSecondaryForm = {
-  id: number;
   secondary: string;
   secondary_highlight?: string | null;
 }
@@ -31,7 +31,6 @@ export default function EditSecondary() {
   const { about_me } = usePage<AboutMeProps>().props;
 
   const { data, setData, put, processing, reset, errors, clearErrors } = useForm<EditSecondaryForm>({
-    id: about_me.id,
     secondary: about_me?.secondary_text ?? '',
     secondary_highlight: about_me?.secondary_text_highlight ?? '',
   });
@@ -61,7 +60,6 @@ export default function EditSecondary() {
   useEffect(() => {
     if (open) {
       setData({
-        id: about_me.id,
         secondary: about_me.secondary_text ?? '',
         secondary_highlight: about_me.secondary_text_highlight ?? '',
       });
@@ -73,7 +71,9 @@ export default function EditSecondary() {
     <div className="space-y-6">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button size='sm' variant="outline">Edit Secondary</Button>
+          <Button size="icon" variant="ghost">
+            <Edit3 className='size-4' />
+          </Button>
         </DialogTrigger>
         <DialogContent className='!max-w-xl w-full overflow-auto max-h-screen scrollbar-hide'>
           <DialogTitle>Edit Secondary</DialogTitle>
