@@ -1,31 +1,30 @@
-import { useForm, usePage } from '@inertiajs/react';
-import { Dispatch, FormEventHandler, SetStateAction, useEffect, useRef, useState } from 'react';
+import { useForm } from '@inertiajs/react';
+import { FormEventHandler, useEffect, useRef, useState } from 'react';
 
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '../ui/input';
-import { Edit3 } from 'lucide-react';
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Category } from '@/types';
+import { Edit3 } from 'lucide-react';
+import { Input } from '../ui/input';
+
 type EditSkillCategoryForm = {
   name: string;
 }
 
-type EditProps = {
-  category: Category;
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  onClose: () => void;
+type CategoryProps = {
+  category: Category
 }
 
-export default function EditSkillCategory({ category, open, setOpen, onClose }: EditProps) {
+export default function EditSkillCategory({ category }: CategoryProps) {
+  const [open, setOpen] = useState(false);
 
   const categoryInput = useRef<HTMLInputElement>(null);
 
   const { data, setData, put, processing, reset, errors, clearErrors } = useForm<EditSkillCategoryForm>({
-    name: category.name,
+    name: category.name ?? '',
   });
 
   const editCategory: FormEventHandler = (e) => {
@@ -45,21 +44,27 @@ export default function EditSkillCategory({ category, open, setOpen, onClose }: 
     clearErrors();
     reset();
     setOpen(false);
-    onClose();
   };
 
   useEffect(() => {
-    if (category) {
-      setData('name', category.name);
+    if (open) {
+      setData({
+        name: category.name ?? '',
+      });
+      clearErrors();
     }
-  }, [category]);
-
+  }, [open, category, setData, clearErrors]);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent>
-        <div className="space-y-6">
-          <DialogTitle>Edit</DialogTitle>
+    <div className="space-y-6">
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button size="icon" variant="ghost">
+            <Edit3 className='size-4' />
+          </Button>
+        </DialogTrigger>
+        <DialogContent onOpenAutoFocus={(e) => e.preventDefault()} className='!max-w-xl w-full'>
+          <DialogTitle>Edit Category</DialogTitle>
           <form className="space-y-6" onSubmit={editCategory}>
             <div className="grid gap-2">
               <Label htmlFor="name">
@@ -67,11 +72,10 @@ export default function EditSkillCategory({ category, open, setOpen, onClose }: 
               </Label>
 
               <Input
-                required id="name"
+                required id="category"
+                ref={categoryInput}
                 placeholder="Web Development, Web Design, etc."
                 value={data.name}
-                ref={categoryInput}
-                autoFocus
                 onChange={(e) => setData("name", e.target.value)}
               />
               <InputError message={errors.name} />
@@ -79,19 +83,18 @@ export default function EditSkillCategory({ category, open, setOpen, onClose }: 
 
             <DialogFooter className="gap-2">
               <DialogClose asChild>
-                <Button variant="secondary" onClick={() => closeModal()}>
+                <Button variant="secondary" onClick={closeModal}>
                   Cancel
                 </Button>
               </DialogClose>
 
-              <Button type='submit' variant="default" disabled={processing || !data.name}>
+              <Button type='submit' variant="default" disabled={processing}>
                 Update
               </Button>
             </DialogFooter>
           </form>
-        </div>
-      </DialogContent>
-    </Dialog>
-
-  )
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ResumeController as AdminResumeController;
 use App\Http\Controllers\Admin\SecondaryTextController as AdminSecondaryTextController;
 use App\Http\Controllers\Admin\ShortController as AdminShortController;
 use App\Http\Controllers\Admin\SkillCategoryController as AdminSkillCategoryController;
+use App\Http\Controllers\Admin\SkillController as AdminSkillController;
 use App\Http\Controllers\Admin\TechStackController as AdminTechStackController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -50,21 +51,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
       'index' => 'admin.hero.index',
       'create' => 'admin.hero.create',
       'store' => 'admin.hero.store',
-      'show' => 'admin.hero.show',
       'update' => 'admin.hero.update',
       'destroy' => 'admin.hero.destroy',
     ]);
 
   // about me page
   Route::resource('admin/about-me', AdminAboutController::class)
-    ->except(['destroy'])
+    ->only(['index'])
     ->names([
       'index' => 'admin.about-me.index',
-      'create' => 'admin.about-me.create',
-      'store' => 'admin.about-me.store',
-      'show' => 'admin.about-me.show',
-      'edit' => 'admin.about-me.edit',
-      'update' => 'admin.about-me.update',
     ]);
   Route::resource('admin/about-me/short', AdminShortController::class)
     ->only(['store', 'update'])
@@ -92,11 +87,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ]);
   Route::patch('admin/about-me/{id}/resume-status', [AdminResumeController::class, 'setResumeStatus'])->name('admin.about-me.update-resume-status');
 
-  // skill category page
-  Route::resource('admin/skill-category', AdminSkillCategoryController::class)
+  // skills page
+  Route::resource('admin/skills', AdminSkillController::class)
     ->except(['create', 'show', 'edit'])
     ->names([
-      'index' => 'admin.skill-category.index',
+      'index' => 'admin.skills.index',
+      'store' => 'admin.skills.store',
+      'update' => 'admin.skills.update',
+      'destroy' => 'admin.skills.destroy',
+    ]);
+  // skill category
+  Route::resource('admin/skill-category', AdminSkillCategoryController::class)
+    ->only(['store', 'update', 'destroy'])
+    ->names([
       'store' => 'admin.skill-category.store',
       'update' => 'admin.skill-category.update',
       'destroy' => 'admin.skill-category.destroy',

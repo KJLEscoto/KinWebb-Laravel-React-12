@@ -1,3 +1,5 @@
+import { SharedData, Skill } from "@/types";
+import { usePage } from "@inertiajs/react";
 import { Check } from "lucide-react";
 
 const webdesign = [
@@ -15,38 +17,31 @@ const webdev = [
 ]
 
 export default function Skills() {
+
+  const { categories } = usePage<SharedData>().props;
+
   return (
-    <div className='grid grid-cols-2 gap-10'>
+    <div className='grid lg:grid-cols-2 gap-10'>
       <h1 className="italic font-light text-3xl text-white/60">Skills</h1>
 
       <div className='space-y-10'>
-        <section className='space-y-2'>
-          <h3 className='text-lg'>Web Development</h3>
-          <ul className='space-y-1 ml-3'>
-            {
-              webdev.map((item, index) => (
-                <li key={index} className='font-light text-white/70 tracking-wide flex items-center gap-2'>
-                  <Check className='size-4 text-white' />
-                  {item}
-                </li>
-              ))
-            }
-          </ul>
-        </section>
-
-        <section className='space-y-3'>
-          <h3 className='text-lg'>Web Design & UI/UX</h3>
-          <ul className='space-y-1 ml-3'>
-            {
-              webdesign.map((item, index) => (
-                <li key={index} className='font-light text-white/70 tracking-wide flex items-center gap-2'>
-                  <Check className='size-4 text-white' />
-                  {item}
-                </li>
-              ))
-            }
-          </ul>
-        </section>
+        {categories.map((category: any) => (
+          category.skills.length > 0 && (
+            <div className="space-y-3">
+              <h2 className="text-lg">{category.name}</h2>
+              <ul className='space-y-1 ml-3'>
+                {category.skills.map((skill: Skill, index: number) => (
+                  <li key={index} className='font-light text-white/70 tracking-wide flex items-start gap-2'>
+                    <div className="mt-1.5">
+                      <Check className='size-4 text-white' />
+                    </div>
+                    <span>{skill.description}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        ))}
       </div>
     </div>
   )

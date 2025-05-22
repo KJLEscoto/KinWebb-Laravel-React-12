@@ -11,7 +11,7 @@ import AppLayout from '@/layouts/app-layout';
 import { filterByType, techLogo } from '@/lib/utils';
 import { TechStack, type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, Check, FullscreenIcon, ImageIcon, LoaderCircle, Plus, Save } from 'lucide-react';
+import { ArrowLeft, Check, Eye, FullscreenIcon, History, ImageIcon, LoaderCircle, Plus, Save, Trash2 } from 'lucide-react';
 import { FormEventHandler, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -108,7 +108,7 @@ export default function Create({ techstack }: CreateProjectsProps) {
         <form className="flex flex-col gap-6" onSubmit={submit}>
           <div className="grid gap-6">
 
-            {/* project information section */}
+            {/* STEP 1 */}
             <div className='flex justify-between items-center'>
               <Link href={route('admin.projects.index')} className='flex items-center gap-2'>
                 <Button variant='outline'>
@@ -268,7 +268,7 @@ export default function Create({ techstack }: CreateProjectsProps) {
 
             <Separator />
 
-            {/* project thumbnail section */}
+            {/* STEP 2 */}
             <section className="w-full flex flex-col gap-3">
               <div className='flex items-center justify-between'>
                 <Title title='Project Thumbnail' />
@@ -314,13 +314,12 @@ export default function Create({ techstack }: CreateProjectsProps) {
 
             <Separator />
 
-            {/* screenshot section */}
+            {/* STEP 3 */}
             <section className="w-full flex flex-col gap-3">
               <div className='flex items-center justify-between'>
                 <Title title='Screenshots' />
-                <Button variant='outline' type='button' onClick={addScreenshot}>
-                  <Plus className="w-3.5 h-3.5" />
-                  Add Entry
+                <Button variant='ghost' size='icon' type='button' onClick={addScreenshot}>
+                  <Plus className="size-4" />
                 </Button>
               </div>
 
@@ -328,13 +327,13 @@ export default function Create({ techstack }: CreateProjectsProps) {
                 <div key={index} className='mt-2'>
                   <section className='flex gap-5 w-full'>
                     <div className="w-full flex flex-col gap-3">
-                      <Label htmlFor={`screenshot_name_${index}`}>Screenshot Name</Label>
+                      <Label htmlFor={`screenshot_name_${index}`}>Name</Label>
                       <Input
                         id={`screenshot_name_${index}`}
                         type="text"
                         required
                         autoFocus
-                        placeholder='Untitled Screenshot'
+                        placeholder={`Screenshot ` + (index + 1)}
                         value={screenshot.name}
                         onChange={(e) => {
                           const newScreenshots = [...data.screenshots];
@@ -345,7 +344,7 @@ export default function Create({ techstack }: CreateProjectsProps) {
                     </div>
 
                     <div className="w-full flex flex-col gap-3">
-                      <Label>Screenshot Image</Label>
+                      <Label>Image</Label>
                       <Label
                         className="w-full cursor-pointer flex items-center gap-2 px-4 border transition hover:border-white p-3 rounded-md"
                         htmlFor={`screenshot_image_${index}`}
@@ -375,7 +374,8 @@ export default function Create({ techstack }: CreateProjectsProps) {
                         disabled={!screenshot.image}
                         onClick={() => window.open(URL.createObjectURL(screenshot.image!), '_blank')}
                       >
-                        View Image
+                        <Eye className='size-4' />
+                        Image
                       </Button>
                       <Button
                         variant='secondary'
@@ -383,14 +383,15 @@ export default function Create({ techstack }: CreateProjectsProps) {
                         disabled={!screenshot.image}
                         onClick={() => resetScreenshot(index)}
                       >
-                        Reset
+                        <History className='size-4' />
                       </Button>
                       <Button
                         variant='destructive'
                         type='button'
+                        size='icon'
                         onClick={() => deleteScreenshot(index)}
                       >
-                        Delete
+                        <Trash2 className="size-4" />
                       </Button>
                     </div>
                   </section>

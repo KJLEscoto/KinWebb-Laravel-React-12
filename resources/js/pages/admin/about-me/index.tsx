@@ -42,10 +42,10 @@ function ShortSection({ short }: { short: ShortAbout | null }) {
   const content = short?.body ? highlightText(short.body, short.highlight ?? '') : null;
 
   return (
-    <section className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl">
+    <section className="flex relative flex-col w-full border rounded-lg gap-3 p-5 max-w-7xl group">
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Welcome | Short</h1>
-        <section className="flex items-center">
+        <section className="flex items-center group-hover:opacity-100 opacity-0 transition-opacity duration-300">
           {short ? <EditShort /> : <AddShort />}
           <Dialog>
             <DialogTrigger asChild className="cursor-pointer">
@@ -53,7 +53,7 @@ function ShortSection({ short }: { short: ShortAbout | null }) {
                 <Info className="size-4" />
               </Button>
             </DialogTrigger>
-            <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
+            <DialogContent className='!max-w-5xl w-full'>
               <DialogHeader>
                 <DialogTitle>Short Preview</DialogTitle>
               </DialogHeader>
@@ -66,7 +66,7 @@ function ShortSection({ short }: { short: ShortAbout | null }) {
       {content ? (
         <p className="text-3xl font-light text-white/50" dangerouslySetInnerHTML={{ __html: content }} />
       ) : (
-        <p className="text-center text-white/50">No Short Yet.</p>
+        <p className="text-white/50">No Short Yet.</p>
       )}
     </section>
   );
@@ -76,10 +76,10 @@ function MainSection({ about_me }: { about_me: AboutMe | null }) {
   const content = about_me?.main_text ? highlightText(about_me.main_text, about_me.main_text_highlight ?? '') : null;
 
   return (
-    <section className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl">
+    <section className="flex relative flex-col w-full border rounded-lg gap-3 p-5 max-w-7xl group">
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Main</h1>
-        <section className="flex items-center">
+        <section className="flex items-center group-hover:opacity-100 opacity-0 transition-opacity duration-300">
           {about_me?.main_text ? <EditMain /> : <AddMain />}
           <Dialog>
             <DialogTrigger asChild>
@@ -87,7 +87,7 @@ function MainSection({ about_me }: { about_me: AboutMe | null }) {
                 <Info className='size-4' />
               </Button>
             </DialogTrigger>
-            <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
+            <DialogContent className='!max-w-5xl w-full'>
               <DialogHeader>
                 <DialogTitle>Main Preview</DialogTitle>
               </DialogHeader>
@@ -100,7 +100,7 @@ function MainSection({ about_me }: { about_me: AboutMe | null }) {
       {content ? (
         <p className="text-3xl font-light text-white/50" dangerouslySetInnerHTML={{ __html: content }} />
       ) : (
-        <p className="text-center text-white/50">No Main Yet.</p>
+        <p className="text-white/50">No Main Yet.</p>
       )}
     </section>
   );
@@ -110,10 +110,10 @@ function SecondarySection({ about_me }: { about_me: AboutMe | null }) {
   const content = about_me?.secondary_text ? highlightText(about_me.secondary_text, about_me.secondary_text_highlight ?? '') : null;
 
   return (
-    <section className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl">
+    <section className="flex relative flex-col w-full border rounded-lg gap-3 p-5 max-w-7xl group">
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Secondary</h1>
-        <section className="flex items-center">
+        <section className="flex items-center group-hover:opacity-100 opacity-0 transition-opacity duration-300">
           {about_me?.secondary_text ? <EditSecondary /> : <AddSecondary />}
           <Dialog>
             <DialogTrigger asChild>
@@ -121,7 +121,7 @@ function SecondarySection({ about_me }: { about_me: AboutMe | null }) {
                 <Info className='size-4' />
               </Button>
             </DialogTrigger>
-            <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
+            <DialogContent className='!max-w-5xl w-full'>
               <DialogHeader>
                 <DialogTitle>Secondary Preview</DialogTitle>
               </DialogHeader>
@@ -134,7 +134,7 @@ function SecondarySection({ about_me }: { about_me: AboutMe | null }) {
       {content ? (
         <p className="text-3xl font-light text-white/50" dangerouslySetInnerHTML={{ __html: content }} />
       ) : (
-        <p className="text-center text-white/50">No Secondary Yet.</p>
+        <p className="text-white/50">No Secondary Yet.</p>
       )}
     </section>
   );
@@ -156,10 +156,10 @@ function ResumeSection({ about_me }: { about_me: AboutMe }) {
   }
 
   return (
-    <section className="flex relative flex-col items-center w-full border rounded-lg gap-5 p-5 max-w-7xl">
+    <section className="flex relative flex-col w-full border rounded-lg gap-3 p-5 max-w-7xl group">
       <div className="w-full gap-5 items-center flex justify-between">
         <h1 className="text-lg">Resumé</h1>
-        <section className="flex items-center">
+        <section className="flex items-center group-hover:opacity-100 opacity-0 transition-opacity duration-300">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
@@ -185,7 +185,7 @@ function ResumeSection({ about_me }: { about_me: AboutMe }) {
                 <Info className='size-4' />
               </Button>
             </DialogTrigger>
-            <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
+            <DialogContent>
               <DialogHeader>
                 <DialogTitle>Valid Resumé</DialogTitle>
                 <DialogDescription>
@@ -201,7 +201,7 @@ function ResumeSection({ about_me }: { about_me: AboutMe }) {
       {content ? (
         <p className="font-light text-white/80 break-all">{content}</p>
       ) : (
-        <p className="text-center text-white/50">No Active Resume Yet.</p>
+        <p className="text-white/50">No Active Resume Yet.</p>
       )}
     </section>
   );

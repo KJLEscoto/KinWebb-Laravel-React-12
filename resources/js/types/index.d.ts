@@ -23,6 +23,7 @@ export interface NavItem {
 }
 
 export interface SharedData {
+    skills: Skill[];
     categories: Category[];
     user: User;
     about_me: AboutMe;
@@ -150,6 +151,13 @@ export type ResumeLink = {
 export interface Category {
     id: number;
     name: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Skill {
+    id: number;
+    description: string;
     created_at: string;
     updated_at: string;
 }

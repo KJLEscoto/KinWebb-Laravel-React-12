@@ -17,24 +17,28 @@ export default function TechStack() {
       <div className='space-y-10'>
         <section className='space-y-3'>
           <h3 className='text-lg'>Frameworks</h3>
-          {
-            frameworks.length > 0 ? (
-              <Badge items={frameworks} />
-            ) : (
-              <p className='text-white/50'>Coming Soon...</p>
-            )
-          }
+          <div className='flex items-center flex-wrap gap-2'>
+            {
+              frameworks.length > 0 ? (
+                <Badge items={frameworks} />
+              ) : (
+                <p className='text-white/50'>Coming Soon...</p>
+              )
+            }
+          </div>
         </section>
 
         <section className='space-y-3'>
           <h3 className='text-lg'>Tools</h3>
-          {
-            tools.length > 0 ? (
-              <Badge items={tools} />
-            ) : (
-              <p className='text-white/50'>Coming Soon...</p>
-            )
-          }
+          <div className='flex items-center flex-wrap gap-2'>
+            {
+              tools.length > 0 ? (
+                <Badge items={tools} />
+              ) : (
+                <p className='text-white/50'>Coming Soon...</p>
+              )
+            }
+          </div>
         </section>
       </div>
     </div>

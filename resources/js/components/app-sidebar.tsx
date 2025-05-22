@@ -1,10 +1,10 @@
-import { NavFooter } from '@/components/nav-footer';
+// import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { AppWindow, BadgeMinus, BookOpen, CircleUserRound, Component, Container, Diamond, Folder, FolderOpen, LayoutGrid } from 'lucide-react';
+import { AppWindow, BicepsFlexed, Blocks, CircleUserRound, FolderOpen, LayoutGrid, Sparkles } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -21,7 +21,7 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Skills',
         href: '/admin/skills',
-        icon: Diamond,
+        icon: BicepsFlexed,
     },
 ];
 
@@ -42,12 +42,12 @@ const manageNavItems: NavItem[] = [
     {
         title: 'Tech Stack',
         href: '/admin/tech-stack',
-        icon: Container,
+        icon: Blocks,
     },
     {
-        title: 'Skill Category',
-        href: '/admin/skill-category',
-        icon: Component,
+        title: 'Experiences',
+        href: '/admin/experiences',
+        icon: Sparkles,
     },
 ];
 

@@ -15,7 +15,7 @@ export default function ProjectList() {
         <Link
           href={route('projects.show', slugify(project.name))}
           key={project.id}
-          className="cursor-pointer grid grid-cols-4 gap-5 py-4 font-light text-white/50 hover:text-white group relative transition-all duration-300"
+          className="cursor-pointer grid grid-cols-4 gap-5 py-4 font-light text-white/50 hover:text-white group relative transition-all duration-300 hover:bg-white/5 px-2"
         >
           <h3 className='w-full truncate'>{project.name}</h3>
           <div className='flex items-center justify-start gap-2 w-full overflow-auto scrollbar-hide'>
@@ -27,8 +27,8 @@ export default function ProjectList() {
               ))}
             />
           </div>
-          <div className='absolute z-10 right-20 -top-20 w-80 h-auto block opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300'>
-            <Image src={`/storage/${project.thumbnail}`} alt={project.name}
+          <div className='absolute z-10 right-20 -top-20 w-80 h-auto opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500'>
+            <Image className='group-hover:block hidden' src={`/storage/${project.thumbnail}`} alt={project.name}
             />
           </div>
           <div className='col-span-2 flex items-center justify-end opacity-0 group-hover:opacity-100 transition-all duration-300'>

@@ -129,7 +129,7 @@ export default function Show() {
                           <DialogTrigger className="cursor-pointer !w-full">
                             <Image src={`/storage/${project.thumbnail}`} className="cursor-zoom-in !w-full" />
                           </DialogTrigger>
-                          <DialogContent className='lg:!min-w-5xl !max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
+                          <DialogContent className='lg:!min-w-5xl !max-w-5xl w-full'>
                             <DialogHeader>
                               <DialogTitle>Thumbnail</DialogTitle>
                             </DialogHeader>
@@ -139,27 +139,30 @@ export default function Show() {
                       </aside>
                     </header>
 
-                    <section className='grid lg:grid-cols-2 gap-x-5 lg:gap-y-10 gap-y-5 w-full'>
-                      {
-                        tools.length > 0 &&
-                        <>
-                          <h3 className='text-sm flex items-start'>Tools</h3>
-                          <div className='flex items-center flex-wrap gap-2'>
-                            <Badge items={tools} />
+                    {
+                      (tools.length > 0 || frameworks.length > 0) &&
+                      <section className='grid lg:grid-cols-2 gap-x-5 lg:gap-y-10 gap-y-5 w-full'>
+                        {
+                          tools.length > 0 &&
+                          <div className='w-full space-y-3'>
+                            <h3 className='text-sm flex items-start'>Tools</h3>
+                            <div className='flex items-center flex-wrap gap-2'>
+                              <Badge items={tools} />
+                            </div>
                           </div>
-                        </>
-                      }
+                        }
 
-                      {
-                        frameworks.length > 0 &&
-                        <>
-                          <h3 className='text-sm flex items-start lg:mt-0 mt-5'>Frameworks</h3>
-                          <div className='flex items-center flex-wrap gap-2'>
-                            <Badge items={frameworks} />
+                        {
+                          frameworks.length > 0 &&
+                          <div className='w-full space-y-3'>
+                            <h3 className='text-sm flex items-start'>Frameworks</h3>
+                            <div className='flex items-center flex-wrap gap-2'>
+                              <Badge items={frameworks} />
+                            </div>
                           </div>
-                        </>
-                      }
-                    </section>
+                        }
+                      </section>
+                    }
 
                     {project.screenshots.length > 0 &&
                       <div className='space-y-5'>

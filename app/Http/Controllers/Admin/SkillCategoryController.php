@@ -10,16 +10,6 @@ use Illuminate\Validation\Rule;
 class SkillCategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $categories = Category::all();
-
-        return inertia('admin/skill-category/index', compact('categories'));
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -76,6 +66,6 @@ class SkillCategoryController extends Controller
         $name = $category->name;
         $category->delete();
 
-        return back()->with('success', "{$name} has been deleted.");
+        return back()->with('success', "Category \"{$name}\" has been deleted.");
     }
 }

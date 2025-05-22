@@ -45,7 +45,7 @@ export default function AddSkillCategory() {
         <DialogTrigger asChild>
           <Button variant="default">Add Category</Button>
         </DialogTrigger>
-        <DialogContent className='!max-w-xl w-full overflow-auto max-h-screen scrollbar-hide'>
+        <DialogContent className='!max-w-xl w-full'>
           <DialogTitle>Add Category</DialogTitle>
 
           <form className="space-y-6" onSubmit={addCategory}>

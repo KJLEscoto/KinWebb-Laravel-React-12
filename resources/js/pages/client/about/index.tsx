@@ -95,7 +95,6 @@ export default function Index() {
             {/* skills */}
             <Skills />
 
-
             <Separator />
 
             {/* tech stack */}

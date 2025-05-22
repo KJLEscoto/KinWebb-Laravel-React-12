@@ -4,6 +4,7 @@ import AppLayout from '@/layouts/app-layout';
 import { filterByType } from '@/lib/utils';
 import { TechStack, type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -40,9 +41,9 @@ export default function Index({ techstack }: TechStackProps) {
             <div className='flex items-center flex-wrap gap-2'>
               {
                 tools.length > 0 ?
-                  <Badge asLink items={tools} />
+                  <Badge asModal items={tools} />
                   :
-                  <div className='text-white/70 text-center w-full'>No Tools Available.</div>
+                  <div className='text-white/70 text-center w-full'>No Tools yet.</div>
               }
             </div>
           </section>
@@ -52,9 +53,9 @@ export default function Index({ techstack }: TechStackProps) {
             <div className='flex items-center flex-wrap gap-2'>
               {
                 frameworks.length > 0 ?
-                  <Badge asLink items={frameworks} />
+                  <Badge asModal items={frameworks} />
                   :
-                  <div className='text-white/70 text-center w-full'>No Frameworks Available.</div>
+                  <div className='text-white/70 text-center w-full'>No Frameworks yet.</div>
               }
             </div>
           </section>

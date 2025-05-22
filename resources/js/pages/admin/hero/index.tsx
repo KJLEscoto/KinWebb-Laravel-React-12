@@ -83,7 +83,7 @@ export default function Index({ hero_entries }: HeroProps) {
               <DialogTrigger className="cursor-pointer">
                 <Info className="size-4" />
               </DialogTrigger>
-              <DialogContent className='!max-w-5xl w-full overflow-auto max-h-screen scrollbar-hide'>
+              <DialogContent className='!max-w-5xl w-full'>
                 <DialogHeader>
                   <DialogTitle>Hero Preview</DialogTitle>
                 </DialogHeader>
@@ -120,8 +120,7 @@ export default function Index({ hero_entries }: HeroProps) {
 
                     <Dialog open={openDelete} onOpenChange={setOpenDelete}>
                       <DialogTrigger asChild>
-                        <Button size='sm' variant='destructive'>
-                          Delete
+                        <Button size='icon' variant='destructive'>
                           <Trash2 className="size-4" />
                         </Button>
                       </DialogTrigger>
