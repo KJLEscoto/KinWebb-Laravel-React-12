@@ -34,15 +34,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
   // admin tech stack page
   Route::resource('admin/tech-stack', AdminTechStackController::class)
-    ->except(['destroy'])
+    ->only(['index', 'store', 'update', 'destroy'])
     ->names([
       'index' => 'admin.techstack.index',
-      'create' => 'admin.techstack.create',
       'store' => 'admin.techstack.store',
-      'show' => 'admin.techstack.show',
-      'edit' => 'admin.techstack.edit',
       'update' => 'admin.techstack.update',
+      'destroy' => 'admin.techstack.destroy',
     ]);
+  Route::patch('admin/tech-stack/{id}/update-logo', [AdminTechStackController::class, 'updateLogo'])->name('admin.techstack.update-logo');
 
   // admin hero page
   Route::resource('admin/hero', AdminHeroController::class)

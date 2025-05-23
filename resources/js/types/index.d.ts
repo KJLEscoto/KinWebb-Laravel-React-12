@@ -23,6 +23,7 @@ export interface NavItem {
 }
 
 export interface SharedData {
+    haveSkills: Skill[];
     skills: Skill[];
     categories: Category[];
     user: User;

@@ -34,9 +34,12 @@ export default function Index() {
           <main className='flex flex-col gap-20'>
 
             {/* about me header */}
-            <div className='grid grid-cols-2 gap-10'>
+            <div className='grid grid-cols-2'>
               <section className='flex flex-col items-center gap-5'>
-                <Image className='!max-w-sm rounded-4xl' src={`/storage/${about_me.picture}`} alt='model image' />
+                <Image
+                  className='!max-w-sm rounded-4xl'
+                  src={about_me.picture ? `/storage/${about_me.picture}` : '/images/about-model.png'}
+                  alt='model image' />
 
                 <div className={`flex items-center gap-1 select-none px-5 py-1.5 rounded-full bg-white/10`}>
                   {/* <CircleSmall className='size-3 animate-pulse cursor-pointer' /> */}

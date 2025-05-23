@@ -1,10 +1,9 @@
 import Badge from '@/components/personalized/badge';
-import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { filterByType } from '@/lib/utils';
 import { TechStack, type BreadcrumbItem } from '@/types';
-import { Head, Link } from '@inertiajs/react';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Head } from '@inertiajs/react';
+import AddTechStack from '@/components/modals/add-techstack';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -28,16 +27,19 @@ export default function Index({ techstack }: TechStackProps) {
 
         <div className='flex justify-between items-center'>
           <h1>TECH STACK</h1>
-          <Link href={route('admin.techstack.create')}>
+          {/* <Link href={route('admin.techstack.create')}>
             <Button variant='default'>
               Add Tech Stack
             </Button>
-          </Link>
+          </Link> */}
         </div>
 
         <div className='grid grid-cols-2 gap-5'>
           <section className='space-y-3 w-full p-5 border rounded-md'>
-            <h1>Tools</h1>
+            <div className='flex items-center justify-between w-full'>
+              <h1>Tools</h1>
+              <AddTechStack tech_type='tool' />
+            </div>
             <div className='flex items-center flex-wrap gap-2'>
               {
                 tools.length > 0 ?
@@ -49,7 +51,10 @@ export default function Index({ techstack }: TechStackProps) {
           </section>
 
           <section className='space-y-3 w-full p-5 border rounded-md'>
-            <h1>Frameworks</h1>
+            <div className='flex items-center justify-between w-full'>
+              <h1>Frameworks</h1>
+              <AddTechStack tech_type='framework' />
+            </div>
             <div className='flex items-center flex-wrap gap-2'>
               {
                 frameworks.length > 0 ?

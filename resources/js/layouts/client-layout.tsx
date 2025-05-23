@@ -32,7 +32,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       </main>
 
       {/* Fixed bottom CTA */}
-      <span className='fixed bottom-5 z-50 max-w-5xl mx-auto w-full mix-blend-difference'>
+      <span className='fixed bottom-5 z-50 max-w-7xl mx-auto w-full mix-blend-difference'>
         <FixedBottom />
       </span>
 

@@ -108,7 +108,7 @@ function NavHeader() {
   };
 
   return (
-    <nav className="py-5 max-w-5xl mx-auto px-5 lg:px-0 transition-all duration-500 flex items-center justify-between">
+    <nav className="py-5 max-w-7xl mx-auto px-5 xl:px-0 transition-all duration-500 flex items-center justify-between">
       <Link href={route("home")} className="text-white font-bold text-base">
         <Image className="!w-10" src='/images/KinWebb_Icon_White.png' alt="kinwebb_icon" />
       </Link>

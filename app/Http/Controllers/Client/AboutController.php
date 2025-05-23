@@ -20,6 +20,8 @@ class AboutController extends Controller
         $about_me = DB::table('about_me')->first();
         $user = User::first();
         $categories = Category::with('skills')->get();
-        return inertia('client/about/index', compact('techstack', 'about_me', 'user', 'categories'));
+        $haveSkills = Category::has('skills')->with('skills')->get();
+
+        return inertia('client/about/index', compact('techstack', 'about_me', 'user', 'categories', 'haveSkills'));
     }
 }

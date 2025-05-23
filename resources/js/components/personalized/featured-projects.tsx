@@ -23,18 +23,18 @@ function FeaturedProjects() {
             // Determine layout based on index
             const isLarge = [0, 3, 4].includes(index); // projects 1, 4, 5 (0-based index)
             const span = isLarge ? "lg:col-span-3" : "lg:col-span-2";
-            const height = isLarge ? "lg:h-80" : "lg:h-60";
+            const height = isLarge ? "lg:h-[500px]" : "lg:h-[350px]";
 
             return (
               <Link
                 href={route('projects.show', slugify(project.name))}
                 key={index}
-                className={`col-span-5 ${span} space-y-2 cursor-pointer h-fit group`}
+                className={`col-span-5 ${span} flex lg:flex-col flex-col-reverse gap-3 cursor-pointer h-fit group`}
               >
                 <section className={`${height} h-96 overflow-hidden`}>
                   <Image
                     src={`/storage/${project.thumbnail}`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition"
+                    className="!w-full !h-full object-cover group-hover:scale-105 transition"
                   />
                 </section>
 

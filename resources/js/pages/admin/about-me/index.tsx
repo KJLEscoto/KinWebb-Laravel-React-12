@@ -2,7 +2,7 @@ import Image from '@/components/personalized/image';
 import AppLayout from '@/layouts/app-layout';
 import { AboutMe, type BreadcrumbItem, ShortAbout } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react';
-import { Info } from 'lucide-react';
+import { Copy, Info } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -155,6 +155,20 @@ function ResumeSection({ about_me }: { about_me: AboutMe }) {
     });
   }
 
+  const copyResume = () => {
+    const resumeElement = document.getElementById('copyresume');
+    if (!resumeElement) return;
+
+    const textToCopy = resumeElement.textContent || '';
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        toast.success('Copied to clipboard!');
+      })
+      .catch(() => {
+        toast.error('Failed to copy.');
+      });
+  };
+
   return (
     <section className="flex relative flex-col w-full border rounded-lg gap-3 p-5 max-w-7xl group">
       <div className="w-full gap-5 items-center flex justify-between">
@@ -185,14 +199,22 @@ function ResumeSection({ about_me }: { about_me: AboutMe }) {
                 <Info className='size-4' />
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className='!max-w-xl w-full'>
               <DialogHeader>
                 <DialogTitle>Valid Resumé</DialogTitle>
                 <DialogDescription>
                   Copy the given url and change the random link.
                 </DialogDescription>
               </DialogHeader>
-              <p>https://drive.google.com/file/d/<span className='text-blue-500 underline'>[change random link here]</span>/view</p>
+              <div className='flex items-center gap-5 justify-between'>
+                <p id='copyresume' className='text-nowrap'>https://drive.google.com/file/d/<span className='text-blue-500 underline'>[change_random_link_here]</span>/view</p>
+                <Button
+                  onClick={copyResume}
+                  variant='ghost'
+                  size='icon'>
+                  <Copy className='size-4' />
+                </Button>
+              </div>
             </DialogContent>
           </Dialog>
         </section>

@@ -88,7 +88,7 @@ export default function Show() {
 
                 <Shell>
                   <div className='space-y-20'>
-                    <header className='flex lg:flex-row flex-col-reverse gap-5 items-end h-full'>
+                    <header className='flex lg:flex-row flex-col gap-5 items-end h-full'>
                       <aside className='flex flex-col gap-10 justify-between min-h-70 w-full'>
                         <section className='space-y-2'>
                           <p className="font-light text-white/60 text-sm">

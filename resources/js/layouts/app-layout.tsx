@@ -1,8 +1,8 @@
 import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
-import { Flash, type BreadcrumbItem } from '@/types';
-import { usePage } from '@inertiajs/react';
-import { useEffect, type ReactNode } from 'react';
-import { toast, Toaster } from 'sonner';
+import { type BreadcrumbItem } from '@/types';
+
+import { type ReactNode } from 'react';
+import { Toaster } from 'sonner';
 import { useFlashToast } from '@/hooks/use-flash-toast';
 
 
@@ -16,8 +16,8 @@ export default function AppLayout({ children, breadcrumbs, ...props }: AppLayout
 
     return (
         <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
+            <Toaster className='!z-[9999]' position={'top-right'} richColors />
             {children}
-            <Toaster className='!z-50' position={'top-right'} richColors />
         </AppLayoutTemplate>
     )
 };

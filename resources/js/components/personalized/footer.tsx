@@ -8,7 +8,7 @@ function Footer() {
   const email = user?.email ?? 'kin.webb.1024@gmail.com';
 
   return (
-    <footer className='flex flex-col justify-center items-center min-h-96 gap-8 lg:p-0 p-5 bg-white text-black w-full select-none'>
+    <footer className='flex flex-col justify-center items-center min-h-96 gap-8 xl:p-0 p-5 bg-white text-black w-full select-none'>
       <h3 className="text-sm capitalize font-bold">HAVE AN IDEA IN MIND?</h3>
 
       <p className="text-2xl font-light text-center">

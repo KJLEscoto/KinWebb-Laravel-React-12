@@ -66,7 +66,7 @@ function Hero() {
   return (
     <div
       ref={heroRef}
-      className='flex flex-col items-center justify-center min-h-screen h-auto text-center lg:p-0 p-5'
+      className='flex flex-col items-center justify-center min-h-screen h-auto text-center xl:p-0 p-5'
     >
       {main_hero ? (
         <>
@@ -80,7 +80,7 @@ function Hero() {
           <header className="relative h-full w-full flex items-center justify-center">
             <Image src={`/storage/${main_hero.model_image}`} alt="model image" />
             <span className='absolute md:-top-5 bottom-5 transition-all duration-500 overflow-hidden w-full'>
-              <Image src={`/storage/${main_hero.logo_image}`} alt="logo image" className="xl:!max-w-5xl object-cover !w-full border-red-500 place-self-center" />
+              <Image src={`/storage/${main_hero.logo_image}`} alt="logo image" className="xl:!max-w-7xl object-cover !w-full border-red-500 place-self-center" />
             </span>
           </header>
 
