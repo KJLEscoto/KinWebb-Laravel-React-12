@@ -69,7 +69,7 @@ function Badge({ items, asLink, asModal }: BadgeProps) {
       {items.map((item) => {
 
         const content = (
-          <div
+          <button
             key={item.id}
             onClick={() => setOpenViewId(item.id as number)}
             className={`flex items-center gap-2 rounded-sm bg-[#131313] px-3 py-2 select-none w-fit ${(asLink || asModal) && 'hover:!bg-white/10 transition cursor-pointer'
@@ -77,11 +77,11 @@ function Badge({ items, asLink, asModal }: BadgeProps) {
           >
             <Image
               src={techLogo(item)}
-              // alt={item.logo}
+              alt={item.logo}
               className="!w-4 aspect-square object-cover rounded-xs"
             />
             <p className="text-sm text-white/80 tracking-wide">{item.name}</p>
-          </div>
+          </button>
         );
 
         if (asModal) {

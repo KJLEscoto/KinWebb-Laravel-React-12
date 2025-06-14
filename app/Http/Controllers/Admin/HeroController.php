@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Hero;
+use App\Models\Social;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,6 +16,7 @@ class HeroController extends Controller
     public function index()
     {
         $hero_entries = Hero::all();
+
         return inertia('admin/hero/index', compact('hero_entries'));
     }
 

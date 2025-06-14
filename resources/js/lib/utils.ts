@@ -50,6 +50,14 @@ export function techLogo(name: any): any {
     return name.logo.startsWith('techstack') ? `/storage/${name.logo}` : name.logo;
 }
 
+export function socialsLogo(role: string, logo: any): any {
+    if (role === 'admin') {
+        return logo.logo.startsWith('socials') ? `/storage/${logo.logo}` : logo.logo;
+    } else {
+        return logo.startsWith('socials') ? `/storage/${logo}` : logo;
+    }
+}
+
 export function filterByType(items: any[], type: string): any[] {
     return items.filter(item => item.type === type);
 }

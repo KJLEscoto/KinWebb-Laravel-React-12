@@ -23,6 +23,7 @@ export interface NavItem {
 }
 
 export interface SharedData {
+    socials: Social[];
     haveSkills: Skill[];
     skills: Skill[];
     categories: Category[];
@@ -161,4 +162,11 @@ export interface Skill {
     description: string;
     created_at: string;
     updated_at: string;
+}
+
+export interface Social {
+    id: number;
+    name: string;
+    logo: string;
+    link: string;
 }

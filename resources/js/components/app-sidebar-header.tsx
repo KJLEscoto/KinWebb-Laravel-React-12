@@ -28,7 +28,7 @@ export function AppSidebarHeader({ breadcrumbs = [] }: { breadcrumbs?: Breadcrum
                     <SidebarTrigger className="-ml-1" />
                     <Breadcrumbs breadcrumbs={breadcrumbs} />
                 </div>
-                <div className='text-sm tracking-wider flex items-center gap-2.5 opacity-70'>
+                <div className='text-sm tracking-wider items-center gap-2.5 opacity-70 md:flex hidden'>
                     <section className='flex items-center gap-1'>
                         <CalendarFold className='size-4' />
                         <p> {dateToday}</p>

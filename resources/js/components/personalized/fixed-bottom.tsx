@@ -3,23 +3,19 @@ import { Facebook, Github, Linkedin, Waypoints } from "lucide-react"; // Assumin
 import gsap from "gsap";
 import HyperLogo from "./hyperlogo";
 import ToggleClock from "./toggle-clock";
-
-const hyperlogos = [
-  {
-    Icon: Facebook,
-    url: "https://www.facebook.com/kentoy.newt",
-  },
-  {
-    Icon: Linkedin,
-    url: "https://www.linkedin.com/in/kent-joemar-escoto-646b92265/",
-  },
-  {
-    Icon: Github,
-    url: "https://github.com/KJLEscoto",
-  },
-];
+import { usePage } from "@inertiajs/react";
+import { SharedData, Social } from "@/types";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 function FixedBottom() {
+
+  const { socials } = usePage<SharedData>().props;
+
   const [showLogos, setShowLogos] = useState(false);
   const [isWaypointClicked, setIsWaypointClicked] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -91,11 +87,21 @@ function FixedBottom() {
       >
         <span
           ref={logosRef}
-          className={`flex flex-col gap-3 items-center mix-blend-difference transition-all duration-300 ${showLogos ? "block" : "hidden"
+          className={`flex flex-col gap-3 items-center transition-all duration-300 ${showLogos ? "block" : "hidden"
             }`}
         >
-          {hyperlogos.map((logo, index) => (
-            <HyperLogo key={index} Icon={logo.Icon} url={logo.url} />
+          {socials.map((item: Social) => (
+            <TooltipProvider key={item.name}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <HyperLogo logo={item.logo} link={item.link} />
+                </TooltipTrigger>
+                <TooltipContent side="right">
+                  {item.name}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
           ))}
         </span>
 

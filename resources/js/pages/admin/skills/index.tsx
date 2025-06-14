@@ -111,7 +111,7 @@ export default function Index() {
                 {category.skills.map((skill: Skill) => (
                   <li
                     key={skill.id}
-                    className="hover:bg-white/5 px-3 py-1 flex items-center justify-between group"
+                    className="hover:bg-white/5 rounded-sm px-3 py-1 flex items-center justify-between group"
                   >
                     <span>
                       <Dot className='size-5 inline-block' />

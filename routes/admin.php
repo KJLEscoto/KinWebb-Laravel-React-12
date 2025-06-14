@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ShortController as AdminShortController;
 use App\Http\Controllers\Admin\SkillCategoryController as AdminSkillCategoryController;
 use App\Http\Controllers\Admin\SkillController as AdminSkillController;
 use App\Http\Controllers\Admin\TechStackController as AdminTechStackController;
+use App\Http\Controllers\Admin\SocialController as AdminSocialController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -102,5 +103,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
       'store' => 'admin.skill-category.store',
       'update' => 'admin.skill-category.update',
       'destroy' => 'admin.skill-category.destroy',
+    ]);
+
+  Route::resource('admin/socials', AdminSocialController::class)
+    ->only(['index', 'store', 'update', 'destroy'])
+    ->names([
+      'index' => 'admin.socials.index',
+      'store' => 'admin.socials.store',
+      'update' => 'admin.socials.update',
+      'destroy' => 'admin.socials.destroy',
     ]);
 });
