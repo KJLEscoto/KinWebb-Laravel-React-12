@@ -9,9 +9,9 @@ function Footer() {
 
   return (
     <footer className='flex flex-col justify-center items-center min-h-96 gap-8 xl:p-0 p-5 bg-white text-black w-full select-none'>
-      <h3 className="text-sm capitalize font-bold">HAVE AN IDEA IN MIND?</h3>
+      <h3 className="text-sm uppercase font-bold">ARE YOU INTERESTED?</h3>
 
-      <p className="text-2xl font-light text-center">
+      <p className="text-5xl font-light text-center">
         Let's work
         <span className="italic font-medium mx-1.5">together</span>
         on your project.

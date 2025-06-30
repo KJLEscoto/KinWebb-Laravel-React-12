@@ -61,13 +61,16 @@ export default function Index() {
               <section className='w-full flex items-start justify-between'>
                 <div className="flex flex-wrap gap-y-2">
                   {project.tags.slice(0, MAX_TAG).map((tag: Tag, index: number) => (
-                    <Link
-                      href={route('admin.projects.show', project.id)}
-                      key={`tag-${project.id}-${index}`}
-                      className="bg-[#1c1c1c] text-white/80 text-xs tracking-wide mr-2 px-3 py-1 rounded-full inline-block"
-                    >
+                    // <Link
+                    //   href={route('admin.projects.show', project.id)}
+                    //   key={`tag-${project.id}-${index}`}
+                    //   className="bg-[#1c1c1c] text-white/80 text-xs tracking-wide mr-2 px-3 py-1 rounded-full inline-block"
+                    // >
+                    //   {tag.title}
+                    // </Link>
+                    <div className="bg-[#1c1c1c] text-white/80 text-xs tracking-wide mr-2 px-3 py-1 rounded-full inline-block cursor-default">
                       {tag.title}
-                    </Link>
+                    </div>
                   ))}
                   {project.tags.length > MAX_TAG && (
                     <span className="text-white/80 text-xs flex items-center">

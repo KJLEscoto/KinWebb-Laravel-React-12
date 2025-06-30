@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\Experience;
 use App\Models\Hero;
 use App\Models\Project;
 use Illuminate\Http\Request;

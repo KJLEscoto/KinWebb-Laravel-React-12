@@ -27,16 +27,16 @@ class SkillController extends Controller
         // dd($request->all());
 
         $validated = $request->validate([
-            'category_id' => 'numeric',
+            'id' => 'numeric',
             'description' => 'required|string'
         ]);
 
-        if ($validated['category_id'] ?? false) {
+        if ($validated['id'] ?? false) {
             $skill = Skill::create([
                 'description' => $validated['description']
             ]);
 
-            $find_category = Category::where('id', $validated['category_id'])->first();
+            $find_category = Category::where('id', $validated['id'])->first();
 
             $skill->categories()->attach($find_category->id);
         }

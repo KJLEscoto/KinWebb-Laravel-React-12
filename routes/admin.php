@@ -11,6 +11,9 @@ use App\Http\Controllers\Admin\SkillCategoryController as AdminSkillCategoryCont
 use App\Http\Controllers\Admin\SkillController as AdminSkillController;
 use App\Http\Controllers\Admin\TechStackController as AdminTechStackController;
 use App\Http\Controllers\Admin\SocialController as AdminSocialController;
+use App\Http\Controllers\Admin\ExpController as AdminExpController;
+use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
+
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -106,11 +109,27 @@ Route::middleware(['auth', 'verified'])->group(function () {
     ]);
 
   Route::resource('admin/socials', AdminSocialController::class)
-    ->only(['index', 'store', 'update', 'destroy'])
+    ->only(['index', 'store', 'destroy'])
     ->names([
       'index' => 'admin.socials.index',
       'store' => 'admin.socials.store',
-      'update' => 'admin.socials.update',
+      // 'update' => 'admin.socials.update',
       'destroy' => 'admin.socials.destroy',
+    ]);
+
+  Route::resource('admin/experiences', AdminExpController::class)
+    ->only(['index', 'store', 'update', 'destroy'])
+    ->names([
+      'index' => 'admin.experiences.index',
+      'store' => 'admin.experiences.store',
+      'update' => 'admin.experiences.update',
+      'destroy' => 'admin.experiences.destroy',
+    ]);
+  Route::resource('admin/experiences/company', AdminCompanyController::class)
+    ->only(['store', 'destroy'])
+    ->names([
+      'store' => 'admin.experiences.store-company',
+      // 'update' => 'admin.experiences.update-company',
+      'destroy' => 'admin.experiences.destroy-company',
     ]);
 });

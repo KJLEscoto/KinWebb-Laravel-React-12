@@ -1,4 +1,4 @@
-import { TechStack } from '@/types';
+import dayjs from 'dayjs';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -37,6 +37,12 @@ export function getFormattedDate(timeZone: string = "Asia/Manila"): string {
     const formattedDate = dateFormatter.format(date);
 
     return `${formattedDate} [${weekday}]`;
+}
+
+export function formatDateRange(started: string, ended: string | null): string {
+    const startFormatted = dayjs(started).format('MMM YYYY');
+    const endFormatted = ended ? dayjs(ended).format('MMM YYYY') : 'Present';
+    return `${startFormatted} – ${endFormatted}`;
 }
 
 export function slugify(text: string): string {

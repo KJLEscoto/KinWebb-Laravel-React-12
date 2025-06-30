@@ -19,7 +19,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <Toaster className='!z-50' position="top-right" richColors />
 
         {/* nav bar */}
-        <span className='fixed top-0 !z-40 w-full bg-black/50 backdrop-blur-sm mix-blend-difference'>
+        <span className='fixed top-0 !z-40 w-full bg-black/50 backdrop-blur-xs mix-blend-difference'>
           <NavHeader />
         </span>
 

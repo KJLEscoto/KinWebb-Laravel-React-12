@@ -20,7 +20,7 @@ export default function Skills() {
 
   const { categories, haveSkills } = usePage<SharedData>().props;
 
-  console.log(haveSkills)
+  // console.log(haveSkills)
 
   return (
     <div className='grid lg:grid-cols-2 gap-10'>

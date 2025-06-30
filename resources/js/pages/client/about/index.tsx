@@ -108,8 +108,6 @@ export default function Index() {
             {/* experiences */}
             <Experiences />
 
-            <Separator />
-
           </main>
 
         </Shell>

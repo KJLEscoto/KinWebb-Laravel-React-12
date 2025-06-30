@@ -8,9 +8,10 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '../ui/textarea';
 import { Plus } from 'lucide-react';
+import { toast } from 'sonner';
 
 type AddSkillCategoryForm = {
-  category_id: number;
+  id: number;
   description: string;
 };
 
@@ -32,17 +33,26 @@ export default function AddSkills({ id }: { id: number }) {
   const [randomPlaceholder, setRandomPlaceholder] = useState(getRandomPlaceholder());
 
   const { data, setData, post, processing, reset, errors, clearErrors } = useForm<AddSkillCategoryForm>({
-    category_id: id,
+    id: id,
     description: '',
   });
 
   const addSkill: FormEventHandler = (e) => {
     e.preventDefault();
 
-    post(route('admin.skills.store'), {
-      preserveScroll: true,
-      onSuccess: () => closeModal(),
-    });
+    if (route().current()?.endsWith('skills.index')) {
+      post(route('admin.skills.store'), {
+        preserveScroll: true,
+        onSuccess: () => closeModal(),
+      });
+    } else if (route().current()?.endsWith('experiences.index')) {
+      post(route('admin.experiences.store'), {
+        preserveScroll: true,
+        onSuccess: () => closeModal(),
+      });
+    } else {
+      return toast.warning('Something went wrong!');
+    }
   };
 
   const closeModal = () => {
@@ -78,6 +88,7 @@ export default function AddSkills({ id }: { id: number }) {
               <Textarea
                 id="skill_description"
                 required
+                disabled={processing}
                 placeholder={randomPlaceholder}
                 className="!bg-transparent h-10"
                 value={data.description}

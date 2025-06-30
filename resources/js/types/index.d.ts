@@ -23,6 +23,8 @@ export interface NavItem {
 }
 
 export interface SharedData {
+    experiences: any[];
+    companies: Company[];
     socials: Social[];
     haveSkills: Skill[];
     skills: Skill[];
@@ -169,4 +171,22 @@ export interface Social {
     name: string;
     logo: string;
     link: string;
+}
+
+export interface Company {
+    id: number;
+    position: string;
+    job_type: string;
+    link: string;
+    month_started: string;
+    month_ended: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Experience {
+    id: number;
+    description: string;
+    created_at: string;
+    updated_at: string;
 }
