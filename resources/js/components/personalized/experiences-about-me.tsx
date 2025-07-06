@@ -24,22 +24,27 @@ export default function Experiences() {
                   started={company.month_started}
                   ended={company.month_ended}
                   content={
-                    <ul className='list-disc list-inside'>
-                      {
-                        company.experiences.length > 0 ? (
-                          company.experiences.map((experience: any) => (
-                            <li key={experience.id} className='ml-3 py-1 font-light text-white/80 tracking-wide'>
-                              {experience.description}
+                    <>
+                      <h1 className="text-white/90 mb-2">
+                        In this company, I worked as a <strong>{company.position}</strong>.
+                      </h1>
+                      <ul className='list-disc list-inside'>
+                        {
+                          company.experiences.length > 0 ? (
+                            company.experiences.map((experience: any) => (
+                              <li key={experience.id} className='ml-3 py-1 font-light text-white/80 tracking-wide'>
+                                {experience.description}
+                              </li>
+                            ))
+                          ) : (
+                            <li className='ml-3 py-1 font-light text-white/80 tracking-wide flex items-center gap-2'>
+                              <NotebookPen className="size-3.5" /> To be update...
                             </li>
-                          ))
-                        ) : (
-                          <span className='ml-3 font-light text-white/80 tracking-wide flex items-center gap-2'>
-                            <NotebookPen className="size-3.5" /> To be update...
-                          </span>
-                        )
+                          )
 
-                      }
-                    </ul>
+                        }
+                      </ul>
+                    </>
                   }
                   isOpen={activeIndex === index}
                   onToggle={() => setActiveIndex(activeIndex === index ? null : index)}

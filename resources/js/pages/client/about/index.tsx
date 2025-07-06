@@ -38,7 +38,7 @@ export default function Index() {
               <section className='flex flex-col items-center gap-5'>
                 <Image
                   className='!max-w-sm rounded-4xl'
-                  src={about_me.picture ? `/storage/${about_me.picture}` : '/images/about-model.png'}
+                  src={about_me.picture ? `/storage/${about_me.picture}` : '/images/about-model.jpg'}
                   alt='model image' />
 
                 <div className={`flex items-center gap-1 select-none px-5 py-1.5 rounded-full bg-white/10`}>

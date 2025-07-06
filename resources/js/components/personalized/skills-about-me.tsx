@@ -32,7 +32,7 @@ export default function Skills() {
             category.skills.length > 0 && (
               <div className="space-y-3">
                 <h2 className="text-lg">{category.name}</h2>
-                <ul className='space-y-1 ml-3'>
+                <ul className='space-y-2 ml-3'>
                   {category.skills.map((skill: Skill, index: number) => (
                     <li key={index} className='font-light text-white/70 tracking-wide flex items-start gap-2'>
                       <div className="mt-1.5">
